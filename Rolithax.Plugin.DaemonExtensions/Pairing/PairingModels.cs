@@ -40,6 +40,12 @@ public sealed class RedeemRequest
     public string? Payload { get; set; }
     public string? DeviceName { get; set; }
     public string? DeviceFingerprint { get; set; }
+
+    /// <summary>
+    /// 原设备当前仍有效的 API Key。仅当它能证明属于同指纹的已配对设备时，才会替换旧设备记录；
+    /// 不提供或不匹配时，新设备与现有设备并存，绝不依据指纹单独撤销他人设备。
+    /// </summary>
+    public string? PreviousApiKey { get; set; }
 }
 
 /// <summary>一台已配对设备的持久化记录（不含明文 API Key）。</summary>
@@ -50,6 +56,10 @@ public sealed class DeviceRecord
     public string Fingerprint { get; set; } = string.Empty;
     public string UserId { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
+
+    /// <summary>签发该设备配对码的用户 ID；签发者被删除、撤销或到期时，本设备授权随之失效。</summary>
+    public string IssuedBy { get; set; } = string.Empty;
+
     public string Role { get; set; } = "user";
     public List<string> Resources { get; set; } = new();
 
@@ -60,7 +70,7 @@ public sealed class DeviceRecord
     public long ExpiresAt { get; set; }
     public bool Revoked { get; set; }
 
-    /// <summary>撤销/过期原因：revoked / expired / replaced。</summary>
+    /// <summary>撤销/过期原因：revoked / expired / replaced / issuer-removed / issuer-revoked / user-removed / plugin-unloaded。</summary>
     public string? RevokeReason { get; set; }
 
     public string? CreatedIp { get; set; }

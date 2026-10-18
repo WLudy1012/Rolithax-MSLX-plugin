@@ -12,7 +12,7 @@
 ## 安装
 
 1. 运行 `pack.ps1`（需 .NET 10 SDK；`MSLX.SDK` 自动探测：仓库内 `MSLX-dev`、
-   平级 `MSLX-dev`、平级 `MSLX-Android/MSLX-dev`，也可用 `-SdkDir` 或
+   平级 `MSLX-dev`、平级 `RolithaxLauncher/MSLX-dev`；兼容本地旧目录 `MSLX-Android/MSLX-dev`，也可用 `-SdkDir` 或
    `-p:MSLX_SDK_DIR=<SDK 目录>` 指定）得到 `dist/Rolithax.Plugin.DaemonExtensions.dll`；
 2. 将 `Rolithax.Plugin.DaemonExtensions.dll` 复制到 Daemon 数据目录的 `Plugins/` 子目录：
    - Windows：`%APPDATA%\MSLX\MSLXData\DaemonData\Plugins\`
@@ -36,6 +36,15 @@
 
 `redeem` 允许匿名兑换；配置地址和设备管理要求 **admin** 角色，生成二维码要求登录用户。
 
+### 授权期限与撤销
+
+- **设备记录原子更新**：设备记录的读取、修改、写回在同一把锁内完成（兑换、撤销、过期清理互不覆盖）；兑换时先落设备记录、再创建用户，任何时刻都不会出现「Key 有效但管理列表里没有」的设备。撤销只有在确认对应用户已删除后才会把记录标成已撤销。
+- **配对设备签发的新设备受上级约束**：配对设备也可以生成配对码，但新设备的到期时间不会晚于签发设备，签发设备被撤销、到期或删除时，它签发的下级设备一并失效（状态 `issuer-revoked` / `issuer-removed`）。
+- **请求期校验**：本插件的全部接口在每次请求时核对配对设备的撤销、到期和签发链，失效的凭据当场删除并返回 401，不依赖定时清理。定时清理每分钟运行一次，并在插件加载时立即执行，用来收回停用期间到期的设备、已删除签发者名下的设备，以及没有设备记录的孤儿配对账号。
+- **插件卸载即撤销**：Daemon 自身的 API Key 鉴权不识别设备到期时间，所以插件停用、移除或在面板中覆盖更新（调用 `OnUnload`）时会撤销全部配对设备（状态 `plugin-unloaded`），需要重新扫码。按下文「从旧版本升级」先停止 Daemon 再替换 DLL 不触发此行为。直接删除 DLL 且 Daemon 未走卸载流程时，插件没有机会收回凭据，请同时在用户管理中删除 `pair_` 开头的配对用户。
+- **签发者失效即作废**：兑换时重新核对签发者仍然存在、`scope=full` 的签发者仍是管理员，并把权限收敛到签发者当前拥有的实例；签发者删除后，未兑换的配对码立即不可兑换。
+- **替换旧设备需要出示旧 Key**：`redeem` 请求可带 `previousApiKey`。只有它对应一台未撤销、未到期、指纹与本次提交一致的已配对设备时，才会撤销该旧设备（其下级设备改挂到新设备）。仅凭 `deviceFingerprint` 不会撤销任何设备；不带或带错时新设备与现有设备并存，由管理员在设备列表中撤销。
+
 首次安装时需要管理员在面板中保存 Daemon 对外地址；未配置地址时，`/codes` 会返回 400，避免二维码携带不可访问的请求地址。
 
 | 方法 | 路径 | 说明 |
@@ -43,7 +52,7 @@
 | GET | `/config` | 读取已保存的 Daemon 地址和当前用户可执行的操作 |
 | PUT | `/config` | 管理员保存 Daemon 对外地址 |
 | POST | `/codes` | 生成一次性配对码（TTL 120s，仅内存保存）。管理员可选择 `scope=full\|limited` 和 `resources[]`；普通用户强制使用自己的资源权限 |
-| POST | `/redeem` | 兑换配对码（匿名端点，插件内部强校验：HMAC 签名 / 时效 / 一次性 / IP 限速与失败锁定） |
+| POST | `/redeem` | 兑换配对码（匿名端点，插件内部强校验：HMAC 签名 / 时效 / 一次性 / IP 限速与失败锁定 / 签发者仍有效）。可选 `previousApiKey` 用于换发同一设备的旧凭据 |
 | GET | `/devices` | 已配对设备列表（脱敏：Key 前缀、指纹前缀、状态、有效期） |
 | POST | `/devices/{deviceId}/revoke` | 撤销设备（删除配对用户，Key 立即失效） |
 
@@ -78,12 +87,26 @@
 
 支持 `mod`、`plugin`、`datapack`、`modpack` 四种类型。整合包只安装服务端可用文件以及 `server-overrides/`（没有时使用 `overrides/`）；拒绝超出大小上限、没有可信摘要、穿越实例目录或经过符号链接的安装目标。
 
+安装限额（每个任务）：
+
+- 暂存区总量上限 4 GB，下载的资源文件、整合包内清单列出的下载文件、解压出的覆盖文件共用同一份配额；以实际写入的字节计量，压缩条目或清单里声明的大小只用于提前拒绝，整合包本体展开后立即释放配额。
+- 单个文件 1 GB；任务内文件数量上限 20000，整合包条目数上限 40000，清单 4 MB。
+- 暂存期间持续检查实例所在磁盘，剩余空间低于 1 GB 时中止并回滚。
+
 ---
 
 普通用户生成二维码时，服务端忽略请求中的 `scope` 和 `resources`，直接复制当前登录用户的 `Resources`，新设备角色固定为 `user`。管理员可生成完整权限设备，也可生成指定实例的受限设备。
 
 ## 数据位置
 
-- 配对配置：`<AppData>/PluginsData/mslx-pair/Config.json`（安装密钥 + Daemon 地址 + 设备记录）
+- 配对配置：`<AppData>/PluginsData/mslx-pair/Config.json`（安装密钥 + Daemon 地址 + 设备记录，设备记录含签发者 `issuedBy`）
 - 图标缓存：`<AppData>/PluginsData/mslx-icon/IconCache/<实例 id>.png`（TTL 24 小时）
 - 配对设备对应的用户：Daemon `UserList.json` 中用户名形如 `pair_dxxxxxxxxxx`
+
+## 回归测试
+
+```powershell
+dotnet test ./Rolithax.Plugin.DaemonExtensions.Tests -p:MSLX_SDK_DIR=<MSLX.SDK 目录>
+```
+
+测试用内存实现替身替换 Daemon 的用户与插件配置，覆盖并发更新、派生凭据、设备替换、期限与卸载、签发者失效和安装限额。

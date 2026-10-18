@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using MSLX.SDK.Models;
 using Newtonsoft.Json.Linq;
 
@@ -13,6 +14,9 @@ namespace Rolithax.Plugin.DaemonExtensions.Pairing;
 /// - 配对码：一次性、TTL 2 分钟、仅内存保存，HMAC-SHA256 签名防篡改；
 /// - 兑换：按 IP 失败计数 + 临时锁定，创建用户成功后消费配对码；
 /// - 设备：兑换后创建**独立受限用户**（随设备记录可撤销、可过期），API Key 只存前缀；
+///   设备记录的读-改-写全部在同一把锁内完成，先落记录再建用户，避免并发覆盖与孤儿 Key；
+/// - 授权期限：设备签发出的新设备不得晚于签发设备到期，签发者被删除/撤销/到期时级联失效；
+///   期限在插件的每次请求与定时清理中都会校验，插件卸载时撤销全部配对设备；
 /// - 审计：所有关键操作写 Daemon 日志（密钥绝不落日志）。
 /// </summary>
 public sealed class PairingService
@@ -26,6 +30,10 @@ public sealed class PairingService
     private const int MaxRedeemFailures = 5;
     private static readonly TimeSpan FailureWindow = TimeSpan.FromMinutes(10);
     private static readonly TimeSpan LockDuration = TimeSpan.FromMinutes(15);
+    private static readonly TimeSpan SweepInterval = TimeSpan.FromMinutes(1);
+    private const long NewDeviceUserGraceSeconds = 300;
+    private static readonly Regex PairedUsernamePattern = new("^pair_d[0-9a-z]{10}$", RegexOptions.Compiled);
+    private const string PairedNamePrefix = "配对设备 ";
     private const int DefaultDeviceTtlDays = 30;
     private const int MaxDeviceTtlDays = 365;
     private const string CrockfordAlphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
@@ -59,7 +67,10 @@ public sealed class PairingService
     private readonly ConcurrentDictionary<string, byte> _redeemingCodes = new(StringComparer.OrdinalIgnoreCase);
     private readonly ConcurrentDictionary<string, IpState> _ipStates = new();
     private readonly ConcurrentDictionary<string, Queue<DateTime>> _codeIssued = new();
-    private readonly object _storeLock = new();
+    // 设备记录与 publicUrl 共用同一份插件配置；静态锁保证热重载期间新旧实例也不会交错写入。
+    private static readonly object StoreLock = new();
+
+    internal Func<DateTimeOffset> Clock { get; set; } = () => DateTimeOffset.UtcNow;
 
     private string _installSecret = string.Empty;
     private Timer? _sweeper;
@@ -67,12 +78,14 @@ public sealed class PairingService
     private static MSLX.SDK.Interfaces.IPluginConfigBridge Config =>
         global::MSLX.SDK.MSLX.Config.GetPluginConfig(ConfigId);
 
+    private static MSLX.SDK.Interfaces.IUserConfigBridge Users => global::MSLX.SDK.MSLX.Config.Users;
+
     private static MSLX.SDK.Interfaces.IMSLXLogger Log => global::MSLX.SDK.MSLX.Logger;
 
     /// <summary>插件加载后调用：准备安装密钥并启动过期清理定时器。</summary>
     public void Initialize()
     {
-        lock (_storeLock)
+        lock (StoreLock)
         {
             var existing = Config.ReadConfigKey("installSecret")?.ToString();
             if (string.IsNullOrWhiteSpace(existing))
@@ -86,14 +99,49 @@ public sealed class PairingService
                 _installSecret = existing;
             }
         }
-        _sweeper = new Timer(_ => SafeSweep(), null, TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(10));
+        // 加载即清理一次：插件停用期间到期、或签发者已被删除的授权不等下一个定时周期。
+        SafeSweep();
+        _sweeper = new Timer(_ => SafeSweep(), null, SweepInterval, SweepInterval);
         Log.Info("[Pairing] 扫码配对插件已就绪");
     }
 
+    /// <summary>
+    /// 插件卸载（停用、移除、覆盖更新）：停止清理定时器，并撤销全部配对设备。
+    /// Daemon 的用户鉴权不识别设备到期时间，卸载后无人再按期清理，因此必须在此收回凭据。
+    /// </summary>
     public void Shutdown()
     {
         _sweeper?.Dispose();
         _sweeper = null;
+        _codes.Clear();
+        try
+        {
+            lock (StoreLock)
+            {
+                var devices = ReadDevices();
+                var changed = false;
+                foreach (var d in devices.Where(d => !d.Revoked))
+                {
+                    if (!TryDeleteUser(d.UserId))
+                    {
+                        Log.Error($"[Pairing] 卸载时无法撤销设备 {d.DeviceId}，请在用户管理中手动删除 {d.Username}");
+                        continue;
+                    }
+                    d.Revoked = true;
+                    d.RevokeReason = "plugin-unloaded";
+                    changed = true;
+                }
+                if (changed)
+                {
+                    WriteDevices(devices);
+                    Log.Info("[Pairing] 插件卸载，已撤销全部配对设备");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error($"[Pairing] 卸载时撤销配对设备异常：{ex.Message}", ex);
+        }
     }
 
     public (int Code, string Message, object? Data) GetConfig(bool canEditAddress)
@@ -114,7 +162,7 @@ public sealed class PairingService
             return (400, "Daemon 地址必须是有效的 http:// 或 https:// 地址", null);
         }
 
-        lock (_storeLock)
+        lock (StoreLock)
         {
             Config.WriteConfigKey("publicUrl", normalized);
         }
@@ -141,6 +189,25 @@ public sealed class PairingService
             return (400, "尚未配置 Daemon 地址，请先由管理员保存", null);
         }
 
+        var now = Now();
+        long? issuerDeviceExpiresAt = null;
+        lock (StoreLock)
+        {
+            var issuerDevice = ReadDevices().FirstOrDefault(d => d.UserId == creator.Id);
+            if (issuerDevice == null && IsPairedDeviceAccount(creator))
+            {
+                return (403, "配对设备记录缺失，无法确认授权期限，请重新配对", null);
+            }
+            if (issuerDevice != null)
+            {
+                if (issuerDevice.Revoked || issuerDevice.ExpiresAt <= now)
+                {
+                    return (403, "当前设备授权已失效", null);
+                }
+                issuerDeviceExpiresAt = issuerDevice.ExpiresAt;
+            }
+        }
+
         var isAdmin = string.Equals(creator.Role, "admin", StringComparison.OrdinalIgnoreCase);
         var scope = isAdmin && string.Equals(request.Scope, "limited", StringComparison.OrdinalIgnoreCase)
             ? "limited"
@@ -149,7 +216,13 @@ public sealed class PairingService
             ? NormalizeResources(request.Resources)
             : (isAdmin ? new List<string>() : NormalizeResources(creator.Resources));
         var ttlDays = Math.Clamp(request.DeviceTtlDays ?? DefaultDeviceTtlDays, 1, MaxDeviceTtlDays);
-        var expiresAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + CodeTtlSeconds;
+        if (issuerDeviceExpiresAt.HasValue)
+        {
+            // 配对设备签发的新设备不得活得比自己久；精确截止时间在兑换时再按签发设备当时的到期时间取小。
+            var remainingDays = (int)Math.Clamp((issuerDeviceExpiresAt.Value - now + 86399) / 86400, 1, MaxDeviceTtlDays);
+            ttlDays = Math.Min(ttlDays, remainingDays);
+        }
+        var expiresAt = now + CodeTtlSeconds;
         var code = GenerateCode();
 
         _codes[code] = new PairingCodeEntry
@@ -215,7 +288,7 @@ public sealed class PairingService
         }
 
         // 3) 时效（以服务端时间为准）
-        var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var now = Now();
         if (payload.ExpiresAt < now - 5)
         {
             RegisterFailure(clientIp);
@@ -247,7 +320,6 @@ public sealed class PairingService
             return (409, "配对码正在处理中，请稍后重试", null);
         }
 
-        UserInfo? createdUser = null;
         try
         {
             if (!_codes.TryGetValue(payload.Code, out var currentEntry) || !ReferenceEquals(entry, currentEntry))
@@ -256,37 +328,40 @@ public sealed class PairingService
                 return (410, "配对码不存在或已被使用", null);
             }
 
+            // 签发者在出码之后可能已被删除、降权，或其自身的设备授权已被撤销/到期：此时配对码一并作废。
+            var issuer = Users.GetUserById(entry.CreatedBy);
+            if (issuer == null)
+            {
+                _codes.TryRemove(payload.Code, out _);
+                Log.Warn($"[Pairing] 兑换被拒（{clientIp}）：配对码签发者已不存在");
+                return (410, "配对码的签发者已被删除，配对码已失效", null);
+            }
+            var issuerIsAdmin = IsAdmin(issuer);
+            if (entry.Scope == "full" && !issuerIsAdmin)
+            {
+                _codes.TryRemove(payload.Code, out _);
+                Log.Warn($"[Pairing] 兑换被拒（{clientIp}）：配对码签发者已不再是管理员");
+                return (410, "配对码签发者的权限已变更，配对码已失效", null);
+            }
+
             var deviceId = "d" + RandomString(10);
             var username = $"pair_{deviceId}";
             var apiKey = Base64Url(RandomNumberGenerator.GetBytes(24));
             var role = entry.Scope == "full" ? "admin" : "user";
-            var expiresAt = now + (long)entry.DeviceTtlDays * 86400;
+            var resources = issuerIsAdmin
+                ? entry.Resources
+                : entry.Resources.Intersect(NormalizeResources(issuer.Resources), StringComparer.OrdinalIgnoreCase).ToList();
 
             var user = new UserInfo
             {
                 Username = username,
-                Name = $"配对设备 {deviceName}",
+                Name = PairedNamePrefix + deviceName,
                 PasswordHash = Base64Url(RandomNumberGenerator.GetBytes(32)),
                 Role = role,
                 ApiKey = apiKey,
-                Resources = entry.Resources,
+                Resources = resources,
                 Avatar = string.Empty,
             };
-
-            if (!global::MSLX.SDK.MSLX.Config.Users.CreateUser(user))
-            {
-                Log.Error($"[Pairing] 创建配对用户失败：{username}");
-                return (500, "服务端创建配对用户失败", null);
-            }
-            createdUser = user;
-
-            if (!_codes.TryRemove(payload.Code, out _))
-            {
-                return (410, "配对码已过期或已被使用，请重新生成", null);
-            }
-
-            ReplaceSameFingerprint(fingerprint, clientIp);
-
             var record = new DeviceRecord
             {
                 DeviceId = deviceId,
@@ -294,18 +369,80 @@ public sealed class PairingService
                 Fingerprint = fingerprint,
                 UserId = user.Id,
                 Username = username,
+                IssuedBy = issuer.Id,
                 Role = role,
-                Resources = entry.Resources,
+                Resources = resources,
                 ApiKeyPrefix = apiKey.Length > 8 ? apiKey[..8] : apiKey,
                 CreatedAt = now,
-                ExpiresAt = expiresAt,
                 CreatedIp = clientIp,
             };
-            UpsertDevice(record);
-            createdUser = null;
+
+            // 替换旧设备必须出示旧设备仍有效的 API Key，不能只凭客户端自报的指纹。
+            var proofUser = string.IsNullOrWhiteSpace(request.PreviousApiKey)
+                ? null
+                : Users.GetUserByApiKey(request.PreviousApiKey.Trim());
+
+            lock (StoreLock)
+            {
+                var devices = ReadDevices();
+                var issuerDevice = devices.FirstOrDefault(d => d.UserId == issuer.Id);
+                if (issuerDevice == null ? IsPairedDeviceAccount(issuer) : (issuerDevice.Revoked || issuerDevice.ExpiresAt <= now))
+                {
+                    _codes.TryRemove(payload.Code, out _);
+                    Log.Warn($"[Pairing] 兑换被拒（{clientIp}）：签发设备的授权已失效");
+                    return (410, "签发该配对码的设备授权已失效，配对码已失效", null);
+                }
+
+                // 新设备绝不晚于签发设备到期。
+                record.ExpiresAt = Math.Min(now + (long)entry.DeviceTtlDays * 86400, issuerDevice?.ExpiresAt ?? long.MaxValue);
+
+                // 先落设备记录再建用户：任何时刻都不会出现「Key 有效但管理列表里没有」的设备。
+                devices.Add(record);
+                WriteDevices(devices);
+
+                var userCreated = false;
+                try
+                {
+                    if (!Users.CreateUser(user))
+                    {
+                        Log.Error($"[Pairing] 创建配对用户失败：{username}");
+                        RollbackNewDevice(record, user, userCreated);
+                        return (500, "服务端创建配对用户失败", null);
+                    }
+                    userCreated = true;
+
+                    if (!_codes.TryRemove(payload.Code, out _))
+                    {
+                        RollbackNewDevice(record, user, userCreated);
+                        return (410, "配对码已过期或已被使用，请重新生成", null);
+                    }
+
+                    var replaced = devices.FirstOrDefault(d =>
+                        proofUser != null && fingerprint.Length > 0 &&
+                        !d.Revoked && d.ExpiresAt > now &&
+                        d.UserId == proofUser.Id && d.UserId != issuer.Id &&
+                        string.Equals(d.Fingerprint, fingerprint, StringComparison.Ordinal));
+                    if (replaced != null && TryDeleteUser(replaced.UserId))
+                    {
+                        replaced.Revoked = true;
+                        replaced.RevokeReason = "replaced";
+                        foreach (var child in devices.Where(d => d.IssuedBy == replaced.UserId && d.DeviceId != record.DeviceId))
+                        {
+                            child.IssuedBy = record.UserId;
+                        }
+                        WriteDevices(devices);
+                        Log.Info($"[Pairing] 同一设备重新配对，旧记录已撤销：{replaced.DeviceId}");
+                    }
+                }
+                catch
+                {
+                    RollbackNewDevice(record, user, userCreated);
+                    throw;
+                }
+            }
 
             ClearFailures(clientIp);
-            Log.Info($"[Pairing] 设备配对成功：{deviceName}（{deviceId}, role={role}, 过期 {Iso(expiresAt)}）");
+            Log.Info($"[Pairing] 设备配对成功：{deviceName}（{deviceId}, role={role}, 过期 {Iso(record.ExpiresAt)}）");
 
             return (200, "配对成功", new
             {
@@ -314,8 +451,8 @@ public sealed class PairingService
                 deviceId,
                 userId = user.Id,
                 role,
-                resources = entry.Resources,
-                expiresAt = Iso(expiresAt),
+                resources,
+                expiresAt = Iso(record.ExpiresAt),
             });
         }
         catch (Exception ex)
@@ -325,19 +462,27 @@ public sealed class PairingService
         }
         finally
         {
-            try
-            {
-                if (createdUser != null &&
-                    !global::MSLX.SDK.MSLX.Config.Users.DeleteUser(createdUser.Id))
-                {
-                    Log.Error($"[Pairing] 清理未完成配对用户失败：{createdUser.Id}");
-                }
-            }
-            catch (Exception cleanupException)
-            {
-                Log.Error($"[Pairing] 清理未完成配对用户失败：{cleanupException.Message}", cleanupException);
-            }
             _redeemingCodes.TryRemove(payload.Code, out _);
+        }
+    }
+
+    /// <summary>回滚尚未交付给客户端的新设备：删除用户并移除记录（调用方已持有 StoreLock）。</summary>
+    private void RollbackNewDevice(DeviceRecord record, UserInfo user, bool userCreated)
+    {
+        try
+        {
+            if (userCreated && !TryDeleteUser(user.Id))
+            {
+                Log.Error($"[Pairing] 清理未完成配对用户失败：{user.Id}");
+                return; // 用户仍在，保留记录以便管理员撤销/定时清理，不能留下无记录的有效 Key
+            }
+            var devices = ReadDevices();
+            devices.RemoveAll(d => d.DeviceId == record.DeviceId);
+            WriteDevices(devices);
+        }
+        catch (Exception ex)
+        {
+            Log.Error($"[Pairing] 回滚未完成配对设备失败：{ex.Message}", ex);
         }
     }
 
@@ -345,8 +490,14 @@ public sealed class PairingService
 
     public (int Code, string Message, object? Data) ListDevices()
     {
-        var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        var devices = ReadDevices()
+        var now = Now();
+        List<DeviceRecord> snapshot;
+        lock (StoreLock)
+        {
+            snapshot = ReadDevices();
+            if (ReconcileLocked(snapshot, now)) WriteDevices(snapshot);
+        }
+        var list = snapshot
             .Select(d => new
             {
                 d.DeviceId,
@@ -357,72 +508,166 @@ public sealed class PairingService
                 apiKeyPrefix = d.ApiKeyPrefix + "…",
                 createdAt = Iso(d.CreatedAt),
                 expiresAt = Iso(d.ExpiresAt),
-                status = d.Revoked ? (d.RevokeReason ?? "revoked") : (d.ExpiresAt < now ? "expired" : "active"),
+                status = d.Revoked ? (d.RevokeReason ?? "revoked") : (d.ExpiresAt <= now ? "expired" : "active"),
             })
             .OrderByDescending(d => d.createdAt)
             .ToList();
-        return (200, "ok", devices);
+        return (200, "ok", list);
     }
 
-    /// <summary>撤销设备：删除对应配对用户（其 API Key 即时失效）并记录撤销原因。</summary>
+    /// <summary>撤销设备：删除对应配对用户（其 API Key 即时失效）；该设备签发的下级设备一并撤销。</summary>
     public (int Code, string Message, object? Data) Revoke(string deviceId)
     {
-        var devices = ReadDevices();
-        var target = devices.FirstOrDefault(d => d.DeviceId == deviceId);
-        if (target == null)
+        lock (StoreLock)
         {
-            return (404, "未找到该设备记录", null);
+            var devices = ReadDevices();
+            var target = devices.FirstOrDefault(d => d.DeviceId == deviceId);
+            if (target == null)
+            {
+                return (404, "未找到该设备记录", null);
+            }
+            if (!target.Revoked)
+            {
+                // 确认 Key 已经失效才改记录状态，避免列表显示已撤销而凭据仍然有效。
+                if (!TryDeleteUser(target.UserId))
+                {
+                    Log.Error($"[Pairing] 撤销配对设备失败：{target.DeviceId}");
+                    return (500, "撤销失败：无法删除设备对应的用户，请重试", null);
+                }
+                target.Revoked = true;
+                target.RevokeReason = "revoked";
+                ReconcileLocked(devices, Now());
+                WriteDevices(devices);
+                Log.Info($"[Pairing] 已撤销配对设备：{target.Name}（{target.DeviceId}）");
+            }
+            return (200, "已撤销", null);
         }
-        if (!target.Revoked)
+    }
+
+    /// <summary>
+    /// 请求期授权校验：凭据属于配对设备时，核对其是否撤销、到期，或签发链是否已失效；失效则当场收回。
+    /// 返回 false 表示该凭据不应再被接受。非配对设备（普通用户）恒为 true。
+    /// </summary>
+    public bool IsCredentialActive(string? userId)
+    {
+        if (string.IsNullOrWhiteSpace(userId)) return true;
+        lock (StoreLock)
         {
-            global::MSLX.SDK.MSLX.Config.Users.DeleteUser(target.UserId);
-            target.Revoked = true;
-            target.RevokeReason = "revoked";
-            WriteDevices(devices);
-            Log.Info($"[Pairing] 已撤销配对设备：{target.Name}（{target.DeviceId}）");
+            var devices = ReadDevices();
+            var mine = devices.FirstOrDefault(d => d.UserId == userId);
+            if (mine == null)
+            {
+                // 设备记录丢失（旧版本并发覆盖遗留）的配对账号：Key 仍有效却无法管理，按失效处理并删除。
+                var account = userId == "system-admin" ? null : Users.GetUserById(userId);
+                if (account != null && IsPairedDeviceAccount(account) && TryDeleteUser(account.Id))
+                {
+                    Log.Warn($"[Pairing] 已删除无设备记录的配对账号 {account.Username}");
+                    return false;
+                }
+                return true;
+            }
+            if (ReconcileLocked(devices, Now())) WriteDevices(devices);
+            return !mine.Revoked;
         }
-        return (200, "已撤销", null);
     }
 
     // ---------------- 内部 ----------------
 
-    private void ReplaceSameFingerprint(string fingerprint, string clientIp)
+    private long Now() => Clock().ToUnixTimeSeconds();
+
+    private static bool IsAdmin(UserInfo user) =>
+        string.Equals(user.Role, "admin", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>用户名与显示名都符合本插件配对账号的命名（避免误伤恰好同名前缀的普通用户）。</summary>
+    private static bool IsPairedDeviceAccount(UserInfo user) =>
+        PairedUsernamePattern.IsMatch(user.Username ?? string.Empty) &&
+        (user.Name ?? string.Empty).StartsWith(PairedNamePrefix, StringComparison.Ordinal);
+
+    /// <summary>删除用户并确认其已不存在；仅当凭据确实失效时返回 true。</summary>
+    private static bool TryDeleteUser(string userId)
     {
-        if (string.IsNullOrWhiteSpace(fingerprint)) return;
-        var devices = ReadDevices();
-        var changed = false;
-        foreach (var d in devices.Where(d => !d.Revoked && d.Fingerprint == fingerprint))
+        try
         {
-            global::MSLX.SDK.MSLX.Config.Users.DeleteUser(d.UserId);
-            d.Revoked = true;
-            d.RevokeReason = "replaced";
-            changed = true;
-            Log.Info($"[Pairing] 同指纹设备重新配对，旧记录已撤销：{d.DeviceId}");
+            Users.DeleteUser(userId);
+            return Users.GetUserById(userId) == null;
         }
-        if (changed) WriteDevices(devices);
+        catch (Exception ex)
+        {
+            Log.Error($"[Pairing] 删除用户失败：{ex.Message}", ex);
+            return false;
+        }
     }
+
+    private static string? GetInvalidReason(List<DeviceRecord> devices, DeviceRecord d, long now)
+    {
+        if (d.ExpiresAt <= now) return "expired";
+        if (!string.IsNullOrEmpty(d.IssuedBy))
+        {
+            var parent = devices.FirstOrDefault(p => p.UserId == d.IssuedBy);
+            if (parent != null && (parent.Revoked || parent.ExpiresAt <= now)) return "issuer-revoked";
+            if (Users.GetUserById(d.IssuedBy) == null) return "issuer-removed";
+        }
+        if (now - d.CreatedAt > NewDeviceUserGraceSeconds && Users.GetUserById(d.UserId) == null) return "user-removed";
+        return null;
+    }
+
+    /// <summary>
+    /// 撤销所有已失效的设备（到期、签发者被删除/撤销、用户被外部删除），并沿签发链级联到下级设备。
+    /// 调用方须持有 StoreLock；返回是否修改了记录。
+    /// </summary>
+    private bool ReconcileLocked(List<DeviceRecord> devices, long now)
+    {
+        var changed = false;
+        for (var pass = 0; pass <= devices.Count; pass++)
+        {
+            var passChanged = false;
+            foreach (var d in devices.Where(d => !d.Revoked))
+            {
+                var reason = GetInvalidReason(devices, d, now);
+                if (reason == null) continue;
+                if (!TryDeleteUser(d.UserId))
+                {
+                    Log.Error($"[Pairing] 无法收回失效设备的凭据：{d.DeviceId}（{reason}），将在下次清理时重试");
+                    continue;
+                }
+                d.Revoked = true;
+                d.RevokeReason = reason;
+                passChanged = true;
+                Log.Info($"[Pairing] 配对设备授权失效并已移除：{d.DeviceId}（{reason}）");
+            }
+            if (!passChanged) break;
+            changed = true;
+        }
+        return changed;
+    }
+
+    /// <summary>立即清理一次：失效设备、已作废的配对码、无记录的孤儿配对账号、过期的 IP 状态。</summary>
+    internal void SweepNow() => SafeSweep();
 
     private void SafeSweep()
     {
         try
         {
-            var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            foreach (var key in _codes.Where(kv => kv.Value.ExpiresAt < now - 60).Select(kv => kv.Key).ToList())
+            var now = Now();
+            foreach (var kv in _codes.ToList())
             {
-                _codes.TryRemove(key, out _);
+                if (kv.Value.ExpiresAt < now - 60 || Users.GetUserById(kv.Value.CreatedBy) == null)
+                {
+                    _codes.TryRemove(kv.Key, out _);
+                }
             }
 
-            var devices = ReadDevices();
-            var changed = false;
-            foreach (var d in devices.Where(d => !d.Revoked && d.ExpiresAt < now))
+            lock (StoreLock)
             {
-                global::MSLX.SDK.MSLX.Config.Users.DeleteUser(d.UserId);
-                d.Revoked = true;
-                d.RevokeReason = "expired";
-                changed = true;
-                Log.Info($"[Pairing] 配对设备已过期并移除：{d.DeviceId}");
+                var devices = ReadDevices();
+                if (ReconcileLocked(devices, now)) WriteDevices(devices);
+
+                var known = devices.Select(d => d.UserId).ToHashSet();
+                foreach (var account in Users.GetAllUsers().Where(u => u != null && !known.Contains(u.Id) && IsPairedDeviceAccount(u)))
+                {
+                    if (TryDeleteUser(account!.Id)) Log.Warn($"[Pairing] 已删除无设备记录的配对账号 {account.Username}");
+                }
             }
-            if (changed) WriteDevices(devices);
 
             var stale = DateTime.UtcNow - FailureWindow - LockDuration;
             foreach (var key in _ipStates.Where(kv => kv.Value.LockedUntil == null && kv.Value.FailureWindowStart < stale)
@@ -513,7 +758,7 @@ public sealed class PairingService
 
     private List<DeviceRecord> ReadDevices()
     {
-        lock (_storeLock)
+        lock (StoreLock)
         {
             var token = Config.ReadConfigKey("devices") as JArray ?? new JArray();
             return token.ToObject<List<DeviceRecord>>() ?? new List<DeviceRecord>();
@@ -522,18 +767,10 @@ public sealed class PairingService
 
     private void WriteDevices(List<DeviceRecord> devices)
     {
-        lock (_storeLock)
+        lock (StoreLock)
         {
             Config.WriteConfigKey("devices", JArray.FromObject(devices));
         }
-    }
-
-    private void UpsertDevice(DeviceRecord record)
-    {
-        var devices = ReadDevices();
-        devices.RemoveAll(d => d.DeviceId == record.DeviceId);
-        devices.Add(record);
-        WriteDevices(devices);
     }
 
     private static List<string> NormalizeResources(IEnumerable<string>? resources) =>
@@ -546,7 +783,7 @@ public sealed class PairingService
 
     private string ReadPublicUrl()
     {
-        lock (_storeLock)
+        lock (StoreLock)
         {
             var stored = Config.ReadConfigKey("publicUrl")?.ToString();
             var normalized = NormalizeUrl(stored, string.Empty);

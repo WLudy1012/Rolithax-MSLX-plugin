@@ -34,6 +34,12 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: 运行回归测试
+        shell: pwsh
+        run: |
+          dotnet test ./Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExtensions.Tests.csproj --nologo "-p:MSLX_SDK_DIR=$env:GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK"
+          if ($LASTEXITCODE -ne 0) { throw 'regression tests failed' }
+
       - name: 构建并打包插件
         shell: pwsh
         run: |
@@ -73,7 +79,7 @@ jobs:
           }
           git config user.name 'GitHub Actions'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git remote add cnb "https://cnb:$env:CNB_TOKEN@cnb.cool/WLudy/MSLX_APP-Plugins.git"
+          git remote add cnb "https://cnb:$env:CNB_TOKEN@cnb.cool/WLudy/Rolithax-MSLX-plugin.git"
           if ($LASTEXITCODE -ne 0) { throw '添加 CNB 远端失败。' }
           git fetch cnb main --prune
           if ($LASTEXITCODE -ne 0) { throw '获取 CNB main 失败，已停止同步。' }

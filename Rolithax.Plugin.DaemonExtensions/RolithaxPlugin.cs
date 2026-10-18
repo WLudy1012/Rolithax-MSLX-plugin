@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Rolithax.Plugin.DaemonExtensions.Pairing;
 using Rolithax.Plugin.DaemonExtensions.ServerIcon;
@@ -42,7 +44,7 @@ public sealed class RolithaxPlugin : IPlugin
 
     public string AuthorUrl => "https://github.com/WLudy1012";
 
-    public string PluginUrl => "https://github.com/WLudy1012/MSLX_APP-Plugins";
+    public string PluginUrl => "https://github.com/WLudy1012/Rolithax-MSLX-plugin";
 
     /// <summary>插件图标：相对文件名（Daemon 会拼成 /plugins/{id}/{version}/icon.png 下发 Frontend/dist/icon.png）。</summary>
     public string Icon => "icon.png";
@@ -80,9 +82,15 @@ public sealed class RolithaxPlugin : IPlugin
         _serverIcon ??= new ServerIconService();
         _resourceInstaller ??= new ResourceInstallService();
 
-        PairingEndpoints.Map(endpoints, _pairing, ApiPrefix + "/pair");
-        ServerIconEndpoints.Map(endpoints, _serverIcon, ApiPrefix + "/icon");
-        ResourceInstallEndpoints.Map(endpoints, _resourceInstaller, ApiPrefix + "/resources");
+        // 三组端点共用一道请求期授权校验：配对设备凭据到期/撤销/签发链失效后立即拒绝。
+        var pairing = _pairing;
+        var api = endpoints.MapGroup(ApiPrefix);
+        api.AddEndpointFilter(async (context, next) =>
+            (object?)DeviceLeaseGuard.Reject(context.HttpContext, pairing) ?? await next(context));
+
+        PairingEndpoints.Map(api, _pairing, "/pair");
+        ServerIconEndpoints.Map(api, _serverIcon, "/icon");
+        ResourceInstallEndpoints.Map(api, _resourceInstaller, "/resources");
 
         global::MSLX.SDK.MSLX.Logger.Info($"[{PluginId}] Rolithax 扩展已挂载配对、图标和资源安装接口");
     }

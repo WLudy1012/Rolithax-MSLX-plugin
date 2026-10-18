@@ -18,9 +18,11 @@
     <!-- MSLX.SDK 引用：按以下顺序自动探测（均不存在时报错，可用 -p:MSLX_SDK_DIR=... 覆盖）：
          1) 本仓库根下的 MSLX-dev/MSLX.SDK（CI 检出位置）；
          2) 与本仓库平级的 MSLX-dev/MSLX.SDK；
-         3) 与本仓库平级的 MSLX-Android/MSLX-dev/MSLX.SDK（App 工作区布局）。 -->
+         3) 与本仓库平级的 RolithaxLauncher/MSLX-dev/MSLX.SDK（新 App 工作区布局）；
+         4) 兼容本地旧目录 MSLX-Android/MSLX-dev/MSLX.SDK。 -->
     <MSLX_SDK_DIR Condition="'$(MSLX_SDK_DIR)' == '' AND Exists('$(MSBuildThisFileDirectory)../MSLX-dev/MSLX.SDK/MSLX.SDK.csproj')">$(MSBuildThisFileDirectory)../MSLX-dev/MSLX.SDK</MSLX_SDK_DIR>
     <MSLX_SDK_DIR Condition="'$(MSLX_SDK_DIR)' == '' AND Exists('$(MSBuildThisFileDirectory)../../MSLX-dev/MSLX.SDK/MSLX.SDK.csproj')">$(MSBuildThisFileDirectory)../../MSLX-dev/MSLX.SDK</MSLX_SDK_DIR>
+    <MSLX_SDK_DIR Condition="'$(MSLX_SDK_DIR)' == '' AND Exists('$(MSBuildThisFileDirectory)../../RolithaxLauncher/MSLX-dev/MSLX.SDK/MSLX.SDK.csproj')">$(MSBuildThisFileDirectory)../../RolithaxLauncher/MSLX-dev/MSLX.SDK</MSLX_SDK_DIR>
     <MSLX_SDK_DIR Condition="'$(MSLX_SDK_DIR)' == '' AND Exists('$(MSBuildThisFileDirectory)../../MSLX-Android/MSLX-dev/MSLX.SDK/MSLX.SDK.csproj')">$(MSBuildThisFileDirectory)../../MSLX-Android/MSLX-dev/MSLX.SDK</MSLX_SDK_DIR>
     <MSLX_SDK_DIR Condition="'$(MSLX_SDK_DIR)' == ''">$(MSBuildThisFileDirectory)../../MSLX-dev/MSLX.SDK</MSLX_SDK_DIR>
     <MSLX_SDK_DIR>$([System.IO.Path]::GetFullPath('$(MSLX_SDK_DIR)'))</MSLX_SDK_DIR>
@@ -33,6 +35,10 @@
 
   <ItemGroup>
     <ProjectReference Include="$(MSLX_SDK_DIR)/MSLX.SDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Rolithax.Plugin.DaemonExtensions.Tests" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,5 @@
 # CNB（cnb.cool）云构建：main push 构建校验；v* tag 构建并发布 CNB Release（dll + zip）。
-# 本仓库为 GitHub WLudy1012/MSLX_APP-Plugins 的 CNB 直推镜像；
+# 本仓库为 GitHub WLudy1012/Rolithax-MSLX-plugin 的 CNB 直推镜像；
 # MSLX.SDK 源码需从 GitHub（MSLTeam/MSLX dev）检出（本仓库 csproj 以 ProjectReference 引用），
 # 插件面板前端产物 Frontend/dist 已入库，构建无需 Node。
 
@@ -67,6 +67,12 @@ main:
             dotnet build Rolithax.Plugin.DaemonExtensions/Rolithax.Plugin.DaemonExtensions.csproj \
               -c Release --nologo \
               -p:MSLX_SDK_DIR="$PWD/MSLX-dev/MSLX.SDK"
+
+        - name: 运行回归测试
+          script: |
+            set -eu
+            dotnet test Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExtensions.Tests.csproj \
+              --nologo -p:MSLX_SDK_DIR="$PWD/MSLX-dev/MSLX.SDK"
 
         - name: 验证内嵌前端
           script: |
@@ -145,6 +151,12 @@ $:
               -c Release --nologo \
               -p:MSLX_SDK_DIR="$PWD/MSLX-dev/MSLX.SDK" \
               -p:Version="$VER"
+
+        - name: 运行回归测试
+          script: |
+            set -eu
+            dotnet test Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExtensions.Tests.csproj \
+              --nologo -p:MSLX_SDK_DIR="$PWD/MSLX-dev/MSLX.SDK"
 
         - name: 收集发布产物
           script: |

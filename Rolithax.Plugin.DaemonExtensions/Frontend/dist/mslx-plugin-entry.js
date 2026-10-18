@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".rolithax-card{background:var(--td-bg-color-container);border:1px solid var(--td-component-border);border-radius:16px;box-shadow:0 1px 2px #00000008}.rolithax-title{color:var(--td-text-color-primary)}.rolithax-muted{color:var(--td-text-color-secondary)}.rolithax-placeholder{color:var(--td-text-color-placeholder)}@keyframes t-spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.t-icon{display:inline-block;vertical-align:middle;width:1em;height:1em}.t-icon:before{font-family:unset}.t-icon-loading{animation:t-spin 1s linear infinite}.t-icon.t-size-s,i.t-size-s{font-size:14px}.t-icon.t-size-m,i.t-size-m{font-size:16px}.t-icon.t-size-l,i.t-size-l{font-size:18px}.rolithax-qr-col[data-v-aa959d09]{width:100%}.rolithax-qr-box[data-v-aa959d09]{display:flex;width:240px;height:240px;background:#fff}.rolithax-qr-mask[data-v-aa959d09]{position:absolute;inset:0;background:#000000b3;color:#fff}.rolithax-expired[data-v-aa959d09]{color:var(--td-error-color)}@media(min-width:768px){.rolithax-qr-col[data-v-aa959d09]{width:280px}}.absolute[data-v-aa959d09]{position:absolute}.relative[data-v-aa959d09]{position:relative}.m-0[data-v-aa959d09]{margin:0}.min-w-0[data-v-aa959d09]{min-width:0}.w-full[data-v-aa959d09]{width:100%}.flex[data-v-aa959d09]{display:flex}.flex-1[data-v-aa959d09]{flex:1 1 0%}.shrink-0[data-v-aa959d09]{flex-shrink:0}.flex-col[data-v-aa959d09]{flex-direction:column}.items-center[data-v-aa959d09]{align-items:center}.self-start[data-v-aa959d09]{align-self:flex-start}.justify-center[data-v-aa959d09]{justify-content:center}.gap-2[data-v-aa959d09]{gap:.5rem}.gap-3[data-v-aa959d09]{gap:.75rem}.gap-4[data-v-aa959d09]{gap:1rem}.gap-5[data-v-aa959d09]{gap:1.25rem}.gap-6[data-v-aa959d09]{gap:1.5rem}.overflow-hidden[data-v-aa959d09]{overflow:hidden}.p-5[data-v-aa959d09]{padding:1.25rem}.px-6[data-v-aa959d09]{padding-left:1.5rem;padding-right:1.5rem}.text-center[data-v-aa959d09]{text-align:center}.text-base[data-v-aa959d09]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-aa959d09]{font-size:.875rem;line-height:1.25rem}.text-xs[data-v-aa959d09]{font-size:.75rem;line-height:1rem}.font-bold[data-v-aa959d09]{font-weight:700}.tracking-widest[data-v-aa959d09]{letter-spacing:.1em}.font-mono[data-v-aa959d09]{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}@media(min-width:768px){.md\\:flex-row[data-v-aa959d09]{flex-direction:row}}.fixed[data-v-ccac421b]{position:fixed}.m-0[data-v-ccac421b]{margin:0}.flex[data-v-ccac421b]{display:flex}.flex-col[data-v-ccac421b]{flex-direction:column}.flex-wrap[data-v-ccac421b]{flex-wrap:wrap}.items-center[data-v-ccac421b]{align-items:center}.justify-between[data-v-ccac421b]{justify-content:space-between}.gap-2[data-v-ccac421b]{gap:.5rem}.gap-4[data-v-ccac421b]{gap:1rem}.p-5[data-v-ccac421b]{padding:1.25rem}.text-base[data-v-ccac421b]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-ccac421b]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-ccac421b]{font-weight:700}@unocss;.rolithax-page[data-v-39086d7c]{color:var(--td-text-color-primary);padding-bottom:8px}.rolithax-error[data-v-39086d7c]{color:var(--td-error-color)}.rolithax-fade-enter-active[data-v-39086d7c],.rolithax-fade-leave-active[data-v-39086d7c]{transition:opacity .2s ease,transform .2s ease}.rolithax-fade-enter-from[data-v-39086d7c],.rolithax-fade-leave-to[data-v-39086d7c]{opacity:0;transform:translateY(10px)}.m-0[data-v-39086d7c]{margin:0}.flex[data-v-39086d7c]{display:flex}.flex-col[data-v-39086d7c]{flex-direction:column}.transform[data-v-39086d7c]{transform:translate(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotate(var(--un-rotate-z)) skew(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z))}.items-center[data-v-39086d7c]{align-items:center}.self-start[data-v-39086d7c]{align-self:flex-start}.justify-between[data-v-39086d7c]{justify-content:space-between}.gap-1[data-v-39086d7c]{gap:.25rem}.gap-2[data-v-39086d7c]{gap:.5rem}.gap-5[data-v-39086d7c]{gap:1.25rem}.p-5[data-v-39086d7c]{padding:1.25rem}.text-lg[data-v-39086d7c]{font-size:1.125rem;line-height:1.75rem}.text-sm[data-v-39086d7c]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-39086d7c]{font-weight:700}.transition[data-v-39086d7c]{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.ease[data-v-39086d7c]{transition-timing-function:cubic-bezier(.4,0,.2,1)}@media(min-width:1280px){.xl\\:flex-row[data-v-39086d7c]{flex-direction:row}.xl\\:items-center[data-v-39086d7c]{align-items:center}.xl\\:self-auto[data-v-39086d7c]{align-self:auto}}")),document.head.appendChild(a)}}catch(t){console.error("vite-plugin-css-injected-by-js",t)}})();
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".rolithax-card{background:var(--td-bg-color-container);border:1px solid var(--td-component-border);border-radius:16px;box-shadow:0 1px 2px #00000008}.rolithax-title{color:var(--td-text-color-primary)}.rolithax-muted{color:var(--td-text-color-secondary)}.rolithax-placeholder{color:var(--td-text-color-placeholder)}@keyframes t-spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.t-icon{display:inline-block;vertical-align:middle;width:1em;height:1em}.t-icon:before{font-family:unset}.t-icon-loading{animation:t-spin 1s linear infinite}.t-icon.t-size-s,i.t-size-s{font-size:14px}.t-icon.t-size-m,i.t-size-m{font-size:16px}.t-icon.t-size-l,i.t-size-l{font-size:18px}.rolithax-qr-col[data-v-aa959d09]{width:100%}.rolithax-qr-box[data-v-aa959d09]{display:flex;width:240px;height:240px;background:#fff}.rolithax-qr-mask[data-v-aa959d09]{position:absolute;inset:0;background:#000000b3;color:#fff}.rolithax-expired[data-v-aa959d09]{color:var(--td-error-color)}@media(min-width:768px){.rolithax-qr-col[data-v-aa959d09]{width:280px}}.absolute[data-v-aa959d09]{position:absolute}.relative[data-v-aa959d09]{position:relative}.m-0[data-v-aa959d09]{margin:0}.min-w-0[data-v-aa959d09]{min-width:0}.w-full[data-v-aa959d09]{width:100%}.flex[data-v-aa959d09]{display:flex}.flex-1[data-v-aa959d09]{flex:1 1 0%}.shrink-0[data-v-aa959d09]{flex-shrink:0}.flex-col[data-v-aa959d09]{flex-direction:column}.items-center[data-v-aa959d09]{align-items:center}.self-start[data-v-aa959d09]{align-self:flex-start}.justify-center[data-v-aa959d09]{justify-content:center}.gap-2[data-v-aa959d09]{gap:.5rem}.gap-3[data-v-aa959d09]{gap:.75rem}.gap-4[data-v-aa959d09]{gap:1rem}.gap-5[data-v-aa959d09]{gap:1.25rem}.gap-6[data-v-aa959d09]{gap:1.5rem}.overflow-hidden[data-v-aa959d09]{overflow:hidden}.p-5[data-v-aa959d09]{padding:1.25rem}.px-6[data-v-aa959d09]{padding-left:1.5rem;padding-right:1.5rem}.text-center[data-v-aa959d09]{text-align:center}.text-base[data-v-aa959d09]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-aa959d09]{font-size:.875rem;line-height:1.25rem}.text-xs[data-v-aa959d09]{font-size:.75rem;line-height:1rem}.font-bold[data-v-aa959d09]{font-weight:700}.tracking-widest[data-v-aa959d09]{letter-spacing:.1em}.font-mono[data-v-aa959d09]{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}@media(min-width:768px){.md\\:flex-row[data-v-aa959d09]{flex-direction:row}}.fixed[data-v-c423395c]{position:fixed}.m-0[data-v-c423395c]{margin:0}.flex[data-v-c423395c]{display:flex}.flex-col[data-v-c423395c]{flex-direction:column}.flex-wrap[data-v-c423395c]{flex-wrap:wrap}.items-center[data-v-c423395c]{align-items:center}.justify-between[data-v-c423395c]{justify-content:space-between}.gap-2[data-v-c423395c]{gap:.5rem}.gap-4[data-v-c423395c]{gap:1rem}.p-5[data-v-c423395c]{padding:1.25rem}.text-base[data-v-c423395c]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-c423395c]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-c423395c]{font-weight:700}@unocss;.rolithax-page[data-v-39086d7c]{color:var(--td-text-color-primary);padding-bottom:8px}.rolithax-error[data-v-39086d7c]{color:var(--td-error-color)}.rolithax-fade-enter-active[data-v-39086d7c],.rolithax-fade-leave-active[data-v-39086d7c]{transition:opacity .2s ease,transform .2s ease}.rolithax-fade-enter-from[data-v-39086d7c],.rolithax-fade-leave-to[data-v-39086d7c]{opacity:0;transform:translateY(10px)}.m-0[data-v-39086d7c]{margin:0}.flex[data-v-39086d7c]{display:flex}.flex-col[data-v-39086d7c]{flex-direction:column}.transform[data-v-39086d7c]{transform:translate(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotate(var(--un-rotate-z)) skew(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z))}.items-center[data-v-39086d7c]{align-items:center}.self-start[data-v-39086d7c]{align-self:flex-start}.justify-between[data-v-39086d7c]{justify-content:space-between}.gap-1[data-v-39086d7c]{gap:.25rem}.gap-2[data-v-39086d7c]{gap:.5rem}.gap-5[data-v-39086d7c]{gap:1.25rem}.p-5[data-v-39086d7c]{padding:1.25rem}.text-lg[data-v-39086d7c]{font-size:1.125rem;line-height:1.75rem}.text-sm[data-v-39086d7c]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-39086d7c]{font-weight:700}.transition[data-v-39086d7c]{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.ease[data-v-39086d7c]{transition-timing-function:cubic-bezier(.4,0,.2,1)}@media(min-width:1280px){.xl\\:flex-row[data-v-39086d7c]{flex-direction:row}.xl\\:items-center[data-v-39086d7c]{align-items:center}.xl\\:self-auto[data-v-39086d7c]{align-self:auto}}")),document.head.appendChild(a)}}catch(t){console.error("vite-plugin-css-injected-by-js",t)}})();
 function pe(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
@@ -41,8 +41,8 @@ function K(e, s) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
-    s && (o = o.filter(function(u) {
-      return Object.getOwnPropertyDescriptor(e, u).enumerable;
+    s && (o = o.filter(function(d) {
+      return Object.getOwnPropertyDescriptor(e, d).enumerable;
     })), n.push.apply(n, o);
   }
   return n;
@@ -64,19 +64,19 @@ var Y = (e) => {
 }, be = (e, s) => {
   var n = e.split(".")[1], o = /^overlapMask(Id|Url)_(.+)$/.exec(n);
   if (o) {
-    var u = "".concat(s.overlapMaskPrefix, "-overlap-").concat(o[2]);
-    return o[1] === "Url" ? "url(#".concat(u, ")") : u;
+    var d = "".concat(s.overlapMaskPrefix, "-overlap-").concat(o[2]);
+    return o[1] === "Url" ? "url(#".concat(d, ")") : d;
   }
   return s[n];
 }, se = (e, s) => {
   var n = {};
   if (e.attrs)
-    for (var [o, u] of Object.entries(e.attrs))
-      typeof u == "string" && u.startsWith("props.") ? n[Y(o)] = be(u, s) : n[Y(o)] = u;
+    for (var [o, d] of Object.entries(e.attrs))
+      typeof d == "string" && d.startsWith("props.") ? n[Y(o)] = be(d, s) : n[Y(o)] = d;
   e.tag === "svg" && (n.class = s.class, n.style = s.style, n.onClick = s.onClick);
-  var d = e.children ? e.children.map((i) => se(i, s)) : [];
-  return t.h(e.tag, n, d);
-}, H = (e, s) => {
+  var v = e.children ? e.children.map((i) => se(i, s)) : [];
+  return t.h(e.tag, n, v);
+}, L = (e, s) => {
   var n = "t-icon-".concat(s.iconId, "-instance-").concat(s.overlapMaskInstanceId);
   return se(e, G(G({}, s), {}, {
     overlapMaskPrefix: n
@@ -116,7 +116,7 @@ function Me() {
     }
   };
 }
-function L(e) {
+function H(e) {
   var s = Me().SIZE, n = t.computed(() => e.value in s ? s[e.value] : ""), o = t.computed(() => e.value === void 0 || e.value in s ? {} : {
     fontSize: e.value
   });
@@ -129,8 +129,8 @@ function X(e, s) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
-    s && (o = o.filter(function(u) {
-      return Object.getOwnPropertyDescriptor(e, u).enumerable;
+    s && (o = o.filter(function(d) {
+      return Object.getOwnPropertyDescriptor(e, d).enumerable;
     })), n.push.apply(n, o);
   }
   return n;
@@ -243,19 +243,19 @@ var Pe = {
   },
   setup(e, s) {
     var n, o, {
-      attrs: u
-    } = s, d = t.useId, i = d ? d() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
+      attrs: d
+    } = s, v = t.useId, i = v ? v() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
       var C;
       return e.strokeColor ? Array.isArray(e.strokeColor) ? (C = e.strokeColor[1]) !== null && C !== void 0 ? C : e.strokeColor[0] : e.strokeColor : "currentColor";
-    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), v = t.computed(() => {
+    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), u = t.computed(() => {
       var C;
       return e.fillColor ? Array.isArray(e.fillColor) ? (C = e.fillColor[1]) !== null && C !== void 0 ? C : e.fillColor[0] : e.fillColor : "transparent";
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: g,
-      style: p
-    } = L(a), w = t.computed(() => ["t-icon", "t-icon-copy", g.value]), k = t.computed(() => J(J({
+      style: y
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-copy", g.value]), k = t.computed(() => J(J({
       fill: "none"
-    }, p.value), u.style)), b = t.computed(() => ({
+    }, y.value), d.style)), b = t.computed(() => ({
       class: w.value,
       style: k.value,
       onClick: (C) => {
@@ -267,21 +267,21 @@ var Pe = {
       strokeColor1: l.value,
       strokeColor2: c.value,
       fillColor1: f.value,
-      fillColor2: v.value,
+      fillColor2: u.value,
       strokeWidth: e.strokeWidth || 2,
       filledColor: h.value,
       iconId: "copy",
       overlapMaskInstanceId: r
     }));
-    return () => H(Pe, b.value);
+    return () => L(Pe, b.value);
   }
 });
 function ee(e, s) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
-    s && (o = o.filter(function(u) {
-      return Object.getOwnPropertyDescriptor(e, u).enumerable;
+    s && (o = o.filter(function(d) {
+      return Object.getOwnPropertyDescriptor(e, d).enumerable;
     })), n.push.apply(n, o);
   }
   return n;
@@ -422,19 +422,19 @@ var _e = {
   },
   setup(e, s) {
     var n, o, {
-      attrs: u
-    } = s, d = t.useId, i = d ? d() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
+      attrs: d
+    } = s, v = t.useId, i = v ? v() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
       var C;
       return e.strokeColor ? Array.isArray(e.strokeColor) ? (C = e.strokeColor[1]) !== null && C !== void 0 ? C : e.strokeColor[0] : e.strokeColor : "currentColor";
-    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), v = t.computed(() => {
+    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), u = t.computed(() => {
       var C;
       return e.fillColor ? Array.isArray(e.fillColor) ? (C = e.fillColor[1]) !== null && C !== void 0 ? C : e.fillColor[0] : e.fillColor : "transparent";
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: g,
-      style: p
-    } = L(a), w = t.computed(() => ["t-icon", "t-icon-qrcode", g.value]), k = t.computed(() => te(te({
+      style: y
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-qrcode", g.value]), k = t.computed(() => te(te({
       fill: "none"
-    }, p.value), u.style)), b = t.computed(() => ({
+    }, y.value), d.style)), b = t.computed(() => ({
       class: w.value,
       style: k.value,
       onClick: (C) => {
@@ -446,21 +446,21 @@ var _e = {
       strokeColor1: l.value,
       strokeColor2: c.value,
       fillColor1: f.value,
-      fillColor2: v.value,
+      fillColor2: u.value,
       strokeWidth: e.strokeWidth || 2,
       filledColor: h.value,
       iconId: "qrcode",
       overlapMaskInstanceId: r
     }));
-    return () => H(_e, b.value);
+    return () => L(_e, b.value);
   }
 });
 function re(e, s) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
-    s && (o = o.filter(function(u) {
-      return Object.getOwnPropertyDescriptor(e, u).enumerable;
+    s && (o = o.filter(function(d) {
+      return Object.getOwnPropertyDescriptor(e, d).enumerable;
     })), n.push.apply(n, o);
   }
   return n;
@@ -521,19 +521,19 @@ var Ve = {
   },
   setup(e, s) {
     var n, o, {
-      attrs: u
-    } = s, d = t.useId, i = d ? d() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
+      attrs: d
+    } = s, v = t.useId, i = v ? v() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
       var C;
       return e.strokeColor ? Array.isArray(e.strokeColor) ? (C = e.strokeColor[1]) !== null && C !== void 0 ? C : e.strokeColor[0] : e.strokeColor : "currentColor";
-    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), v = t.computed(() => {
+    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), u = t.computed(() => {
       var C;
       return e.fillColor ? Array.isArray(e.fillColor) ? (C = e.fillColor[1]) !== null && C !== void 0 ? C : e.fillColor[0] : e.fillColor : "transparent";
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: g,
-      style: p
-    } = L(a), w = t.computed(() => ["t-icon", "t-icon-refresh", g.value]), k = t.computed(() => ae(ae({
+      style: y
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-refresh", g.value]), k = t.computed(() => ae(ae({
       fill: "none"
-    }, p.value), u.style)), b = t.computed(() => ({
+    }, y.value), d.style)), b = t.computed(() => ({
       class: w.value,
       style: k.value,
       onClick: (C) => {
@@ -545,21 +545,21 @@ var Ve = {
       strokeColor1: l.value,
       strokeColor2: c.value,
       fillColor1: f.value,
-      fillColor2: v.value,
+      fillColor2: u.value,
       strokeWidth: e.strokeWidth || 2,
       filledColor: h.value,
       iconId: "refresh",
       overlapMaskInstanceId: r
     }));
-    return () => H(Ve, b.value);
+    return () => L(Ve, b.value);
   }
 });
 function oe(e, s) {
   var n = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
-    s && (o = o.filter(function(u) {
-      return Object.getOwnPropertyDescriptor(e, u).enumerable;
+    s && (o = o.filter(function(d) {
+      return Object.getOwnPropertyDescriptor(e, d).enumerable;
     })), n.push.apply(n, o);
   }
   return n;
@@ -692,19 +692,19 @@ var Se = {
   },
   setup(e, s) {
     var n, o, {
-      attrs: u
-    } = s, d = t.useId, i = d ? d() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
+      attrs: d
+    } = s, v = t.useId, i = v ? v() : "".concat((n = (o = t.getCurrentInstance()) === null || o === void 0 ? void 0 : o.uid) !== null && n !== void 0 ? n : "unknown"), r = i.replace(/[^a-zA-Z0-9_]/g, ""), a = t.computed(() => e.size), l = t.computed(() => e.strokeColor ? Array.isArray(e.strokeColor) ? e.strokeColor[0] : e.strokeColor : "currentColor"), c = t.computed(() => {
       var C;
       return e.strokeColor ? Array.isArray(e.strokeColor) ? (C = e.strokeColor[1]) !== null && C !== void 0 ? C : e.strokeColor[0] : e.strokeColor : "currentColor";
-    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), v = t.computed(() => {
+    }), f = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "transparent"), u = t.computed(() => {
       var C;
       return e.fillColor ? Array.isArray(e.fillColor) ? (C = e.fillColor[1]) !== null && C !== void 0 ? C : e.fillColor[0] : e.fillColor : "transparent";
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: g,
-      style: p
-    } = L(a), w = t.computed(() => ["t-icon", "t-icon-usergroup", g.value]), k = t.computed(() => ne(ne({
+      style: y
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-usergroup", g.value]), k = t.computed(() => ne(ne({
       fill: "none"
-    }, p.value), u.style)), b = t.computed(() => ({
+    }, y.value), d.style)), b = t.computed(() => ({
       class: w.value,
       style: k.value,
       onClick: (C) => {
@@ -716,13 +716,13 @@ var Se = {
       strokeColor1: l.value,
       strokeColor2: c.value,
       fillColor1: f.value,
-      fillColor2: v.value,
+      fillColor2: u.value,
       strokeWidth: e.strokeWidth || 2,
       filledColor: h.value,
       iconId: "usergroup",
       overlapMaskInstanceId: r
     }));
-    return () => H(Se, b.value);
+    return () => L(Se, b.value);
   }
 }), F, le;
 function Oe() {
@@ -759,15 +759,15 @@ async function Ue() {
   return (await I.get({ url: "/api/instance/list" }) || []).map((s) => ({ label: `${s.name} (#${s.id})`, value: `server:${s.id}` }));
 }
 var Z, ie;
-function He() {
+function Le() {
   return ie || (ie = 1, Z = TDesign), Z;
 }
-var N = He();
+var N = Le();
 var S = function() {
   return S = Object.assign || function(s) {
-    for (var n, o = 1, u = arguments.length; o < u; o++) {
+    for (var n, o = 1, d = arguments.length; o < d; o++) {
       n = arguments[o];
-      for (var d in n) Object.prototype.hasOwnProperty.call(n, d) && (s[d] = n[d]);
+      for (var v in n) Object.prototype.hasOwnProperty.call(n, v) && (s[v] = n[v]);
     }
     return s;
   }, S.apply(this, arguments);
@@ -783,19 +783,19 @@ var A;
         if (c < -1 || c > 7)
           throw new RangeError("Mask value out of range");
         this.size = r * 4 + 17;
-        for (var f = [], v = 0; v < this.size; v++)
+        for (var f = [], u = 0; u < this.size; u++)
           f.push(!1);
-        for (var v = 0; v < this.size; v++)
+        for (var u = 0; u < this.size; u++)
           this.modules.push(f.slice()), this.isFunction.push(f.slice());
         this.drawFunctionPatterns();
         var h = this.addEccAndInterleave(l);
         if (this.drawCodewords(h), c == -1)
-          for (var g = 1e9, v = 0; v < 8; v++) {
-            this.applyMask(v), this.drawFormatBits(v);
-            var p = this.getPenaltyScore();
-            p < g && (c = v, g = p), this.applyMask(v);
+          for (var g = 1e9, u = 0; u < 8; u++) {
+            this.applyMask(u), this.drawFormatBits(u);
+            var y = this.getPenaltyScore();
+            y < g && (c = u, g = y), this.applyMask(u);
           }
-        u(0 <= c && c <= 7), this.mask = c, this.applyMask(c), this.drawFormatBits(c), this.isFunction = [];
+        d(0 <= c && c <= 7), this.mask = c, this.applyMask(c), this.drawFormatBits(c), this.isFunction = [];
       }
       return i.encodeText = function(r, a) {
         var l = e.QrSegment.makeSegments(r);
@@ -803,13 +803,13 @@ var A;
       }, i.encodeBinary = function(r, a) {
         var l = e.QrSegment.makeBytes(r);
         return i.encodeSegments([l], a);
-      }, i.encodeSegments = function(r, a, l, c, f, v) {
-        if (l === void 0 && (l = 1), c === void 0 && (c = 40), f === void 0 && (f = -1), v === void 0 && (v = !0), !(i.MIN_VERSION <= l && l <= c && c <= i.MAX_VERSION) || f < -1 || f > 7)
+      }, i.encodeSegments = function(r, a, l, c, f, u) {
+        if (l === void 0 && (l = 1), c === void 0 && (c = 40), f === void 0 && (f = -1), u === void 0 && (u = !0), !(i.MIN_VERSION <= l && l <= c && c <= i.MAX_VERSION) || f < -1 || f > 7)
           throw new RangeError("Invalid value");
         var h, g;
         for (h = l; ; h++) {
-          var p = i.getNumDataCodewords(h, a) * 8, w = d.getTotalBits(r, h);
-          if (w <= p) {
+          var y = i.getNumDataCodewords(h, a) * 8, w = v.getTotalBits(r, h);
+          if (w <= y) {
             g = w;
             break;
           }
@@ -818,19 +818,19 @@ var A;
         }
         for (var k = 0, b = [i.Ecc.MEDIUM, i.Ecc.QUARTILE, i.Ecc.HIGH]; k < b.length; k++) {
           var C = b[k];
-          v && g <= i.getNumDataCodewords(h, C) * 8 && (a = C);
+          u && g <= i.getNumDataCodewords(h, C) * 8 && (a = C);
         }
-        for (var m = [], y = 0, M = r; y < M.length; y++) {
-          var E = M[y];
+        for (var m = [], p = 0, M = r; p < M.length; p++) {
+          var E = M[p];
           n(E.mode.modeBits, 4, m), n(E.numChars, E.mode.numCharCountBits(h), m);
           for (var _ = 0, P = E.getData(); _ < P.length; _++) {
             var R = P[_];
             m.push(R);
           }
         }
-        u(m.length == g);
+        d(m.length == g);
         var V = i.getNumDataCodewords(h, a) * 8;
-        u(m.length <= V), n(0, Math.min(4, V - m.length), m), n(0, (8 - m.length % 8) % 8, m), u(m.length % 8 == 0);
+        d(m.length <= V), n(0, Math.min(4, V - m.length), m), n(0, (8 - m.length % 8) % 8, m), d(m.length % 8 == 0);
         for (var x = 236; m.length < V; x ^= 253)
           n(x, 8, m);
         for (var O = []; O.length * 8 < m.length; )
@@ -854,7 +854,7 @@ var A;
         for (var a = this.errorCorrectionLevel.formatBits << 3 | r, l = a, c = 0; c < 10; c++)
           l = l << 1 ^ (l >>> 9) * 1335;
         var f = (a << 10 | l) ^ 21522;
-        u(f >>> 15 == 0);
+        d(f >>> 15 == 0);
         for (var c = 0; c <= 5; c++)
           this.setFunctionModule(8, c, o(f, c));
         this.setFunctionModule(8, 7, o(f, 6)), this.setFunctionModule(8, 8, o(f, 7)), this.setFunctionModule(7, 8, o(f, 8));
@@ -870,17 +870,17 @@ var A;
           for (var r = this.version, a = 0; a < 12; a++)
             r = r << 1 ^ (r >>> 11) * 7973;
           var l = this.version << 12 | r;
-          u(l >>> 18 == 0);
+          d(l >>> 18 == 0);
           for (var a = 0; a < 18; a++) {
-            var c = o(l, a), f = this.size - 11 + a % 3, v = Math.floor(a / 3);
-            this.setFunctionModule(f, v, c), this.setFunctionModule(v, f, c);
+            var c = o(l, a), f = this.size - 11 + a % 3, u = Math.floor(a / 3);
+            this.setFunctionModule(f, u, c), this.setFunctionModule(u, f, c);
           }
         }
       }, i.prototype.drawFinderPattern = function(r, a) {
         for (var l = -4; l <= 4; l++)
           for (var c = -4; c <= 4; c++) {
-            var f = Math.max(Math.abs(c), Math.abs(l)), v = r + c, h = a + l;
-            0 <= v && v < this.size && 0 <= h && h < this.size && this.setFunctionModule(v, h, f != 2 && f != 4);
+            var f = Math.max(Math.abs(c), Math.abs(l)), u = r + c, h = a + l;
+            0 <= u && u < this.size && 0 <= h && h < this.size && this.setFunctionModule(u, h, f != 2 && f != 4);
           }
       }, i.prototype.drawAlignmentPattern = function(r, a) {
         for (var l = -2; l <= 2; l++)
@@ -892,19 +892,19 @@ var A;
         var a = this.version, l = this.errorCorrectionLevel;
         if (r.length != i.getNumDataCodewords(a, l))
           throw new RangeError("Invalid argument");
-        for (var c = i.NUM_ERROR_CORRECTION_BLOCKS[l.ordinal][a], f = i.ECC_CODEWORDS_PER_BLOCK[l.ordinal][a], v = Math.floor(i.getNumRawDataModules(a) / 8), h = c - v % c, g = Math.floor(v / c), p = [], w = i.reedSolomonComputeDivisor(f), k = 0, b = 0; k < c; k++) {
+        for (var c = i.NUM_ERROR_CORRECTION_BLOCKS[l.ordinal][a], f = i.ECC_CODEWORDS_PER_BLOCK[l.ordinal][a], u = Math.floor(i.getNumRawDataModules(a) / 8), h = c - u % c, g = Math.floor(u / c), y = [], w = i.reedSolomonComputeDivisor(f), k = 0, b = 0; k < c; k++) {
           var C = r.slice(b, b + g - f + (k < h ? 0 : 1));
           b += C.length;
           var m = i.reedSolomonComputeRemainder(C, w);
-          k < h && C.push(0), p.push(C.concat(m));
+          k < h && C.push(0), y.push(C.concat(m));
         }
-        for (var y = [], M = function(E) {
-          p.forEach(function(_, P) {
-            (E != g - f || P >= h) && y.push(_[E]);
+        for (var p = [], M = function(E) {
+          y.forEach(function(_, P) {
+            (E != g - f || P >= h) && p.push(_[E]);
           });
-        }, k = 0; k < p[0].length; k++)
+        }, k = 0; k < y[0].length; k++)
           M(k);
-        return u(y.length == v), y;
+        return d(p.length == u), p;
       }, i.prototype.drawCodewords = function(r) {
         if (r.length != Math.floor(i.getNumRawDataModules(this.version) / 8))
           throw new RangeError("Invalid argument");
@@ -912,11 +912,11 @@ var A;
           l == 6 && (l = 5);
           for (var c = 0; c < this.size; c++)
             for (var f = 0; f < 2; f++) {
-              var v = l - f, h = (l + 1 & 2) == 0, g = h ? this.size - 1 - c : c;
-              !this.isFunction[g][v] && a < r.length * 8 && (this.modules[g][v] = o(r[a >>> 3], 7 - (a & 7)), a++);
+              var u = l - f, h = (l + 1 & 2) == 0, g = h ? this.size - 1 - c : c;
+              !this.isFunction[g][u] && a < r.length * 8 && (this.modules[g][u] = o(r[a >>> 3], 7 - (a & 7)), a++);
             }
         }
-        u(a == r.length * 8);
+        d(a == r.length * 8);
       }, i.prototype.applyMask = function(r) {
         if (r < 0 || r > 7)
           throw new RangeError("Mask value out of range");
@@ -955,28 +955,28 @@ var A;
           }
       }, i.prototype.getPenaltyScore = function() {
         for (var r = 0, a = 0; a < this.size; a++) {
-          for (var l = !1, c = 0, f = [0, 0, 0, 0, 0, 0, 0], v = 0; v < this.size; v++)
-            this.modules[a][v] == l ? (c++, c == 5 ? r += i.PENALTY_N1 : c > 5 && r++) : (this.finderPenaltyAddHistory(c, f), l || (r += this.finderPenaltyCountPatterns(f) * i.PENALTY_N3), l = this.modules[a][v], c = 1);
+          for (var l = !1, c = 0, f = [0, 0, 0, 0, 0, 0, 0], u = 0; u < this.size; u++)
+            this.modules[a][u] == l ? (c++, c == 5 ? r += i.PENALTY_N1 : c > 5 && r++) : (this.finderPenaltyAddHistory(c, f), l || (r += this.finderPenaltyCountPatterns(f) * i.PENALTY_N3), l = this.modules[a][u], c = 1);
           r += this.finderPenaltyTerminateAndCount(l, c, f) * i.PENALTY_N3;
         }
-        for (var v = 0; v < this.size; v++) {
+        for (var u = 0; u < this.size; u++) {
           for (var l = !1, h = 0, f = [0, 0, 0, 0, 0, 0, 0], a = 0; a < this.size; a++)
-            this.modules[a][v] == l ? (h++, h == 5 ? r += i.PENALTY_N1 : h > 5 && r++) : (this.finderPenaltyAddHistory(h, f), l || (r += this.finderPenaltyCountPatterns(f) * i.PENALTY_N3), l = this.modules[a][v], h = 1);
+            this.modules[a][u] == l ? (h++, h == 5 ? r += i.PENALTY_N1 : h > 5 && r++) : (this.finderPenaltyAddHistory(h, f), l || (r += this.finderPenaltyCountPatterns(f) * i.PENALTY_N3), l = this.modules[a][u], h = 1);
           r += this.finderPenaltyTerminateAndCount(l, h, f) * i.PENALTY_N3;
         }
         for (var a = 0; a < this.size - 1; a++)
-          for (var v = 0; v < this.size - 1; v++) {
-            var g = this.modules[a][v];
-            g == this.modules[a][v + 1] && g == this.modules[a + 1][v] && g == this.modules[a + 1][v + 1] && (r += i.PENALTY_N2);
+          for (var u = 0; u < this.size - 1; u++) {
+            var g = this.modules[a][u];
+            g == this.modules[a][u + 1] && g == this.modules[a + 1][u] && g == this.modules[a + 1][u + 1] && (r += i.PENALTY_N2);
           }
-        for (var p = 0, w = 0, k = this.modules; w < k.length; w++) {
+        for (var y = 0, w = 0, k = this.modules; w < k.length; w++) {
           var b = k[w];
-          p = b.reduce(function(y, M) {
-            return y + (M ? 1 : 0);
-          }, p);
+          y = b.reduce(function(p, M) {
+            return p + (M ? 1 : 0);
+          }, y);
         }
-        var C = this.size * this.size, m = Math.ceil(Math.abs(p * 20 - C * 10) / C) - 1;
-        return u(0 <= m && m <= 9), r += m * i.PENALTY_N4, u(0 <= r && r <= 2568888), r;
+        var C = this.size * this.size, m = Math.ceil(Math.abs(y * 20 - C * 10) / C) - 1;
+        return d(0 <= m && m <= 9), r += m * i.PENALTY_N4, d(0 <= r && r <= 2568888), r;
       }, i.prototype.getAlignmentPatternPositions = function() {
         if (this.version == 1)
           return [];
@@ -991,7 +991,7 @@ var A;
           var l = Math.floor(r / 7) + 2;
           a -= (25 * l - 10) * l - 55, r >= 7 && (a -= 36);
         }
-        return u(208 <= a && a <= 29648), a;
+        return d(208 <= a && a <= 29648), a;
       }, i.getNumDataCodewords = function(r, a) {
         return Math.floor(i.getNumRawDataModules(r) / 8) - i.ECC_CODEWORDS_PER_BLOCK[a.ordinal][r] * i.NUM_ERROR_CORRECTION_BLOCKS[a.ordinal][r];
       }, i.reedSolomonComputeDivisor = function(r) {
@@ -1010,12 +1010,12 @@ var A;
         for (var l = a.map(function(g) {
           return 0;
         }), c = function(g) {
-          var p = g ^ l.shift();
+          var y = g ^ l.shift();
           l.push(0), a.forEach(function(w, k) {
-            return l[k] ^= i.reedSolomonMultiply(w, p);
+            return l[k] ^= i.reedSolomonMultiply(w, y);
           });
-        }, f = 0, v = r; f < v.length; f++) {
-          var h = v[f];
+        }, f = 0, u = r; f < u.length; f++) {
+          var h = u[f];
           c(h);
         }
         return l;
@@ -1024,10 +1024,10 @@ var A;
           throw new RangeError("Byte out of range");
         for (var l = 0, c = 7; c >= 0; c--)
           l = l << 1 ^ (l >>> 7) * 285, l ^= (a >>> c & 1) * r;
-        return u(l >>> 8 == 0), l;
+        return d(l >>> 8 == 0), l;
       }, i.prototype.finderPenaltyCountPatterns = function(r) {
         var a = r[1];
-        u(a <= this.size * 3);
+        d(a <= this.size * 3);
         var l = a > 0 && r[2] == a && r[3] == a * 3 && r[4] == a && r[5] == a;
         return (l && r[0] >= a * 4 && r[6] >= a ? 1 : 0) + (l && r[6] >= a * 4 && r[0] >= a ? 1 : 0);
       }, i.prototype.finderPenaltyTerminateAndCount = function(r, a, l) {
@@ -1069,11 +1069,11 @@ var A;
   function o(i, r) {
     return (i >>> r & 1) != 0;
   }
-  function u(i) {
+  function d(i) {
     if (!i)
       throw new Error("Assertion error");
   }
-  var d = (
+  var v = (
     /** @class */
     (function() {
       function i(r, a, l) {
@@ -1127,10 +1127,10 @@ var A;
         return this.bitData.slice();
       }, i.getTotalBits = function(r, a) {
         for (var l = 0, c = 0, f = r; c < f.length; c++) {
-          var v = f[c], h = v.mode.numCharCountBits(a);
-          if (v.numChars >= 1 << h)
+          var u = f[c], h = u.mode.numCharCountBits(a);
+          if (u.numChars >= 1 << h)
             return 1 / 0;
-          l += 4 + h + v.bitData.length;
+          l += 4 + h + u.bitData.length;
         }
         return l;
       }, i.toUtf8ByteArray = function(r) {
@@ -1141,15 +1141,15 @@ var A;
       }, i.NUMERIC_REGEX = /^[0-9]*$/, i.ALPHANUMERIC_REGEX = /^[A-Z0-9 $%*+.\/:-]*$/, i.ALPHANUMERIC_CHARSET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:", i;
     })()
   );
-  e.QrSegment = d;
+  e.QrSegment = v;
 })(A || (A = {}));
 (function(e) {
   (function(s) {
     var n = (
       /** @class */
       (function() {
-        function o(u, d) {
-          this.ordinal = u, this.formatBits = d;
+        function o(d, v) {
+          this.ordinal = d, this.formatBits = v;
         }
         return o.LOW = new o(0, 1), o.MEDIUM = new o(1, 0), o.QUARTILE = new o(2, 3), o.HIGH = new o(3, 2), o;
       })()
@@ -1162,20 +1162,20 @@ var A;
     var n = (
       /** @class */
       (function() {
-        function o(u, d) {
-          this.modeBits = u, this.numBitsCharCount = d;
+        function o(d, v) {
+          this.modeBits = d, this.numBitsCharCount = v;
         }
-        return o.prototype.numCharCountBits = function(u) {
-          return this.numBitsCharCount[Math.floor((u + 7) / 17)];
+        return o.prototype.numCharCountBits = function(d) {
+          return this.numBitsCharCount[Math.floor((d + 7) / 17)];
         }, o.NUMERIC = new o(1, [10, 12, 14]), o.ALPHANUMERIC = new o(2, [9, 11, 13]), o.BYTE = new o(4, [8, 16, 16]), o.KANJI = new o(8, [8, 10, 12]), o.ECI = new o(7, [0, 0, 0]), o;
       })()
     );
     s.Mode = n;
   })(e.QrSegment || (e.QrSegment = {}));
 })(A || (A = {}));
-var D = A, Le = 0;
+var D = A, He = 0;
 function je(e) {
-  return e || "v-".concat(Le++);
+  return e || "v-".concat(He++);
 }
 var de = "L", $e = 100, fe = 0, Fe = 0.1, Ze = 2, ve = {
   L: D.QrCode.Ecc.LOW,
@@ -1194,46 +1194,46 @@ function he(e) {
   return e in ve;
 }
 function Qe(e, s, n) {
-  var o = s > 0 ? e[s - 1][n] : !1, u = s < e.length - 1 ? e[s + 1][n] : !1, d = n > 0 ? e[s][n - 1] : !1, i = n < e[s].length - 1 ? e[s][n + 1] : !1;
+  var o = s > 0 ? e[s - 1][n] : !1, d = s < e.length - 1 ? e[s + 1][n] : !1, v = n > 0 ? e[s][n - 1] : !1, i = n < e[s].length - 1 ? e[s][n + 1] : !1;
   return {
-    nw: !o && !d,
+    nw: !o && !v,
     ne: !o && !i,
-    se: !u && !i,
-    sw: !u && !d
+    se: !d && !i,
+    sw: !d && !v
   };
 }
 function qe(e, s, n) {
   s === void 0 && (s = 0), n === void 0 && (n = 0);
-  for (var o = [], u = Math.min(n, 0.5), d = 0; d < e.length; d++)
-    for (var i = 0; i < e[d].length; i++)
-      if (e[d][i]) {
-        var r = Qe(e, d, i), a = r.nw, l = r.ne, c = r.se, f = r.sw, v = i + s, h = d + s;
-        o.push("M".concat(v + (a ? u : 0), " ").concat(h), "L".concat(v + 1 - (l ? u : 0), " ").concat(h)), l && o.push("A".concat(u, " ").concat(u, " 0 0 1 ").concat(v + 1, " ").concat(h + u)), o.push("L".concat(v + 1, " ").concat(h + 1 - (c ? u : 0))), c && o.push("A".concat(u, " ").concat(u, " 0 0 1 ").concat(v + 1 - u, " ").concat(h + 1)), o.push("L".concat(v + (f ? u : 0), " ").concat(h + 1)), f && o.push("A".concat(u, " ").concat(u, " 0 0 1 ").concat(v, " ").concat(h + 1 - u)), o.push("L".concat(v, " ").concat(h + (a ? u : 0))), a && o.push("A".concat(u, " ").concat(u, " 0 0 1 ").concat(v + u, " ").concat(h)), o.push("z");
+  for (var o = [], d = Math.min(n, 0.5), v = 0; v < e.length; v++)
+    for (var i = 0; i < e[v].length; i++)
+      if (e[v][i]) {
+        var r = Qe(e, v, i), a = r.nw, l = r.ne, c = r.se, f = r.sw, u = i + s, h = v + s;
+        o.push("M".concat(u + (a ? d : 0), " ").concat(h), "L".concat(u + 1 - (l ? d : 0), " ").concat(h)), l && o.push("A".concat(d, " ").concat(d, " 0 0 1 ").concat(u + 1, " ").concat(h + d)), o.push("L".concat(u + 1, " ").concat(h + 1 - (c ? d : 0))), c && o.push("A".concat(d, " ").concat(d, " 0 0 1 ").concat(u + 1 - d, " ").concat(h + 1)), o.push("L".concat(u + (f ? d : 0), " ").concat(h + 1)), f && o.push("A".concat(d, " ").concat(d, " 0 0 1 ").concat(u, " ").concat(h + 1 - d)), o.push("L".concat(u, " ").concat(h + (a ? d : 0))), a && o.push("A".concat(d, " ").concat(d, " 0 0 1 ").concat(u + d, " ").concat(h)), o.push("z");
       }
   return o.join("");
 }
 function Ke(e, s) {
   s === void 0 && (s = 0);
   for (var n = [], o = 0; o < e.length; o++)
-    for (var u = e[o], d = null, i = 0; i < u.length; i++) {
-      var r = u[i];
-      if (!r && d !== null) {
-        n.push("M".concat(d + s, " ").concat(o + s, "h").concat(i - d, "v1H").concat(d + s, "z")), d = null;
+    for (var d = e[o], v = null, i = 0; i < d.length; i++) {
+      var r = d[i];
+      if (!r && v !== null) {
+        n.push("M".concat(v + s, " ").concat(o + s, "h").concat(i - v, "v1H").concat(v + s, "z")), v = null;
         continue;
       }
-      if (i === u.length - 1) {
+      if (i === d.length - 1) {
         if (!r)
           continue;
-        d === null ? n.push("M".concat(i + s, ",").concat(o + s, " h1v1H").concat(i + s, "z")) : n.push("M".concat(d + s, ",").concat(o + s, " h").concat(i + 1 - d, "v1H").concat(d + s, "z"));
+        v === null ? n.push("M".concat(i + s, ",").concat(o + s, " h1v1H").concat(i + s, "z")) : n.push("M".concat(v + s, ",").concat(o + s, " h").concat(i + 1 - v, "v1H").concat(v + s, "z"));
         continue;
       }
-      r && d === null && (d = i);
+      r && v === null && (v = i);
     }
   return n.join("");
 }
 function Ge(e, s, n, o) {
-  var u = o.width, d = o.height, i = o.x, r = o.y, a = e.length + n * 2, l = Math.floor(s * Fe), c = a / s, f = (u || l) * c, v = (d || l) * c, h = i == null ? e.length / 2 - f / 2 : i * c, g = r == null ? e.length / 2 - v / 2 : r * c, p = (o.borderRadius || 0) * c;
-  return { x: h, y: g, h: v, w: f, borderRadius: p };
+  var d = o.width, v = o.height, i = o.x, r = o.y, a = e.length + n * 2, l = Math.floor(s * Fe), c = a / s, f = (d || l) * c, u = (v || l) * c, h = i == null ? e.length / 2 - f / 2 : i * c, g = r == null ? e.length / 2 - u / 2 : r * c, y = (o.borderRadius || 0) * c;
+  return { x: h, y: g, h: u, w: f, borderRadius: y };
 }
 function ge(e) {
   var s = t.computed(function() {
@@ -1244,9 +1244,9 @@ function ge(e) {
     return D.QrCode.encodeText(e.value, ve[r]).getModules();
   }), o = t.computed(function() {
     return n.value.length + s.value * 2;
-  }), u = t.computed(function() {
-    return e.radius > 0 ? qe(n.value, s.value, e.radius) : Ke(n.value, s.value);
   }), d = t.computed(function() {
+    return e.radius > 0 ? qe(n.value, s.value, e.radius) : Ke(n.value, s.value);
+  }), v = t.computed(function() {
     if (!e.imageSettings.src)
       return null;
     var r = Ge(n.value, e.size, s.value, e.imageSettings);
@@ -1258,18 +1258,18 @@ function ge(e) {
       borderRadius: r.borderRadius
     };
   }), i = t.computed(function() {
-    if (!e.imageSettings.excavate || !d.value)
+    if (!e.imageSettings.excavate || !v.value)
       return null;
     var r = Ze / (e.size / o.value);
     return {
-      x: d.value.x - r,
-      y: d.value.y - r,
-      width: d.value.width + r * 2,
-      height: d.value.height + r * 2,
-      borderRadius: d.value.borderRadius
+      x: v.value.x - r,
+      y: v.value.y - r,
+      width: v.value.width + r * 2,
+      height: v.value.height + r * 2,
+      borderRadius: v.value.borderRadius
     };
   });
-  return { margin: s, numCells: o, cells: n, fgPath: u, imageProps: d, imageBorderProps: i };
+  return { margin: s, numCells: o, cells: n, fgPath: d, imageProps: v, imageBorderProps: i };
 }
 function me(e, s) {
   var n = document.createElement("a");
@@ -1354,7 +1354,7 @@ var W = {
   name: "QRCodeSvg",
   props: W,
   setup: function(e, s) {
-    var n = ge(e), o = n.numCells, u = n.fgPath, d = n.imageProps, i = n.imageBorderProps, r = t.ref(), a = je(e.id), l = "qrcode.vue-gradient-".concat(a), c = "qrcode.vue-logo-clip-path-".concat(a), f = t.computed(function() {
+    var n = ge(e), o = n.numCells, d = n.fgPath, v = n.imageProps, i = n.imageBorderProps, r = t.ref(), a = je(e.id), l = "qrcode.vue-gradient-".concat(a), c = "qrcode.vue-logo-clip-path-".concat(a), f = t.computed(function() {
       if (!e.gradient)
         return null;
       var g = e.gradientType === "linear" ? {
@@ -1379,16 +1379,16 @@ var W = {
           style: { stopColor: e.gradientEndColor }
         })
       ]);
-    }), v = t.computed(function() {
-      if (!d.value)
+    }), u = t.computed(function() {
+      if (!v.value)
         return null;
-      var g = d.value.borderRadius;
+      var g = v.value.borderRadius;
       return g <= 0 ? null : t.h("clipPath", { id: c }, [
         t.h("rect", {
-          x: d.value.x,
-          y: d.value.y,
-          width: d.value.width,
-          height: d.value.height,
+          x: v.value.x,
+          y: v.value.y,
+          width: v.value.width,
+          height: v.value.height,
           rx: g,
           ry: g
         })
@@ -1404,8 +1404,8 @@ var W = {
       },
       download: function(g) {
         g === void 0 && (g = "qrcode.svg");
-        var p = r.value;
-        p && me(h(p), g);
+        var y = r.value;
+        y && me(h(y), g);
       }
     }), function() {
       return t.h("svg", {
@@ -1416,7 +1416,7 @@ var W = {
         viewBox: "0 0 ".concat(o.value, " ").concat(o.value),
         role: "img"
       }, [
-        t.h("defs", {}, [f.value, v.value].filter(Boolean)),
+        t.h("defs", {}, [f.value, u.value].filter(Boolean)),
         t.h("rect", {
           width: "100%",
           height: "100%",
@@ -1424,7 +1424,7 @@ var W = {
         }),
         t.h("path", {
           fill: e.gradient ? "url(#".concat(l, ")") : e.foreground,
-          d: u.value
+          d: d.value
         }),
         i.value && t.h("rect", {
           x: i.value.x,
@@ -1435,7 +1435,7 @@ var W = {
           rx: i.value.borderRadius,
           ry: i.value.borderRadius
         }),
-        e.imageSettings.src && d.value && t.h("image", S({ href: e.imageSettings.src, crossorigin: e.imageSettings.crossOrigin, "clip-path": d.value.borderRadius > 0 ? "url(#".concat(c, ")") : void 0 }, d.value))
+        e.imageSettings.src && v.value && t.h("image", S({ href: e.imageSettings.src, crossorigin: e.imageSettings.crossOrigin, "clip-path": v.value.borderRadius > 0 ? "url(#".concat(c, ")") : void 0 }, v.value))
       ]);
     };
   }
@@ -1443,40 +1443,40 @@ var W = {
   name: "QRCodeCanvas",
   props: W,
   setup: function(e, s) {
-    var n = ge(e), o = n.margin, u = n.cells, d = n.numCells, i = n.fgPath, r = n.imageProps, a = n.imageBorderProps, l = t.ref(null), c = t.ref(null), f = function(h, g, p, w, k, b) {
-      h.beginPath(), h.roundRect ? h.roundRect(g, p, w, k, b) : h.rect(g, p, w, k);
-    }, v = function() {
-      var h = e.size, g = e.background, p = e.foreground, w = e.gradient, k = e.gradientType, b = e.gradientStartColor, C = e.gradientEndColor, m = l.value;
+    var n = ge(e), o = n.margin, d = n.cells, v = n.numCells, i = n.fgPath, r = n.imageProps, a = n.imageBorderProps, l = t.ref(null), c = t.ref(null), f = function(h, g, y, w, k, b) {
+      h.beginPath(), h.roundRect ? h.roundRect(g, y, w, k, b) : h.rect(g, y, w, k);
+    }, u = function() {
+      var h = e.size, g = e.background, y = e.foreground, w = e.gradient, k = e.gradientType, b = e.gradientStartColor, C = e.gradientEndColor, m = l.value;
       if (m) {
-        var y = m.getContext("2d");
-        if (y) {
-          var M = c.value, E = typeof window < "u" && window.devicePixelRatio || 1, _ = h / d.value * E;
-          if (m.height = m.width = h * E, y.setTransform(_, 0, 0, _, 0, 0), y.fillStyle = g, y.fillRect(0, 0, d.value, d.value), w) {
+        var p = m.getContext("2d");
+        if (p) {
+          var M = c.value, E = typeof window < "u" && window.devicePixelRatio || 1, _ = h / v.value * E;
+          if (m.height = m.width = h * E, p.setTransform(_, 0, 0, _, 0, 0), p.fillStyle = g, p.fillRect(0, 0, v.value, v.value), w) {
             var P = void 0;
-            k === "linear" ? P = y.createLinearGradient(0, 0, d.value, d.value) : P = y.createRadialGradient(d.value / 2, d.value / 2, 0, d.value / 2, d.value / 2, d.value / 2), P.addColorStop(0, b), P.addColorStop(1, C), y.fillStyle = P;
+            k === "linear" ? P = p.createLinearGradient(0, 0, v.value, v.value) : P = p.createRadialGradient(v.value / 2, v.value / 2, 0, v.value / 2, v.value / 2, v.value / 2), P.addColorStop(0, b), P.addColorStop(1, C), p.fillStyle = P;
           } else
-            y.fillStyle = p;
-          We ? y.fill(new Path2D(i.value)) : u.value.forEach(function(O, j) {
+            p.fillStyle = y;
+          We ? p.fill(new Path2D(i.value)) : d.value.forEach(function(O, j) {
             O.forEach(function(U, Ce) {
-              U && y.fillRect(Ce + o.value, j + o.value, 1, 1);
+              U && p.fillRect(Ce + o.value, j + o.value, 1, 1);
             });
           });
           var R = e.imageSettings.src && M && M.naturalWidth !== 0 && M.naturalHeight !== 0;
           if (R && r.value) {
             if (a.value) {
               var V = a.value;
-              y.fillStyle = e.background, f(y, V.x, V.y, V.width, V.height, V.borderRadius), y.fill();
+              p.fillStyle = e.background, f(p, V.x, V.y, V.width, V.height, V.borderRadius), p.fill();
             }
             var x = r.value.borderRadius;
-            x > 0 ? (y.save(), f(y, r.value.x, r.value.y, r.value.width, r.value.height, x), y.clip(), y.drawImage(M, r.value.x, r.value.y, r.value.width, r.value.height), y.restore()) : y.drawImage(M, r.value.x, r.value.y, r.value.width, r.value.height);
+            x > 0 ? (p.save(), f(p, r.value.x, r.value.y, r.value.width, r.value.height, x), p.clip(), p.drawImage(M, r.value.x, r.value.y, r.value.width, r.value.height), p.restore()) : p.drawImage(M, r.value.x, r.value.y, r.value.width, r.value.height);
           }
         }
       }
     };
-    return t.onMounted(v), t.watchEffect(v, { flush: "post" }), s.expose({
+    return t.onMounted(u), t.watchEffect(u, { flush: "post" }), s.expose({
       toDataURL: function(h, g) {
-        var p;
-        return (p = l.value) === null || p === void 0 ? void 0 : p.toDataURL(h, g);
+        var y;
+        return (y = l.value) === null || y === void 0 ? void 0 : y.toDataURL(h, g);
       },
       download: function(h) {
         h === void 0 && (h = "qrcode.png");
@@ -1491,7 +1491,7 @@ var W = {
           src: e.imageSettings.src,
           crossorigin: e.imageSettings.crossOrigin,
           style: { display: "none" },
-          onLoad: v
+          onLoad: u
         })
       ]);
     };
@@ -1502,13 +1502,13 @@ var W = {
   setup: function(e, s) {
     var n = t.ref();
     return s.expose({
-      toDataURL: function(o, u) {
-        var d, i;
-        return (i = (d = n.value) === null || d === void 0 ? void 0 : d.toDataURL) === null || i === void 0 ? void 0 : i.call(d, o, u);
+      toDataURL: function(o, d) {
+        var v, i;
+        return (i = (v = n.value) === null || v === void 0 ? void 0 : v.toDataURL) === null || i === void 0 ? void 0 : i.call(v, o, d);
       },
       download: function(o) {
-        var u, d;
-        return (d = (u = n.value) === null || u === void 0 ? void 0 : u.download) === null || d === void 0 ? void 0 : d.call(u, o);
+        var d, v;
+        return (v = (d = n.value) === null || d === void 0 ? void 0 : d.download) === null || v === void 0 ? void 0 : v.call(d, o);
       }
     }), function() {
       return t.h(e.renderAs === "svg" ? Xe : Je, {
@@ -1541,7 +1541,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
       resources: [],
       deviceTtlDays: 30,
       publicUrl: s.config.publicUrl
-    }), u = t.ref(s.config.publicUrl), d = t.ref(!1), i = t.computed(() => o.publicUrl.trim() !== u.value), r = t.ref([]), a = t.ref(!1);
+    }), d = t.ref(s.config.publicUrl), v = t.ref(!1), i = t.computed(() => o.publicUrl.trim() !== d.value), r = t.ref([]), a = t.ref(!1);
     async function l() {
       try {
         a.value = !0, r.value = await Ue();
@@ -1552,25 +1552,25 @@ const tt = /* @__PURE__ */ t.defineComponent({
       }
     }
     async function c() {
-      if (!n.value || d.value) return;
+      if (!n.value || v.value) return;
       const m = o.publicUrl.trim();
       if (!m) {
         N.MessagePlugin.warning("请输入 Daemon 对外地址");
         return;
       }
       try {
-        d.value = !0;
-        const y = await De(m);
-        o.publicUrl = y.publicUrl, u.value = y.publicUrl, N.MessagePlugin.success("Daemon 地址已保存");
-      } catch (y) {
-        N.MessagePlugin.error("保存 Daemon 地址失败: " + (y?.message || y));
+        v.value = !0;
+        const p = await De(m);
+        o.publicUrl = p.publicUrl, d.value = p.publicUrl, N.MessagePlugin.success("Daemon 地址已保存");
+      } catch (p) {
+        N.MessagePlugin.error("保存 Daemon 地址失败: " + (p?.message || p));
       } finally {
-        d.value = !1;
+        v.value = !1;
       }
     }
-    const f = t.ref(!1), v = t.ref(null), h = t.ref(0);
+    const f = t.ref(!1), u = t.ref(null), h = t.ref(0);
     let g = null;
-    async function p() {
+    async function y() {
       if (!f.value) {
         if (n.value && o.scope === "limited" && o.resources.length === 0) {
           N.MessagePlugin.warning("受限范围请至少选择一个实例资源");
@@ -1583,7 +1583,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
             resources: n.value && o.scope === "limited" ? o.resources : [],
             deviceTtlDays: o.deviceTtlDays
           });
-          v.value = m, w(m?.expiresInSeconds || 120);
+          u.value = m, w(m?.expiresInSeconds || 120);
         } catch (m) {
           N.MessagePlugin.error("生成配对码失败: " + (m?.message || m));
         } finally {
@@ -1599,16 +1599,16 @@ const tt = /* @__PURE__ */ t.defineComponent({
     function k() {
       g && clearInterval(g), g = null;
     }
-    const b = t.computed(() => v.value !== null && h.value === 0);
+    const b = t.computed(() => u.value !== null && h.value === 0);
     async function C() {
-      if (v.value)
+      if (u.value)
         try {
-          await navigator.clipboard.writeText(v.value.payload), N.MessagePlugin.success("二维码原文已复制");
+          await navigator.clipboard.writeText(u.value.payload), N.MessagePlugin.success("二维码原文已复制");
         } catch {
           N.MessagePlugin.error("复制失败，请手动选择");
         }
     }
-    return t.onMounted(l), t.onUnmounted(k), (m, y) => {
+    return t.onMounted(l), t.onUnmounted(k), (m, p) => {
       const M = t.resolveComponent("t-input"), E = t.resolveComponent("t-button"), _ = t.resolveComponent("t-radio-button"), P = t.resolveComponent("t-radio-group"), R = t.resolveComponent("t-select"), V = t.resolveComponent("t-input-number");
       return t.openBlock(), t.createElementBlock("div", { class: "rolithax-card flex flex-col gap-5 p-5" }, [
         t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
@@ -1620,7 +1620,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
           t.createElementVNode("div", { class: "flex flex-col md:flex-row gap-2" }, [
             t.createVNode(M, {
               modelValue: o.publicUrl,
-              "onUpdate:modelValue": y[0] || (y[0] = (x) => o.publicUrl = x),
+              "onUpdate:modelValue": p[0] || (p[0] = (x) => o.publicUrl = x),
               disabled: !n.value,
               clearable: "",
               class: "flex-1"
@@ -1628,7 +1628,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
             n.value ? (t.openBlock(), t.createBlock(E, {
               key: 0,
               theme: "primary",
-              loading: d.value,
+              loading: v.value,
               disabled: !i.value,
               onClick: c
             }, {
@@ -1656,7 +1656,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
               t.createElementVNode("label", { class: "rolithax-title text-xs font-bold" }, "授权范围"),
               t.createVNode(P, {
                 modelValue: o.scope,
-                "onUpdate:modelValue": y[1] || (y[1] = (x) => o.scope = x),
+                "onUpdate:modelValue": p[1] || (p[1] = (x) => o.scope = x),
                 variant: "default-filled"
               }, {
                 default: t.withCtx(() => [
@@ -1683,7 +1683,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
               t.createElementVNode("label", { class: "rolithax-title text-xs font-bold" }, "授予实例"),
               t.createVNode(R, {
                 modelValue: o.resources,
-                "onUpdate:modelValue": y[2] || (y[2] = (x) => o.resources = x),
+                "onUpdate:modelValue": p[2] || (p[2] = (x) => o.resources = x),
                 options: r.value,
                 loading: a.value,
                 multiple: "",
@@ -1696,7 +1696,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
               t.createElementVNode("label", { class: "rolithax-title text-xs font-bold" }, "设备有效期（天，1–365）"),
               t.createVNode(V, {
                 modelValue: o.deviceTtlDays,
-                "onUpdate:modelValue": y[3] || (y[3] = (x) => o.deviceTtlDays = x),
+                "onUpdate:modelValue": p[3] || (p[3] = (x) => o.deviceTtlDays = x),
                 min: 1,
                 max: 365,
                 theme: "column",
@@ -1707,7 +1707,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
               theme: "primary",
               loading: f.value,
               class: "self-start",
-              onClick: p
+              onClick: y
             }, {
               icon: t.withCtx(() => [
                 t.createVNode(t.unref(ce))
@@ -1720,9 +1720,9 @@ const tt = /* @__PURE__ */ t.defineComponent({
           ]),
           t.createElementVNode("div", { class: "rolithax-qr-col shrink-0 flex flex-col items-center gap-3" }, [
             t.createElementVNode("div", { class: "rolithax-qr-box rolithax-card items-center justify-center relative overflow-hidden" }, [
-              v.value ? (t.openBlock(), t.createElementBlock(t.Fragment, { key: 0 }, [
+              u.value ? (t.openBlock(), t.createElementBlock(t.Fragment, { key: 0 }, [
                 t.createVNode(et, {
-                  value: v.value.payload,
+                  value: u.value.payload,
                   size: 220,
                   level: "M",
                   margin: 1
@@ -1735,7 +1735,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
                   t.createVNode(E, {
                     size: "small",
                     variant: "base",
-                    onClick: p
+                    onClick: y
                   }, {
                     default: t.withCtx(() => [
                       t.createTextVNode("重新生成")
@@ -1748,14 +1748,14 @@ const tt = /* @__PURE__ */ t.defineComponent({
                 class: "rolithax-placeholder text-sm px-6 text-center"
               }, "生成后在此显示二维码"))
             ]),
-            v.value ? (t.openBlock(), t.createElementBlock("div", {
+            u.value ? (t.openBlock(), t.createElementBlock("div", {
               key: 0,
               class: "flex flex-col items-center gap-2 text-center"
             }, [
-              t.createElementVNode("div", { class: "rolithax-title text-sm font-mono tracking-widest" }, "配对码 " + t.toDisplayString(v.value.code), 1),
+              t.createElementVNode("div", { class: "rolithax-title text-sm font-mono tracking-widest" }, "配对码 " + t.toDisplayString(u.value.code), 1),
               t.createElementVNode("div", {
                 class: t.normalizeClass(["text-xs", b.value ? "rolithax-expired" : "rolithax-muted"])
-              }, t.toDisplayString(b.value ? "已过期，请重新生成" : `剩余 ${h.value} 秒 · 单次有效 · ${v.value.scope === "full" ? "完整权限" : "受限"}`), 3),
+              }, t.toDisplayString(b.value ? "已过期，请重新生成" : `剩余 ${h.value} 秒 · 单次有效 · ${u.value.scope === "full" ? "完整权限" : "受限"}`), 3),
               t.createElementVNode("div", { class: "flex items-center gap-2" }, [
                 t.createVNode(E, {
                   size: "small",
@@ -1773,7 +1773,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
                 t.createVNode(E, {
                   size: "small",
                   variant: "text",
-                  onClick: p
+                  onClick: y
                 }, {
                   icon: t.withCtx(() => [
                     t.createVNode(t.unref(ue))
@@ -1792,68 +1792,72 @@ const tt = /* @__PURE__ */ t.defineComponent({
   }
 }), Q = (e, s) => {
   const n = e.__vccOpts || e;
-  for (const [o, u] of s)
-    n[o] = u;
+  for (const [o, d] of s)
+    n[o] = d;
   return n;
 }, rt = /* @__PURE__ */ Q(tt, [["__scopeId", "data-v-aa959d09"]]), at = /* @__PURE__ */ t.defineComponent({
   __name: "DeviceList",
   setup(e, { expose: s }) {
     const n = t.ref(!1), o = t.ref([]);
-    async function u() {
+    async function d() {
       try {
         n.value = !0, o.value = await ze() || [];
-      } catch (c) {
-        N.MessagePlugin.error("获取设备列表失败: " + (c?.message || c));
+      } catch (f) {
+        N.MessagePlugin.error("获取设备列表失败: " + (f?.message || f));
       } finally {
         n.value = !1;
       }
     }
-    const d = {
+    const v = {
       active: { text: "生效中", theme: "success" },
       expired: { text: "已过期", theme: "warning" },
       revoked: { text: "已撤销", theme: "default" },
-      replaced: { text: "已替换", theme: "default" }
-    };
-    function i(c) {
-      const f = d[c] || { text: c, theme: "primary" };
-      return t.h(N.Tag, { size: "small", theme: f.theme, variant: "light" }, () => f.text);
+      replaced: { text: "已替换", theme: "default" },
+      "issuer-removed": { text: "签发者已删除", theme: "default" },
+      "issuer-revoked": { text: "签发设备已失效", theme: "default" },
+      "user-removed": { text: "用户已被删除", theme: "default" },
+      "plugin-unloaded": { text: "插件已卸载", theme: "default" }
+    }, i = (f) => f === "active" || f === "expired";
+    function r(f) {
+      const u = v[f] || { text: f, theme: "primary" };
+      return t.h(N.Tag, { size: "small", theme: u.theme, variant: "light" }, () => u.text);
     }
-    const r = [
+    const a = [
       { colKey: "name", title: "设备名称", ellipsis: !0 },
       { colKey: "apiKeyPrefix", title: "API Key", width: 130 },
       { colKey: "fingerprintPrefix", title: "设备指纹", width: 150, ellipsis: !0 },
-      { colKey: "role", title: "角色", width: 90, cell: (c, { row: f }) => f.role === "admin" ? "完整" : "受限" },
+      { colKey: "role", title: "角色", width: 90, cell: (f, { row: u }) => u.role === "admin" ? "完整" : "受限" },
       {
         colKey: "resources",
         title: "实例",
         width: 80,
-        cell: (c, { row: f }) => f.role === "admin" ? "全部" : `${(f.resources || []).length}`
+        cell: (f, { row: u }) => u.role === "admin" ? "全部" : `${(u.resources || []).length}`
       },
-      { colKey: "status", title: "状态", width: 100, cell: (c, { row: f }) => i(f.status) },
+      { colKey: "status", title: "状态", width: 100, cell: (f, { row: u }) => r(u.status) },
       { colKey: "expiresAt", title: "到期时间", width: 170 },
       { colKey: "op", title: "操作", width: 90, fixed: "right" }
-    ], a = t.ref("");
-    async function l(c) {
+    ], l = t.ref("");
+    async function c(f) {
       try {
-        a.value = c.deviceId, await Te(c.deviceId), N.MessagePlugin.success("已撤销，该设备凭据立即失效"), await u();
-      } catch (f) {
-        N.MessagePlugin.error("撤销失败: " + (f?.message || f));
+        l.value = f.deviceId, await Te(f.deviceId), N.MessagePlugin.success("已撤销，该设备凭据立即失效"), await d();
+      } catch (u) {
+        N.MessagePlugin.error("撤销失败: " + (u?.message || u));
       } finally {
-        a.value = "";
+        l.value = "";
       }
     }
-    return s({ getList: u }), t.onMounted(u), (c, f) => {
-      const v = t.resolveComponent("t-button"), h = t.resolveComponent("t-popconfirm"), g = t.resolveComponent("t-table");
+    return s({ getList: d }), t.onMounted(d), (f, u) => {
+      const h = t.resolveComponent("t-button"), g = t.resolveComponent("t-popconfirm"), y = t.resolveComponent("t-table");
       return t.openBlock(), t.createElementBlock("div", { class: "rolithax-card flex flex-col gap-4 p-5" }, [
         t.createElementVNode("div", { class: "flex items-center justify-between gap-4 flex-wrap" }, [
           t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
             t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "已配对设备"),
             t.createElementVNode("p", { class: "rolithax-muted text-sm m-0" }, "撤销将删除对应配对用户，其 API Key 立即失效且不可恢复。")
           ]),
-          t.createVNode(v, {
+          t.createVNode(h, {
             variant: "dashed",
             loading: n.value,
-            onClick: u
+            onClick: d
           }, {
             icon: t.withCtx(() => [
               t.createVNode(t.unref(ue))
@@ -1864,29 +1868,29 @@ const tt = /* @__PURE__ */ t.defineComponent({
             _: 1
           }, 8, ["loading"])
         ]),
-        t.createVNode(g, {
+        t.createVNode(y, {
           "row-key": "deviceId",
           data: o.value,
-          columns: r,
+          columns: a,
           loading: n.value,
           size: "medium",
           hover: "",
           empty: "暂无已配对设备"
         }, {
-          op: t.withCtx(({ row: p }) => [
-            t.createVNode(h, {
-              content: `确认撤销设备「${p.name}」？该操作不可恢复。`,
+          op: t.withCtx(({ row: w }) => [
+            t.createVNode(g, {
+              content: `确认撤销设备「${w.name}」？该操作不可恢复。`,
               theme: "danger",
               placement: "left",
-              onConfirm: (w) => l(p)
+              onConfirm: (k) => c(w)
             }, {
               default: t.withCtx(() => [
-                t.createVNode(v, {
+                t.createVNode(h, {
                   size: "small",
                   theme: "danger",
                   variant: "text",
-                  loading: a.value === p.deviceId,
-                  disabled: p.status === "revoked"
+                  loading: l.value === w.deviceId,
+                  disabled: !i(w.status)
                 }, {
                   default: t.withCtx(() => [
                     t.createTextVNode(" 撤销 ")
@@ -1902,15 +1906,15 @@ const tt = /* @__PURE__ */ t.defineComponent({
       ]);
     };
   }
-}), ot = /* @__PURE__ */ Q(at, [["__scopeId", "data-v-ccac421b"]]), nt = /* @__PURE__ */ t.defineComponent({
+}), ot = /* @__PURE__ */ Q(at, [["__scopeId", "data-v-c423395c"]]), nt = /* @__PURE__ */ t.defineComponent({
   __name: "PairingPage",
   setup(e) {
-    const s = t.ref("generate"), n = t.ref(null), o = t.ref(!0), u = t.ref(""), d = t.computed(() => n.value?.canManageDevices === !0);
+    const s = t.ref("generate"), n = t.ref(null), o = t.ref(!0), d = t.ref(""), v = t.computed(() => n.value?.canManageDevices === !0);
     async function i() {
       try {
-        n.value = await Re(), d.value || (s.value = "generate");
+        n.value = await Re(), v.value || (s.value = "generate");
       } catch (r) {
-        u.value = r?.message || String(r);
+        d.value = r?.message || String(r);
       } finally {
         o.value = !1;
       }
@@ -1923,7 +1927,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
             t.createElementVNode("h2", { class: "rolithax-title text-lg font-bold m-0" }, "扫码配对"),
             t.createElementVNode("p", { class: "rolithax-muted text-sm m-0" }, " 生成一次性配对二维码；设备权限由当前登录账号决定。 ")
           ]),
-          d.value ? (t.openBlock(), t.createBlock(c, {
+          v.value ? (t.openBlock(), t.createBlock(c, {
             key: 0,
             modelValue: s.value,
             "onUpdate:modelValue": a[0] || (a[0] = (f) => s.value = f),
@@ -1956,10 +1960,10 @@ const tt = /* @__PURE__ */ t.defineComponent({
         o.value ? (t.openBlock(), t.createElementBlock("div", {
           key: 0,
           class: "rolithax-card p-5 rolithax-muted"
-        }, "正在加载配对配置…")) : u.value ? (t.openBlock(), t.createElementBlock("div", {
+        }, "正在加载配对配置…")) : d.value ? (t.openBlock(), t.createElementBlock("div", {
           key: 1,
           class: "rolithax-card p-5 rolithax-error"
-        }, "加载配对配置失败：" + t.toDisplayString(u.value), 1)) : n.value ? (t.openBlock(), t.createBlock(t.Transition, {
+        }, "加载配对配置失败：" + t.toDisplayString(d.value), 1)) : n.value ? (t.openBlock(), t.createBlock(t.Transition, {
           key: 2,
           name: "rolithax-fade",
           mode: "out-in"
@@ -1969,7 +1973,7 @@ const tt = /* @__PURE__ */ t.defineComponent({
               s.value === "generate" ? (t.openBlock(), t.createBlock(rt, {
                 key: 0,
                 config: n.value
-              }, null, 8, ["config"])) : d.value ? (t.openBlock(), t.createBlock(ot, { key: 1 })) : t.createCommentVNode("", !0)
+              }, null, 8, ["config"])) : v.value ? (t.openBlock(), t.createBlock(ot, { key: 1 })) : t.createCommentVNode("", !0)
             ], 1024))
           ]),
           _: 1

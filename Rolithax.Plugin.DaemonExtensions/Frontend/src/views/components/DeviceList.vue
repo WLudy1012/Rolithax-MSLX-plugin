@@ -25,7 +25,13 @@ const statusMeta: Record<string, { text: string; theme: string }> = {
   expired: { text: '已过期', theme: 'warning' },
   revoked: { text: '已撤销', theme: 'default' },
   replaced: { text: '已替换', theme: 'default' },
+  'issuer-removed': { text: '签发者已删除', theme: 'default' },
+  'issuer-revoked': { text: '签发设备已失效', theme: 'default' },
+  'user-removed': { text: '用户已被删除', theme: 'default' },
+  'plugin-unloaded': { text: '插件已卸载', theme: 'default' },
 };
+
+const isLive = (status: string) => status === 'active' || status === 'expired';
 
 function renderStatus(status: string) {
   const meta = statusMeta[status] || { text: status, theme: 'primary' };
@@ -95,7 +101,7 @@ onMounted(getList);
           placement="left"
           @confirm="handleRevoke(row)"
         >
-          <t-button size="small" theme="danger" variant="text" :loading="revoking === row.deviceId" :disabled="row.status === 'revoked'">
+          <t-button size="small" theme="danger" variant="text" :loading="revoking === row.deviceId" :disabled="!isLive(row.status)">
             撤销
           </t-button>
         </t-popconfirm>

@@ -79,6 +79,7 @@ public sealed class ResourceInstallService
         var instanceLock = _instanceLocks.GetOrAdd(job.Root, _ => new SemaphoreSlim(1, 1));
         var lockHeld = false;
         var preserveStage = false;
+        var budget = new InstallBudget(freeSpace: () => GetFreeSpace(stage));
         try
         {
             await instanceLock.WaitAsync(job.Token);
@@ -121,10 +122,17 @@ public sealed class ResourceInstallService
                 var url = file.GetProperty("url").GetString() ?? throw new InvalidDataException("下载地址为空");
                 var destination = Destination(item.Type, name, job.Root);
                 var archive = Path.Combine(stage, $"package-{index++}.mrpack");
-                await DownloadVerifiedAsync(url, archive, file.GetProperty("hashes"), ReadOptionalSize(file), job.Token,
+                budget.AddFile();
+                await DownloadVerifiedAsync(url, archive, file.GetProperty("hashes"), ReadOptionalSize(file), budget, job.Token,
                     progress => job.SetProgress(Math.Min(80, 5 + (int)(progress / (float)Math.Max(1, request.Items.Count) * 70))));
                 if (item.Type == "modpack")
-                    await ExpandModpackAsync(archive, stage, pending, job.Token);
+                {
+                    await ExpandModpackAsync(archive, stage, pending, budget, DownloadVerifiedAsync, job.Token);
+                    // 展开后整合包本体不再需要，立即释放磁盘和配额。
+                    var archiveSize = new FileInfo(archive).Length;
+                    File.Delete(archive);
+                    budget.Release(archiveSize);
+                }
                 else
                     pending.Add(new PendingFile(archive, destination));
                 job.SetProgress(Math.Min(85, 5 + index * 80 / request.Items.Count));
@@ -154,29 +162,39 @@ public sealed class ResourceInstallService
         }
     }
 
-    private static async Task ExpandModpackAsync(string archive, string stage, List<PendingFile> pending, CancellationToken token)
+    internal delegate Task DownloadFileAsync(string address, string path, JsonElement hashes, long expectedSize,
+        InstallBudget budget, CancellationToken token, Action<int> onProgress);
+
+    private const int MaxManifestBytes = 4 * 1024 * 1024;
+
+    internal static async Task ExpandModpackAsync(string archive, string stage, List<PendingFile> pending, InstallBudget budget,
+        DownloadFileAsync download, CancellationToken token)
     {
         using var zip = ZipFile.OpenRead(archive);
+        if (zip.Entries.Count > InstallBudget.MaxFiles * 2) throw new InvalidDataException("整合包条目数量过多");
         var manifestEntry = zip.GetEntry("modrinth.index.json") ?? throw new InvalidDataException("整合包缺少 modrinth.index.json");
-        if (manifestEntry.Length > 4 * 1024 * 1024) throw new InvalidDataException("整合包清单过大");
-        await using var manifestStream = manifestEntry.Open();
-        using var manifest = await JsonDocument.ParseAsync(manifestStream, cancellationToken: token);
+        if (manifestEntry.Length > MaxManifestBytes) throw new InvalidDataException("整合包清单过大");
+        using var manifestBuffer = new MemoryStream();
+        await using (var manifestStream = manifestEntry.Open())
+            await CopyLimitedAsync(manifestStream, manifestBuffer, MaxManifestBytes, null, token);
+        manifestBuffer.Position = 0;
+        using var manifest = await JsonDocument.ParseAsync(manifestBuffer, cancellationToken: token);
         var root = manifest.RootElement;
         var fileIndex = 0;
-        long total = 0;
         foreach (var item in root.GetProperty("files").EnumerateArray())
         {
             token.ThrowIfCancellationRequested();
             if (item.TryGetProperty("env", out var env) && env.TryGetProperty("server", out var server) && server.GetString() == "unsupported") continue;
             var size = item.TryGetProperty("fileSize", out var length) ? length.GetInt64() : 0;
-            total += Math.Max(0, size);
-            if (total > 4L * 1024 * 1024 * 1024) throw new InvalidDataException("整合包下载总量超过 4 GB");
             var downloads = item.GetProperty("downloads").EnumerateArray().Select(value => value.GetString()).Where(value => !string.IsNullOrWhiteSpace(value)).ToList();
             if (downloads.Count == 0) throw new InvalidDataException("整合包文件没有下载地址");
             var hashes = item.GetProperty("hashes");
             var relative = SafeRelative(item.GetProperty("path").GetString() ?? string.Empty);
             var staged = Path.Combine(stage, $"file-{fileIndex++}.bin");
-            await DownloadVerifiedAsync(downloads[0]!, staged, hashes, size, token, _ => { });
+            budget.AddFile();
+            // 按声明大小提前拒绝；实际下载字节仍会在 download 内逐块计入总量。
+            budget.EnsureFits(Math.Max(0, size));
+            await download(downloads[0]!, staged, hashes, size, budget, token, _ => { });
             pending.Add(new PendingFile(staged, relative));
         }
 
@@ -187,9 +205,11 @@ public sealed class ResourceInstallService
             token.ThrowIfCancellationRequested();
             var relative = SafeRelative(entry.FullName[overridePrefix.Length..]);
             var staged = Path.Combine(stage, $"override-{fileIndex++}.bin");
+            budget.AddFile();
+            budget.EnsureFits(entry.Length);
             await using (var input = entry.Open())
             await using (var output = new FileStream(staged, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, true))
-                await CopyLimitedAsync(input, output, 1024L * 1024 * 1024, token);
+                await CopyLimitedAsync(input, output, InstallBudget.SingleFileLimit, budget, token);
             pending.Add(new PendingFile(staged, relative));
         }
     }
@@ -237,14 +257,26 @@ public sealed class ResourceInstallService
     }
 
     private static async Task DownloadVerifiedAsync(string address, string path, JsonElement hashes, long expectedSize,
-        CancellationToken token, Action<int> onProgress)
+        InstallBudget budget, CancellationToken token, Action<int> onProgress)
     {
         var uri = ValidateDownloadUrl(address);
         var (algorithm, expectedHash) = GetHash(hashes);
-        if (expectedSize < 0 || expectedSize > 1024L * 1024 * 1024) throw new InvalidDataException("单个资源大小无效或超过 1 GB");
+        if (expectedSize < 0 || expectedSize > InstallBudget.SingleFileLimit) throw new InvalidDataException("单个资源大小无效或超过 1 GB");
+        budget.EnsureFits(expectedSize);
         using var response = await SendDownloadAsync(uri, token);
         response.EnsureSuccessStatusCode();
+        if (response.Content.Headers.ContentLength is { } declared)
+        {
+            if (declared > InstallBudget.SingleFileLimit) throw new InvalidDataException("下载文件超过 1 GB");
+            budget.EnsureFits(declared);
+        }
         var stream = await response.Content.ReadAsStreamAsync(token);
+        await StreamToFileAsync(stream, path, algorithm, expectedHash, expectedSize, budget, token, onProgress);
+    }
+
+    internal static async Task StreamToFileAsync(Stream stream, string path, HashAlgorithmName algorithm, string expectedHash,
+        long expectedSize, InstallBudget budget, CancellationToken token, Action<int> onProgress)
+    {
         using var hash = IncrementalHash.CreateHash(algorithm);
         await using var output = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, true);
         var buffer = new byte[65536];
@@ -255,7 +287,9 @@ public sealed class ResourceInstallService
             var read = await stream.ReadAsync(buffer, token);
             if (read == 0) break;
             count += read;
-            if (count > 1024L * 1024 * 1024) throw new InvalidDataException("下载文件超过 1 GB");
+            if (count > InstallBudget.SingleFileLimit) throw new InvalidDataException("下载文件超过 1 GB");
+            if (expectedSize > 0 && count > expectedSize) throw new InvalidDataException("资源文件长度校验失败");
+            budget.Charge(read);
             hash.AppendData(buffer, 0, read);
             await output.WriteAsync(buffer.AsMemory(0, read), token);
             if (expectedSize > 0) onProgress((int)Math.Clamp(count * 100 / expectedSize, 0, 100));
@@ -434,7 +468,14 @@ public sealed class ResourceInstallService
         if (type is not ("mod" or "plugin" or "datapack" or "modpack")) throw new ArgumentException("资源类型暂不支持");
     }
 
-    private static async Task CopyLimitedAsync(Stream input, Stream output, long maxBytes, CancellationToken token)
+    private static long? GetFreeSpace(string path)
+    {
+        try { return new DriveInfo(path).AvailableFreeSpace; }
+        catch { return null; }
+    }
+
+    /// <summary>按实际读到的字节复制：超过 <paramref name="maxBytes"/> 或总量配额即中止，不信任压缩条目声明的长度。</summary>
+    internal static async Task CopyLimitedAsync(Stream input, Stream output, long maxBytes, InstallBudget? budget, CancellationToken token)
     {
         var buffer = new byte[65536];
         long total = 0;
@@ -443,12 +484,13 @@ public sealed class ResourceInstallService
             var read = await input.ReadAsync(buffer, token);
             if (read == 0) return;
             total += read;
-            if (total > maxBytes) throw new InvalidDataException("整合包覆盖文件过大");
+            if (total > maxBytes) throw new InvalidDataException("整合包文件过大");
+            budget?.Charge(read);
             await output.WriteAsync(buffer.AsMemory(0, read), token);
         }
     }
 
-    private sealed record PendingFile(string StagedPath, string RelativeTarget);
+    internal sealed record PendingFile(string StagedPath, string RelativeTarget);
 
     private sealed class InstallJob(string id, string userId, string root) : IDisposable
     {

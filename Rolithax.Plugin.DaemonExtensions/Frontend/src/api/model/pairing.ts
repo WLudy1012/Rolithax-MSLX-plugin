@@ -39,6 +39,6 @@ export interface PairedDeviceModel {
   apiKeyPrefix: string;
   createdAt: string;
   expiresAt: string;
-  /** active / expired / revoked / replaced */
+  /** active / expired / revoked / replaced / issuer-removed / issuer-revoked / user-removed / plugin-unloaded */
   status: string;
 }
