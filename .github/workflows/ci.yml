@@ -1,0 +1,56 @@
+name: 插件构建与测试
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出插件源码
+        uses: actions/checkout@v7
+      - name: 检出 MSLX SDK
+        uses: actions/checkout@v7
+        with:
+          repository: MSLTeam/MSLX
+          ref: dev
+          path: MSLX-dev
+      - name: 配置 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.3
+      - name: 配置 Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: pnpm
+          cache-dependency-path: Rolithax.Plugin.DaemonExtensions/Frontend/pnpm-lock.yaml
+      - name: 安装前端依赖
+        working-directory: Rolithax.Plugin.DaemonExtensions/Frontend
+        run: pnpm install --frozen-lockfile
+      - name: 前端类型检查
+        working-directory: Rolithax.Plugin.DaemonExtensions/Frontend
+        run: pnpm typecheck
+      - name: 构建前端资源
+        working-directory: Rolithax.Plugin.DaemonExtensions/Frontend
+        run: pnpm build
+      - name: 配置 .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - name: 构建插件
+        run: dotnet build ./Rolithax.Plugin.DaemonExtensions/Rolithax.Plugin.DaemonExtensions.csproj -c Release --nologo -p:MSLX_SDK_DIR="$GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK"
+      - name: 运行插件回归测试
+        run: dotnet test ./Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExtensions.Tests.csproj -c Release --nologo -p:MSLX_SDK_DIR="$GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK"
+      - name: 上传开发版插件 DLL
+        uses: actions/upload-artifact@v7
+        with:
+          name: rolithax-plugin-dev
+          path: Rolithax.Plugin.DaemonExtensions/bin/Release/net10.0/Rolithax.Plugin.DaemonExtensions.dll
+          if-no-files-found: error

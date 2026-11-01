@@ -19,3 +19,7 @@ packages/
 # OS
 .DS_Store
 Thumbs.db
+
+# 本地浏览器布局验证的临时文件
+Rolithax.Plugin.DaemonExtensions/Frontend/.codex-layout-check.html
+Rolithax.Plugin.DaemonExtensions/Frontend/.playwright-cli/

@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".rolithax-title{color:var(--td-text-color-primary)}.rolithax-muted{color:var(--td-text-color-secondary)}.rolithax-placeholder{color:var(--td-text-color-placeholder)}@keyframes t-spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.t-icon{display:inline-block;vertical-align:middle;width:1em;height:1em}.t-icon:before{font-family:unset}.t-icon-loading{animation:t-spin 1s linear infinite}.t-icon.t-size-s,i.t-size-s{font-size:14px}.t-icon.t-size-m,i.t-size-m{font-size:16px}.t-icon.t-size-l,i.t-size-l{font-size:18px}.rolithax-qr-col[data-v-4e82827d]{width:100%}.rolithax-qr-box[data-v-4e82827d]{display:flex;width:240px;height:240px;background:#fff}.rolithax-qr-mask[data-v-4e82827d]{position:absolute;inset:0;background:#000000b3;color:#fff}.rolithax-expired[data-v-4e82827d]{color:var(--td-error-color)}@media(min-width:768px){.rolithax-qr-col[data-v-4e82827d]{width:280px}}.absolute[data-v-4e82827d]{position:absolute}.relative[data-v-4e82827d]{position:relative}.m-0[data-v-4e82827d]{margin:0}.min-w-0[data-v-4e82827d]{min-width:0}.w-full[data-v-4e82827d]{width:100%}.flex[data-v-4e82827d]{display:flex}.flex-1[data-v-4e82827d]{flex:1 1 0%}.shrink-0[data-v-4e82827d]{flex-shrink:0}.flex-col[data-v-4e82827d]{flex-direction:column}.items-center[data-v-4e82827d]{align-items:center}.self-start[data-v-4e82827d]{align-self:flex-start}.justify-center[data-v-4e82827d]{justify-content:center}.gap-2[data-v-4e82827d]{gap:.5rem}.gap-3[data-v-4e82827d]{gap:.75rem}.gap-4[data-v-4e82827d]{gap:1rem}.gap-5[data-v-4e82827d]{gap:1.25rem}.gap-6[data-v-4e82827d]{gap:1.5rem}.overflow-hidden[data-v-4e82827d]{overflow:hidden}.border[data-v-4e82827d]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-4e82827d]{border-color:var(--td-component-border)}.rounded-2xl[data-v-4e82827d]{border-radius:1rem}.p-5[data-v-4e82827d]{padding:1.25rem}.px-6[data-v-4e82827d]{padding-left:1.5rem;padding-right:1.5rem}.text-center[data-v-4e82827d]{text-align:center}.text-base[data-v-4e82827d]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-4e82827d]{font-size:.875rem;line-height:1.25rem}.text-xs[data-v-4e82827d]{font-size:.75rem;line-height:1rem}.font-bold[data-v-4e82827d]{font-weight:700}.tracking-widest[data-v-4e82827d]{letter-spacing:.1em}.font-mono[data-v-4e82827d]{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.shadow-sm[data-v-4e82827d]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}@media(min-width:640px){.sm\\:p-6[data-v-4e82827d]{padding:1.5rem}}@media(min-width:768px){.md\\:flex-row[data-v-4e82827d]{flex-direction:row}}.fixed[data-v-41883a85]{position:fixed}.relative[data-v-41883a85]{position:relative}.m-0[data-v-41883a85]{margin:0}.min-w-0[data-v-41883a85]{min-width:0}.w-full[data-v-41883a85]{width:100%}.flex[data-v-41883a85]{display:flex}.flex-col[data-v-41883a85]{flex-direction:column}.flex-wrap[data-v-41883a85]{flex-wrap:wrap}.items-center[data-v-41883a85]{align-items:center}.justify-between[data-v-41883a85]{justify-content:space-between}.gap-2[data-v-41883a85]{gap:.5rem}.gap-4[data-v-41883a85]{gap:1rem}.gap-5[data-v-41883a85]{gap:1.25rem}.overflow-x-auto[data-v-41883a85]{overflow-x:auto}.border[data-v-41883a85]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-41883a85]{border-color:var(--td-component-border)}.rounded-2xl[data-v-41883a85]{border-radius:1rem}.p-5[data-v-41883a85]{padding:1.25rem}.text-base[data-v-41883a85]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-41883a85]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-41883a85]{font-weight:700}.shadow-sm[data-v-41883a85]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}@media(min-width:640px){.sm\\:p-6[data-v-41883a85]{padding:1.5rem}}.relative[data-v-ecaa2226]{position:relative}.m-0[data-v-ecaa2226]{margin:0}.mb-0[data-v-ecaa2226]{margin-bottom:0}.mt-1[data-v-ecaa2226]{margin-top:.25rem}.mt-2[data-v-ecaa2226]{margin-top:.5rem}.min-w-0[data-v-ecaa2226]{min-width:0}.flex[data-v-ecaa2226]{display:flex}.flex-col[data-v-ecaa2226]{flex-direction:column}.items-center[data-v-ecaa2226]{align-items:center}.justify-between[data-v-ecaa2226]{justify-content:space-between}.gap-3[data-v-ecaa2226]{gap:.75rem}.gap-4[data-v-ecaa2226]{gap:1rem}.gap-5[data-v-ecaa2226]{gap:1.25rem}.border[data-v-ecaa2226]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-ecaa2226]{border-color:var(--td-component-border)}.rounded-2xl[data-v-ecaa2226]{border-radius:1rem}.p-5[data-v-ecaa2226]{padding:1.25rem}.text-base[data-v-ecaa2226]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-ecaa2226]{font-size:.875rem;line-height:1.25rem}.text-\\[var\\(--td-error-color\\)\\][data-v-ecaa2226]{color:var(--td-error-color)}.font-bold[data-v-ecaa2226]{font-weight:700}.font-medium[data-v-ecaa2226]{font-weight:500}.shadow-sm[data-v-ecaa2226]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}@media(min-width:640px){.sm\\:p-6[data-v-ecaa2226]{padding:1.5rem}}@unocss;.rolithax-page[data-v-47aa6333]{color:var(--td-text-color-primary);padding-bottom:8px}.rolithax-error[data-v-47aa6333]{color:var(--td-error-color)}.rolithax-fade-enter-active[data-v-47aa6333],.rolithax-fade-leave-active[data-v-47aa6333]{transition:opacity .2s ease,transform .2s ease}.rolithax-fade-enter-from[data-v-47aa6333],.rolithax-fade-leave-to[data-v-47aa6333]{opacity:0;transform:translateY(10px)}.relative[data-v-47aa6333]{position:relative}.m-0[data-v-47aa6333]{margin:0}.h-10[data-v-47aa6333]{height:2.5rem}.w-10[data-v-47aa6333]{width:2.5rem}.flex[data-v-47aa6333]{display:flex}.flex-col[data-v-47aa6333]{flex-direction:column}.transform[data-v-47aa6333]{transform:translate(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotate(var(--un-rotate-z)) skew(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z))}.items-center[data-v-47aa6333]{align-items:center}.self-start[data-v-47aa6333]{align-self:flex-start}.gap-1[data-v-47aa6333]{gap:.25rem}.gap-2[data-v-47aa6333]{gap:.5rem}.gap-3[data-v-47aa6333]{gap:.75rem}.gap-5[data-v-47aa6333]{gap:1.25rem}.border[data-v-47aa6333]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-47aa6333]{border-color:var(--td-component-border)}.rounded-2xl[data-v-47aa6333]{border-radius:1rem}.object-contain[data-v-47aa6333]{object-fit:contain}.p-5[data-v-47aa6333]{padding:1.25rem}.text-lg[data-v-47aa6333]{font-size:1.125rem;line-height:1.75rem}.text-sm[data-v-47aa6333]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-47aa6333]{font-weight:700}.shadow-sm[data-v-47aa6333]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}.transition[data-v-47aa6333]{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.ease[data-v-47aa6333]{transition-timing-function:cubic-bezier(.4,0,.2,1)}@media(min-width:640px){.sm\\:p-6[data-v-47aa6333]{padding:1.5rem}}@media(min-width:1280px){.xl\\:self-auto[data-v-47aa6333]{align-self:auto}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".rolithax-title{color:var(--td-text-color-primary)}.rolithax-muted{color:var(--td-text-color-secondary)}.rolithax-placeholder{color:var(--td-text-color-placeholder)}@keyframes t-spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.t-icon{display:inline-block;vertical-align:middle;width:1em;height:1em}.t-icon:before{font-family:unset}.t-icon-loading{animation:t-spin 1s linear infinite}.t-icon.t-size-s,i.t-size-s{font-size:14px}.t-icon.t-size-m,i.t-size-m{font-size:16px}.t-icon.t-size-l,i.t-size-l{font-size:18px}.pairing-card[data-v-4ae2c097]{container-type:inline-size}.pairing-layout[data-v-4ae2c097]{display:flex;flex-direction:column;gap:24px}.rolithax-qr-col[data-v-4ae2c097]{width:100%}.rolithax-qr-box[data-v-4ae2c097]{display:flex;width:240px;height:240px;background:#fff}.rolithax-qr-mask[data-v-4ae2c097]{position:absolute;inset:0;background:#000000b3;color:#fff}.rolithax-expired[data-v-4ae2c097]{color:var(--td-error-color)}@container (min-width: 650px){.pairing-layout[data-v-4ae2c097]{flex-direction:row}.rolithax-qr-col[data-v-4ae2c097]{width:260px}}.absolute[data-v-4ae2c097]{position:absolute}.relative[data-v-4ae2c097]{position:relative}.m-0[data-v-4ae2c097]{margin:0}.h-5[data-v-4ae2c097]{height:1.25rem}.min-w-0[data-v-4ae2c097]{min-width:0}.w-1\\.5[data-v-4ae2c097]{width:.375rem}.w-full[data-v-4ae2c097]{width:100%}.flex[data-v-4ae2c097]{display:flex}.flex-1[data-v-4ae2c097]{flex:1 1 0%}.shrink-0[data-v-4ae2c097]{flex-shrink:0}.flex-col[data-v-4ae2c097]{flex-direction:column}.items-center[data-v-4ae2c097]{align-items:center}.self-start[data-v-4ae2c097]{align-self:flex-start}.justify-center[data-v-4ae2c097]{justify-content:center}.gap-2[data-v-4ae2c097]{gap:.5rem}.gap-3[data-v-4ae2c097]{gap:.75rem}.gap-4[data-v-4ae2c097]{gap:1rem}.gap-5[data-v-4ae2c097]{gap:1.25rem}.overflow-hidden[data-v-4ae2c097]{overflow:hidden}.border[data-v-4ae2c097]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-4ae2c097]{border-color:var(--td-component-border)}.rounded-2xl[data-v-4ae2c097]{border-radius:1rem}.rounded-full[data-v-4ae2c097]{border-radius:9999px}.bg-\\[var\\(--color-primary\\)\\][data-v-4ae2c097]{background-color:var(--color-primary)}.p-5[data-v-4ae2c097]{padding:1.25rem}.px-6[data-v-4ae2c097]{padding-left:1.5rem;padding-right:1.5rem}.text-center[data-v-4ae2c097]{text-align:center}.text-base[data-v-4ae2c097]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-4ae2c097]{font-size:.875rem;line-height:1.25rem}.text-xs[data-v-4ae2c097]{font-size:.75rem;line-height:1rem}.font-bold[data-v-4ae2c097]{font-weight:700}.tracking-widest[data-v-4ae2c097]{letter-spacing:.1em}.font-mono[data-v-4ae2c097]{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.shadow-sm[data-v-4ae2c097]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}.\\@container[data-v-4ae2c097]{container-type:inline-size}@media(min-width:640px){.sm\\:p-6[data-v-4ae2c097]{padding:1.5rem}}@media(min-width:768px){.md\\:flex-row[data-v-4ae2c097]{flex-direction:row}}.fixed[data-v-89157c85]{position:fixed}.relative[data-v-89157c85]{position:relative}.m-0[data-v-89157c85]{margin:0}.h-5[data-v-89157c85]{height:1.25rem}.min-w-0[data-v-89157c85]{min-width:0}.w-1\\.5[data-v-89157c85]{width:.375rem}.w-full[data-v-89157c85]{width:100%}.flex[data-v-89157c85]{display:flex}.flex-col[data-v-89157c85]{flex-direction:column}.flex-wrap[data-v-89157c85]{flex-wrap:wrap}.items-center[data-v-89157c85]{align-items:center}.justify-between[data-v-89157c85]{justify-content:space-between}.gap-2[data-v-89157c85]{gap:.5rem}.gap-3[data-v-89157c85]{gap:.75rem}.gap-4[data-v-89157c85]{gap:1rem}.gap-5[data-v-89157c85]{gap:1.25rem}.overflow-x-auto[data-v-89157c85]{overflow-x:auto}.border[data-v-89157c85]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-89157c85]{border-color:var(--td-component-border)}.rounded-2xl[data-v-89157c85]{border-radius:1rem}.rounded-full[data-v-89157c85]{border-radius:9999px}.bg-\\[var\\(--color-primary\\)\\][data-v-89157c85]{background-color:var(--color-primary)}.p-5[data-v-89157c85]{padding:1.25rem}.text-base[data-v-89157c85]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-89157c85]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-89157c85]{font-weight:700}.shadow-sm[data-v-89157c85]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}@media(min-width:640px){.sm\\:p-6[data-v-89157c85]{padding:1.5rem}}.feature-row[data-v-72e6d689]{padding:16px 0;border-top:1px solid var(--td-component-border)}.feature-row[data-v-72e6d689]:last-child{padding-bottom:0}.relative[data-v-72e6d689]{position:relative}.m-0[data-v-72e6d689]{margin:0}.mb-0[data-v-72e6d689]{margin-bottom:0}.mt-1[data-v-72e6d689]{margin-top:.25rem}.mt-2[data-v-72e6d689]{margin-top:.5rem}.h-5[data-v-72e6d689]{height:1.25rem}.min-w-0[data-v-72e6d689]{min-width:0}.w-1\\.5[data-v-72e6d689]{width:.375rem}.flex[data-v-72e6d689]{display:flex}.flex-col[data-v-72e6d689]{flex-direction:column}.items-center[data-v-72e6d689]{align-items:center}.justify-between[data-v-72e6d689]{justify-content:space-between}.gap-3[data-v-72e6d689]{gap:.75rem}.gap-4[data-v-72e6d689]{gap:1rem}.gap-5[data-v-72e6d689]{gap:1.25rem}.border[data-v-72e6d689]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-72e6d689]{border-color:var(--td-component-border)}.rounded-2xl[data-v-72e6d689]{border-radius:1rem}.rounded-full[data-v-72e6d689]{border-radius:9999px}.bg-\\[var\\(--color-primary\\)\\][data-v-72e6d689]{background-color:var(--color-primary)}.p-5[data-v-72e6d689]{padding:1.25rem}.text-base[data-v-72e6d689]{font-size:1rem;line-height:1.5rem}.text-sm[data-v-72e6d689]{font-size:.875rem;line-height:1.25rem}.text-\\[var\\(--td-error-color\\)\\][data-v-72e6d689]{color:var(--td-error-color)}.font-bold[data-v-72e6d689]{font-weight:700}.font-medium[data-v-72e6d689]{font-weight:500}.shadow-sm[data-v-72e6d689]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}@media(min-width:640px){.sm\\:p-6[data-v-72e6d689]{padding:1.5rem}}@unocss;.rolithax-page[data-v-5be26235]{color:var(--td-text-color-primary);padding-bottom:8px;min-width:0}.rolithax-content[data-v-5be26235]{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}.rolithax-main[data-v-5be26235]{min-width:0}@media(min-width:1100px){.rolithax-content[data-v-5be26235]:not(.rolithax-content-wide){grid-template-columns:minmax(0,1fr) minmax(280px,340px)}}.rolithax-error[data-v-5be26235]{color:var(--td-error-color)}.rolithax-fade-enter-active[data-v-5be26235],.rolithax-fade-leave-active[data-v-5be26235]{transition:opacity .2s ease,transform .2s ease}.rolithax-fade-enter-from[data-v-5be26235],.rolithax-fade-leave-to[data-v-5be26235]{opacity:0;transform:translateY(10px)}.relative[data-v-5be26235]{position:relative}.grid[data-v-5be26235]{display:grid}.m-0[data-v-5be26235]{margin:0}.mb-0[data-v-5be26235]{margin-bottom:0}.mt-1[data-v-5be26235]{margin-top:.25rem}.h-10[data-v-5be26235]{height:2.5rem}.w-10[data-v-5be26235]{width:2.5rem}.flex[data-v-5be26235]{display:flex}.flex-col[data-v-5be26235]{flex-direction:column}.transform[data-v-5be26235]{transform:translate(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotate(var(--un-rotate-z)) skew(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z))}.items-center[data-v-5be26235]{align-items:center}.self-start[data-v-5be26235]{align-self:flex-start}.justify-between[data-v-5be26235]{justify-content:space-between}.gap-1[data-v-5be26235]{gap:.25rem}.gap-3[data-v-5be26235]{gap:.75rem}.gap-4[data-v-5be26235]{gap:1rem}.gap-5[data-v-5be26235]{gap:1.25rem}.border[data-v-5be26235]{border-width:1px}.border-\\[var\\(--td-component-border\\)\\][data-v-5be26235]{border-color:var(--td-component-border)}.rounded-2xl[data-v-5be26235]{border-radius:1rem}.object-contain[data-v-5be26235]{object-fit:contain}.p-5[data-v-5be26235]{padding:1.25rem}.text-lg[data-v-5be26235]{font-size:1.125rem;line-height:1.75rem}.text-sm[data-v-5be26235]{font-size:.875rem;line-height:1.25rem}.font-bold[data-v-5be26235]{font-weight:700}.shadow-sm[data-v-5be26235]{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / .05));box-shadow:var(--un-ring-offset-shadow),var(--un-ring-shadow),var(--un-shadow)}.transition[data-v-5be26235]{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.ease[data-v-5be26235]{transition-timing-function:cubic-bezier(.4,0,.2,1)}@media(min-width:640px){.sm\\:flex-row[data-v-5be26235]{flex-direction:row}.sm\\:items-center[data-v-5be26235]{align-items:center}.sm\\:p-6[data-v-5be26235]{padding:1.5rem}}@media(min-width:1280px){.xl\\:self-auto[data-v-5be26235]{align-self:auto}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
 function ye(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
@@ -15,7 +15,7 @@ function D(e) {
     return s && typeof Symbol == "function" && s.constructor === Symbol && s !== Symbol.prototype ? "symbol" : typeof s;
   }, D(e);
 }
-function be(e, s) {
+function we(e, s) {
   if (D(e) != "object" || !e) return e;
   var o = e[Symbol.toPrimitive];
   if (o !== void 0) {
@@ -25,12 +25,12 @@ function be(e, s) {
   }
   return (s === "string" ? String : Number)(e);
 }
-function we(e) {
-  var s = be(e, "string");
+function be(e) {
+  var s = we(e, "string");
   return D(s) == "symbol" ? s : s + "";
 }
 function T(e, s, o) {
-  return (s = we(s)) in e ? Object.defineProperty(e, s, {
+  return (s = be(s)) in e ? Object.defineProperty(e, s, {
     value: o,
     enumerable: !0,
     configurable: !0,
@@ -76,18 +76,18 @@ var Y = (e) => {
   e.tag === "svg" && (o.class = s.class, o.style = s.style, o.onClick = s.onClick);
   var v = e.children ? e.children.map((i) => ce(i, s)) : [];
   return t.h(e.tag, o, v);
-}, z = (e, s) => {
+}, L = (e, s) => {
   var o = "t-icon-".concat(s.iconId, "-instance-").concat(s.overlapMaskInstanceId);
   return ce(e, G(G({}, s), {}, {
     overlapMaskPrefix: o
   }));
-}, Ee = "t", _e = {
+}, Ee = "t", Ne = {
   classPrefix: Ee
 };
-function Ne() {
+function _e() {
   var {
     classPrefix: e
-  } = _e;
+  } = Ne;
   return {
     SIZE: {
       default: "",
@@ -117,7 +117,7 @@ function Ne() {
   };
 }
 function H(e) {
-  var s = Ne().SIZE, o = t.computed(() => e.value in s ? s[e.value] : ""), n = t.computed(() => e.value === void 0 || e.value in s ? {} : {
+  var s = _e().SIZE, o = t.computed(() => e.value in s ? s[e.value] : ""), n = t.computed(() => e.value === void 0 || e.value in s ? {} : {
     fontSize: e.value
   });
   return {
@@ -146,7 +146,7 @@ function J(e) {
   }
   return e;
 }
-var Me = {
+var Ve = {
   tag: "svg",
   attrs: {
     fill: "none",
@@ -222,7 +222,7 @@ var Me = {
       }
     }]
   }]
-}, Pe = t.defineComponent({
+}, Me = t.defineComponent({
   name: "CopyIcon",
   props: {
     size: {
@@ -253,10 +253,10 @@ var Me = {
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: m,
       style: C
-    } = H(a), b = t.computed(() => ["t-icon", "t-icon-copy", m.value]), k = t.computed(() => J(J({
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-copy", m.value]), k = t.computed(() => J(J({
       fill: "none"
-    }, C.value), d.style)), w = t.computed(() => ({
-      class: b.value,
+    }, C.value), d.style)), b = t.computed(() => ({
+      class: w.value,
       style: k.value,
       onClick: (p) => {
         var g;
@@ -273,7 +273,7 @@ var Me = {
       iconId: "copy",
       overlapMaskInstanceId: r
     }));
-    return () => z(Me, w.value);
+    return () => L(Ve, b.value);
   }
 });
 function ee(e, s) {
@@ -297,7 +297,7 @@ function te(e) {
   }
   return e;
 }
-var Ve = {
+var Pe = {
   tag: "svg",
   attrs: {
     fill: "none",
@@ -432,10 +432,10 @@ var Ve = {
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: m,
       style: C
-    } = H(a), b = t.computed(() => ["t-icon", "t-icon-qrcode", m.value]), k = t.computed(() => te(te({
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-qrcode", m.value]), k = t.computed(() => te(te({
       fill: "none"
-    }, C.value), d.style)), w = t.computed(() => ({
-      class: b.value,
+    }, C.value), d.style)), b = t.computed(() => ({
+      class: w.value,
       style: k.value,
       onClick: (p) => {
         var g;
@@ -452,7 +452,7 @@ var Ve = {
       iconId: "qrcode",
       overlapMaskInstanceId: r
     }));
-    return () => z(Ve, w.value);
+    return () => L(Pe, b.value);
   }
 });
 function re(e, s) {
@@ -531,10 +531,10 @@ var Se = {
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: m,
       style: C
-    } = H(a), b = t.computed(() => ["t-icon", "t-icon-refresh", m.value]), k = t.computed(() => ae(ae({
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-refresh", m.value]), k = t.computed(() => ae(ae({
       fill: "none"
-    }, C.value), d.style)), w = t.computed(() => ({
-      class: b.value,
+    }, C.value), d.style)), b = t.computed(() => ({
+      class: w.value,
       style: k.value,
       onClick: (p) => {
         var g;
@@ -551,7 +551,7 @@ var Se = {
       iconId: "refresh",
       overlapMaskInstanceId: r
     }));
-    return () => z(Se, w.value);
+    return () => L(Se, b.value);
   }
 });
 function oe(e, s) {
@@ -702,10 +702,10 @@ var Ae = {
     }), h = t.computed(() => e.fillColor ? Array.isArray(e.fillColor) ? e.fillColor[0] : e.fillColor : "currentColor"), {
       className: m,
       style: C
-    } = H(a), b = t.computed(() => ["t-icon", "t-icon-usergroup", m.value]), k = t.computed(() => ne(ne({
+    } = H(a), w = t.computed(() => ["t-icon", "t-icon-usergroup", m.value]), k = t.computed(() => ne(ne({
       fill: "none"
-    }, C.value), d.style)), w = t.computed(() => ({
-      class: b.value,
+    }, C.value), d.style)), b = t.computed(() => ({
+      class: w.value,
       style: k.value,
       onClick: (p) => {
         var g;
@@ -722,7 +722,7 @@ var Ae = {
       iconId: "usergroup",
       overlapMaskInstanceId: r
     }));
-    return () => z(Ae, w.value);
+    return () => L(Ae, b.value);
   }
 }), Z, le;
 function Ie() {
@@ -750,19 +750,19 @@ async function Ue() {
     url: `${U}/devices`
   });
 }
-async function Le(e) {
+async function ze(e) {
   return await A.post({
     url: `${U}/devices/${encodeURIComponent(e)}/revoke`
   });
 }
-async function ze() {
+async function Le() {
   return (await A.get({ url: "/api/instance/list" }) || []).map((s) => ({ label: `${s.name} (#${s.id})`, value: `server:${s.id}` }));
 }
 var W, ie;
 function He() {
   return ie || (ie = 1, W = TDesign), W;
 }
-var N = He();
+var _ = He();
 var S = function() {
   return S = Object.assign || function(s) {
     for (var o, n = 1, d = arguments.length; n < d; n++) {
@@ -808,35 +808,35 @@ var O;
           throw new RangeError("Invalid value");
         var h, m;
         for (h = l; ; h++) {
-          var C = i.getNumDataCodewords(h, a) * 8, b = v.getTotalBits(r, h);
-          if (b <= C) {
-            m = b;
+          var C = i.getNumDataCodewords(h, a) * 8, w = v.getTotalBits(r, h);
+          if (w <= C) {
+            m = w;
             break;
           }
           if (h >= c)
             throw new RangeError("Data too long");
         }
-        for (var k = 0, w = [i.Ecc.MEDIUM, i.Ecc.QUARTILE, i.Ecc.HIGH]; k < w.length; k++) {
-          var p = w[k];
+        for (var k = 0, b = [i.Ecc.MEDIUM, i.Ecc.QUARTILE, i.Ecc.HIGH]; k < b.length; k++) {
+          var p = b[k];
           u && m <= i.getNumDataCodewords(h, p) * 8 && (a = p);
         }
-        for (var g = [], y = 0, _ = r; y < _.length; y++) {
-          var x = _[y];
+        for (var g = [], y = 0, N = r; y < N.length; y++) {
+          var x = N[y];
           o(x.mode.modeBits, 4, g), o(x.numChars, x.mode.numCharCountBits(h), g);
-          for (var P = 0, M = x.getData(); P < M.length; P++) {
-            var R = M[P];
+          for (var M = 0, V = x.getData(); M < V.length; M++) {
+            var R = V[M];
             g.push(R);
           }
         }
         d(g.length == m);
-        var V = i.getNumDataCodewords(h, a) * 8;
-        d(g.length <= V), o(0, Math.min(4, V - g.length), g), o(0, (8 - g.length % 8) % 8, g), d(g.length % 8 == 0);
-        for (var E = 236; g.length < V; E ^= 253)
+        var P = i.getNumDataCodewords(h, a) * 8;
+        d(g.length <= P), o(0, Math.min(4, P - g.length), g), o(0, (8 - g.length % 8) % 8, g), d(g.length % 8 == 0);
+        for (var E = 236; g.length < P; E ^= 253)
           o(E, 8, g);
         for (var I = []; I.length * 8 < g.length; )
           I.push(0);
-        return g.forEach(function($, L) {
-          return I[L >>> 3] |= $ << 7 - (L & 7);
+        return g.forEach(function($, z) {
+          return I[z >>> 3] |= $ << 7 - (z & 7);
         }), new i(h, a, I, f);
       }, i.prototype.getModule = function(r, a) {
         return 0 <= r && r < this.size && 0 <= a && a < this.size && this.modules[a][r];
@@ -892,18 +892,18 @@ var O;
         var a = this.version, l = this.errorCorrectionLevel;
         if (r.length != i.getNumDataCodewords(a, l))
           throw new RangeError("Invalid argument");
-        for (var c = i.NUM_ERROR_CORRECTION_BLOCKS[l.ordinal][a], f = i.ECC_CODEWORDS_PER_BLOCK[l.ordinal][a], u = Math.floor(i.getNumRawDataModules(a) / 8), h = c - u % c, m = Math.floor(u / c), C = [], b = i.reedSolomonComputeDivisor(f), k = 0, w = 0; k < c; k++) {
-          var p = r.slice(w, w + m - f + (k < h ? 0 : 1));
-          w += p.length;
-          var g = i.reedSolomonComputeRemainder(p, b);
+        for (var c = i.NUM_ERROR_CORRECTION_BLOCKS[l.ordinal][a], f = i.ECC_CODEWORDS_PER_BLOCK[l.ordinal][a], u = Math.floor(i.getNumRawDataModules(a) / 8), h = c - u % c, m = Math.floor(u / c), C = [], w = i.reedSolomonComputeDivisor(f), k = 0, b = 0; k < c; k++) {
+          var p = r.slice(b, b + m - f + (k < h ? 0 : 1));
+          b += p.length;
+          var g = i.reedSolomonComputeRemainder(p, w);
           k < h && p.push(0), C.push(p.concat(g));
         }
-        for (var y = [], _ = function(x) {
-          C.forEach(function(P, M) {
-            (x != m - f || M >= h) && y.push(P[x]);
+        for (var y = [], N = function(x) {
+          C.forEach(function(M, V) {
+            (x != m - f || V >= h) && y.push(M[x]);
           });
         }, k = 0; k < C[0].length; k++)
-          _(k);
+          N(k);
         return d(y.length == u), y;
       }, i.prototype.drawCodewords = function(r) {
         if (r.length != Math.floor(i.getNumRawDataModules(this.version) / 8))
@@ -969,10 +969,10 @@ var O;
             var m = this.modules[a][u];
             m == this.modules[a][u + 1] && m == this.modules[a + 1][u] && m == this.modules[a + 1][u + 1] && (r += i.PENALTY_N2);
           }
-        for (var C = 0, b = 0, k = this.modules; b < k.length; b++) {
-          var w = k[b];
-          C = w.reduce(function(y, _) {
-            return y + (_ ? 1 : 0);
+        for (var C = 0, w = 0, k = this.modules; w < k.length; w++) {
+          var b = k[w];
+          C = b.reduce(function(y, N) {
+            return y + (N ? 1 : 0);
           }, C);
         }
         var p = this.size * this.size, g = Math.ceil(Math.abs(C * 20 - p * 10) / p) - 1;
@@ -1011,8 +1011,8 @@ var O;
           return 0;
         }), c = function(m) {
           var C = m ^ l.shift();
-          l.push(0), a.forEach(function(b, k) {
-            return l[k] ^= i.reedSolomonMultiply(b, C);
+          l.push(0), a.forEach(function(w, k) {
+            return l[k] ^= i.reedSolomonMultiply(w, C);
           });
         }, f = 0, u = r; f < u.length; f++) {
           var h = u[f];
@@ -1443,32 +1443,32 @@ var Q = {
   name: "QRCodeCanvas",
   props: Q,
   setup: function(e, s) {
-    var o = ge(e), n = o.margin, d = o.cells, v = o.numCells, i = o.fgPath, r = o.imageProps, a = o.imageBorderProps, l = t.ref(null), c = t.ref(null), f = function(h, m, C, b, k, w) {
-      h.beginPath(), h.roundRect ? h.roundRect(m, C, b, k, w) : h.rect(m, C, b, k);
+    var o = ge(e), n = o.margin, d = o.cells, v = o.numCells, i = o.fgPath, r = o.imageProps, a = o.imageBorderProps, l = t.ref(null), c = t.ref(null), f = function(h, m, C, w, k, b) {
+      h.beginPath(), h.roundRect ? h.roundRect(m, C, w, k, b) : h.rect(m, C, w, k);
     }, u = function() {
-      var h = e.size, m = e.background, C = e.foreground, b = e.gradient, k = e.gradientType, w = e.gradientStartColor, p = e.gradientEndColor, g = l.value;
+      var h = e.size, m = e.background, C = e.foreground, w = e.gradient, k = e.gradientType, b = e.gradientStartColor, p = e.gradientEndColor, g = l.value;
       if (g) {
         var y = g.getContext("2d");
         if (y) {
-          var _ = c.value, x = typeof window < "u" && window.devicePixelRatio || 1, P = h / v.value * x;
-          if (g.height = g.width = h * x, y.setTransform(P, 0, 0, P, 0, 0), y.fillStyle = m, y.fillRect(0, 0, v.value, v.value), b) {
-            var M = void 0;
-            k === "linear" ? M = y.createLinearGradient(0, 0, v.value, v.value) : M = y.createRadialGradient(v.value / 2, v.value / 2, 0, v.value / 2, v.value / 2, v.value / 2), M.addColorStop(0, w), M.addColorStop(1, p), y.fillStyle = M;
+          var N = c.value, x = typeof window < "u" && window.devicePixelRatio || 1, M = h / v.value * x;
+          if (g.height = g.width = h * x, y.setTransform(M, 0, 0, M, 0, 0), y.fillStyle = m, y.fillRect(0, 0, v.value, v.value), w) {
+            var V = void 0;
+            k === "linear" ? V = y.createLinearGradient(0, 0, v.value, v.value) : V = y.createRadialGradient(v.value / 2, v.value / 2, 0, v.value / 2, v.value / 2, v.value / 2), V.addColorStop(0, b), V.addColorStop(1, p), y.fillStyle = V;
           } else
             y.fillStyle = C;
           Qe ? y.fill(new Path2D(i.value)) : d.value.forEach(function(I, $) {
-            I.forEach(function(L, Ce) {
-              L && y.fillRect(Ce + n.value, $ + n.value, 1, 1);
+            I.forEach(function(z, Ce) {
+              z && y.fillRect(Ce + n.value, $ + n.value, 1, 1);
             });
           });
-          var R = e.imageSettings.src && _ && _.naturalWidth !== 0 && _.naturalHeight !== 0;
+          var R = e.imageSettings.src && N && N.naturalWidth !== 0 && N.naturalHeight !== 0;
           if (R && r.value) {
             if (a.value) {
-              var V = a.value;
-              y.fillStyle = e.background, f(y, V.x, V.y, V.width, V.height, V.borderRadius), y.fill();
+              var P = a.value;
+              y.fillStyle = e.background, f(y, P.x, P.y, P.width, P.height, P.borderRadius), y.fill();
             }
             var E = r.value.borderRadius;
-            E > 0 ? (y.save(), f(y, r.value.x, r.value.y, r.value.width, r.value.height, E), y.clip(), y.drawImage(_, r.value.x, r.value.y, r.value.width, r.value.height), y.restore()) : y.drawImage(_, r.value.x, r.value.y, r.value.width, r.value.height);
+            E > 0 ? (y.save(), f(y, r.value.x, r.value.y, r.value.width, r.value.height, E), y.clip(), y.drawImage(N, r.value.x, r.value.y, r.value.width, r.value.height), y.restore()) : y.drawImage(N, r.value.x, r.value.y, r.value.width, r.value.height);
           }
         }
       }
@@ -1544,9 +1544,9 @@ const rt = /* @__PURE__ */ t.defineComponent({
     }), d = t.ref(s.config.publicUrl), v = t.ref(!1), i = t.computed(() => n.publicUrl.trim() !== d.value), r = t.ref([]), a = t.ref(!1);
     async function l() {
       try {
-        a.value = !0, r.value = await ze();
+        a.value = !0, r.value = await Le();
       } catch (g) {
-        N.MessagePlugin.error("加载实例列表失败: " + (g?.message || g));
+        _.MessagePlugin.error("加载实例列表失败: " + (g?.message || g));
       } finally {
         a.value = !1;
       }
@@ -1555,15 +1555,15 @@ const rt = /* @__PURE__ */ t.defineComponent({
       if (!o.value || v.value) return;
       const g = n.publicUrl.trim();
       if (!g) {
-        N.MessagePlugin.warning("请输入 Daemon 对外地址");
+        _.MessagePlugin.warning("请输入 Daemon 对外地址");
         return;
       }
       try {
         v.value = !0;
         const y = await De(g);
-        n.publicUrl = y.publicUrl, d.value = y.publicUrl, N.MessagePlugin.success("Daemon 地址已保存");
+        n.publicUrl = y.publicUrl, d.value = y.publicUrl, _.MessagePlugin.success("Daemon 地址已保存");
       } catch (y) {
-        N.MessagePlugin.error("保存 Daemon 地址失败: " + (y?.message || y));
+        _.MessagePlugin.error("保存 Daemon 地址失败: " + (y?.message || y));
       } finally {
         v.value = !1;
       }
@@ -1573,7 +1573,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
     async function C() {
       if (!f.value) {
         if (o.value && n.scope === "limited" && n.resources.length === 0) {
-          N.MessagePlugin.warning("受限范围请至少选择一个实例资源");
+          _.MessagePlugin.warning("受限范围请至少选择一个实例资源");
           return;
         }
         try {
@@ -1583,15 +1583,15 @@ const rt = /* @__PURE__ */ t.defineComponent({
             resources: o.value && n.scope === "limited" ? n.resources : [],
             deviceTtlDays: n.deviceTtlDays
           });
-          u.value = g, b(g?.expiresInSeconds || 120);
+          u.value = g, w(g?.expiresInSeconds || 120);
         } catch (g) {
-          N.MessagePlugin.error("生成配对码失败: " + (g?.message || g));
+          _.MessagePlugin.error("生成配对码失败: " + (g?.message || g));
         } finally {
           f.value = !1;
         }
       }
     }
-    function b(g) {
+    function w(g) {
       k(), h.value = Math.max(0, g), m = setInterval(() => {
         h.value = Math.max(0, h.value - 1), h.value === 0 && k();
       }, 1e3);
@@ -1599,26 +1599,29 @@ const rt = /* @__PURE__ */ t.defineComponent({
     function k() {
       m && clearInterval(m), m = null;
     }
-    const w = t.computed(() => u.value !== null && h.value === 0);
+    const b = t.computed(() => u.value !== null && h.value === 0);
     async function p() {
       if (u.value)
         try {
-          await navigator.clipboard.writeText(u.value.payload), N.MessagePlugin.success("二维码原文已复制");
+          await navigator.clipboard.writeText(u.value.payload), _.MessagePlugin.success("二维码原文已复制");
         } catch {
-          N.MessagePlugin.error("复制失败，请手动选择");
+          _.MessagePlugin.error("复制失败，请手动选择");
         }
     }
     return t.onMounted(l), t.onUnmounted(k), (g, y) => {
-      const _ = t.resolveComponent("t-input"), x = t.resolveComponent("t-button"), P = t.resolveComponent("t-radio-button"), M = t.resolveComponent("t-radio-group"), R = t.resolveComponent("t-select"), V = t.resolveComponent("t-input-number");
-      return t.openBlock(), t.createElementBlock("div", { class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5" }, [
+      const N = t.resolveComponent("t-input"), x = t.resolveComponent("t-button"), M = t.resolveComponent("t-radio-button"), V = t.resolveComponent("t-radio-group"), R = t.resolveComponent("t-select"), P = t.resolveComponent("t-input-number");
+      return t.openBlock(), t.createElementBlock("div", { class: "pairing-card design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 min-w-0" }, [
         t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
-          t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "生成配对二维码"),
+          t.createElementVNode("div", { class: "flex items-center gap-3" }, [
+            t.createElementVNode("span", { class: "w-1.5 h-5 bg-[var(--color-primary)] rounded-full" }),
+            t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "生成配对二维码")
+          ]),
           t.createElementVNode("p", { class: "rolithax-muted text-sm m-0" }, " 生成一次性二维码，在另一台设备的 Rolithax Launcher「连接」页扫描即可接入。 ")
         ]),
         t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
           t.createElementVNode("label", { class: "rolithax-title text-xs font-bold" }, "Daemon 对外地址"),
           t.createElementVNode("div", { class: "flex flex-col md:flex-row gap-2" }, [
-            t.createVNode(_, {
+            t.createVNode(N, {
               modelValue: n.publicUrl,
               "onUpdate:modelValue": y[0] || (y[0] = (E) => n.publicUrl = E),
               disabled: !o.value,
@@ -1647,26 +1650,26 @@ const rt = /* @__PURE__ */ t.defineComponent({
           t.createTextVNode(" 当前二维码只会授予你的 Daemon 权限，无法扩大到其他用户或实例。 "),
           r.value.length ? (t.openBlock(), t.createElementBlock("span", { key: 0 }, "当前可访问实例：" + t.toDisplayString(r.value.map((E) => E.label).join("、")), 1)) : t.createCommentVNode("", !0)
         ])),
-        t.createElementVNode("div", { class: "flex flex-col md:flex-row gap-6" }, [
+        t.createElementVNode("div", { class: "pairing-layout" }, [
           t.createElementVNode("div", { class: "flex-1 min-w-0 flex flex-col gap-4" }, [
             o.value ? (t.openBlock(), t.createElementBlock("div", {
               key: 0,
               class: "flex flex-col gap-2"
             }, [
               t.createElementVNode("label", { class: "rolithax-title text-xs font-bold" }, "授权范围"),
-              t.createVNode(M, {
+              t.createVNode(V, {
                 modelValue: n.scope,
                 "onUpdate:modelValue": y[1] || (y[1] = (E) => n.scope = E),
                 variant: "default-filled"
               }, {
                 default: t.withCtx(() => [
-                  t.createVNode(P, { value: "full" }, {
+                  t.createVNode(M, { value: "full" }, {
                     default: t.withCtx(() => [
                       t.createTextVNode("完整权限（admin）")
                     ]),
                     _: 1
                   }),
-                  t.createVNode(P, { value: "limited" }, {
+                  t.createVNode(M, { value: "limited" }, {
                     default: t.withCtx(() => [
                       t.createTextVNode("受限（指定实例）")
                     ]),
@@ -1694,7 +1697,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
             ])) : t.createCommentVNode("", !0),
             t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
               t.createElementVNode("label", { class: "rolithax-title text-xs font-bold" }, "设备有效期（天，1–365）"),
-              t.createVNode(V, {
+              t.createVNode(P, {
                 modelValue: n.deviceTtlDays,
                 "onUpdate:modelValue": y[3] || (y[3] = (E) => n.deviceTtlDays = E),
                 min: 1,
@@ -1727,7 +1730,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
                   level: "M",
                   margin: 1
                 }, null, 8, ["value"]),
-                w.value ? (t.openBlock(), t.createElementBlock("div", {
+                b.value ? (t.openBlock(), t.createElementBlock("div", {
                   key: 0,
                   class: "rolithax-qr-mask flex flex-col items-center justify-center gap-2 text-sm font-bold"
                 }, [
@@ -1754,8 +1757,8 @@ const rt = /* @__PURE__ */ t.defineComponent({
             }, [
               t.createElementVNode("div", { class: "rolithax-title text-sm font-mono tracking-widest" }, "配对码 " + t.toDisplayString(u.value.code), 1),
               t.createElementVNode("div", {
-                class: t.normalizeClass(["text-xs", w.value ? "rolithax-expired" : "rolithax-muted"])
-              }, t.toDisplayString(w.value ? "已过期，请重新生成" : `剩余 ${h.value} 秒 · 单次有效 · ${u.value.scope === "full" ? "完整权限" : "受限"}`), 3),
+                class: t.normalizeClass(["text-xs", b.value ? "rolithax-expired" : "rolithax-muted"])
+              }, t.toDisplayString(b.value ? "已过期，请重新生成" : `剩余 ${h.value} 秒 · 单次有效 · ${u.value.scope === "full" ? "完整权限" : "受限"}`), 3),
               t.createElementVNode("div", { class: "flex items-center gap-2" }, [
                 t.createVNode(x, {
                   size: "small",
@@ -1763,7 +1766,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
                   onClick: p
                 }, {
                   icon: t.withCtx(() => [
-                    t.createVNode(t.unref(Pe))
+                    t.createVNode(t.unref(Me))
                   ]),
                   default: t.withCtx(() => [
                     t.createTextVNode(" 复制原文 ")
@@ -1795,7 +1798,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
   for (const [n, d] of s)
     o[n] = d;
   return o;
-}, at = /* @__PURE__ */ j(rt, [["__scopeId", "data-v-4e82827d"]]), ot = /* @__PURE__ */ t.defineComponent({
+}, at = /* @__PURE__ */ j(rt, [["__scopeId", "data-v-4ae2c097"]]), ot = /* @__PURE__ */ t.defineComponent({
   __name: "DeviceList",
   setup(e, { expose: s }) {
     const o = t.ref(!1), n = t.ref([]);
@@ -1803,7 +1806,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
       try {
         o.value = !0, n.value = await Ue() || [];
       } catch (f) {
-        N.MessagePlugin.error("获取设备列表失败: " + (f?.message || f));
+        _.MessagePlugin.error("获取设备列表失败: " + (f?.message || f));
       } finally {
         o.value = !1;
       }
@@ -1820,7 +1823,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
     }, i = (f) => f === "active" || f === "expired";
     function r(f) {
       const u = v[f] || { text: f, theme: "primary" };
-      return t.h(N.Tag, { size: "small", theme: u.theme, variant: "light" }, () => u.text);
+      return t.h(_.Tag, { size: "small", theme: u.theme, variant: "light" }, () => u.text);
     }
     const a = [
       { colKey: "name", title: "设备名称", ellipsis: !0 },
@@ -1839,9 +1842,9 @@ const rt = /* @__PURE__ */ t.defineComponent({
     ], l = t.ref("");
     async function c(f) {
       try {
-        l.value = f.deviceId, await Le(f.deviceId), N.MessagePlugin.success("已撤销，该设备凭据立即失效"), await d();
+        l.value = f.deviceId, await ze(f.deviceId), _.MessagePlugin.success("已撤销，该设备凭据立即失效"), await d();
       } catch (u) {
-        N.MessagePlugin.error("撤销失败: " + (u?.message || u));
+        _.MessagePlugin.error("撤销失败: " + (u?.message || u));
       } finally {
         l.value = "";
       }
@@ -1851,7 +1854,10 @@ const rt = /* @__PURE__ */ t.defineComponent({
       return t.openBlock(), t.createElementBlock("div", { class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 min-w-0" }, [
         t.createElementVNode("div", { class: "flex items-center justify-between gap-4 flex-wrap" }, [
           t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
-            t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "已配对设备"),
+            t.createElementVNode("div", { class: "flex items-center gap-3" }, [
+              t.createElementVNode("span", { class: "w-1.5 h-5 bg-[var(--color-primary)] rounded-full" }),
+              t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "已配对设备")
+            ]),
             t.createElementVNode("p", { class: "rolithax-muted text-sm m-0" }, "撤销将删除对应配对用户，其 API Key 立即失效且不可恢复。")
           ]),
           t.createVNode(h, {
@@ -1878,20 +1884,20 @@ const rt = /* @__PURE__ */ t.defineComponent({
             hover: "",
             empty: "暂无已配对设备"
           }, {
-            op: t.withCtx(({ row: b }) => [
+            op: t.withCtx(({ row: w }) => [
               t.createVNode(m, {
-                content: `确认撤销设备「${b.name}」？该操作不可恢复。`,
+                content: `确认撤销设备「${w.name}」？该操作不可恢复。`,
                 theme: "danger",
                 placement: "left",
-                onConfirm: (k) => c(b)
+                onConfirm: (k) => c(w)
               }, {
                 default: t.withCtx(() => [
                   t.createVNode(h, {
                     size: "small",
                     theme: "danger",
                     variant: "text",
-                    loading: l.value === b.deviceId,
-                    disabled: !i(b.status)
+                    loading: l.value === w.deviceId,
+                    disabled: !i(w.status)
                   }, {
                     default: t.withCtx(() => [
                       t.createTextVNode(" 撤销 ")
@@ -1908,7 +1914,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
       ]);
     };
   }
-}), nt = /* @__PURE__ */ j(ot, [["__scopeId", "data-v-41883a85"]]), se = "/api/plugin/mslx-plugin-rolithax/features", lt = /* @__PURE__ */ t.defineComponent({
+}), nt = /* @__PURE__ */ j(ot, [["__scopeId", "data-v-89157c85"]]), se = "/api/plugin/mslx-plugin-rolithax/features", lt = /* @__PURE__ */ t.defineComponent({
   __name: "FeatureSettings",
   emits: ["changed"],
   setup(e, { emit: s }) {
@@ -1931,9 +1937,9 @@ const rt = /* @__PURE__ */ t.defineComponent({
       if (!v.value) {
         v.value = c;
         try {
-          o.value = await A.put({ url: `${se}/${c}`, data: { enabled: f } }), N.MessagePlugin.success("扩展 API 状态已更新"), n("changed");
+          o.value = await A.put({ url: `${se}/${c}`, data: { enabled: f } }), _.MessagePlugin.success("扩展 API 状态已更新"), n("changed");
         } catch (u) {
-          N.MessagePlugin.error(u?.message || "更新扩展 API 状态失败"), await a();
+          _.MessagePlugin.error(u?.message || "更新扩展 API 状态失败"), await a();
         } finally {
           v.value = null;
         }
@@ -1943,7 +1949,10 @@ const rt = /* @__PURE__ */ t.defineComponent({
       const u = t.resolveComponent("t-button"), h = t.resolveComponent("t-switch");
       return t.openBlock(), t.createElementBlock("section", { class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5" }, [
         t.createElementVNode("div", null, [
-          t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "扩展 API"),
+          t.createElementVNode("div", { class: "flex items-center gap-3" }, [
+            t.createElementVNode("span", { class: "w-1.5 h-5 bg-[var(--color-primary)] rounded-full" }),
+            t.createElementVNode("h3", { class: "rolithax-title text-base font-bold m-0" }, "扩展 API")
+          ]),
           t.createElementVNode("p", { class: "rolithax-muted text-sm mt-2 mb-0" }, "管理此 Daemon 提供的 Rolithax 扩展能力。")
         ]),
         d.value ? (t.openBlock(), t.createElementBlock("p", {
@@ -1965,11 +1974,11 @@ const rt = /* @__PURE__ */ t.defineComponent({
           })
         ])) : o.value ? (t.openBlock(), t.createElementBlock("div", {
           key: 2,
-          class: "flex flex-col gap-4"
+          class: "feature-list flex flex-col"
         }, [
           (t.openBlock(), t.createElementBlock(t.Fragment, null, t.renderList(r, (m) => t.createElementVNode("div", {
             key: m.key,
-            class: "flex items-center justify-between gap-4"
+            class: "feature-row flex items-center justify-between gap-4"
           }, [
             t.createElementVNode("div", { class: "min-w-0" }, [
               t.createElementVNode("div", { class: "rolithax-title font-medium" }, t.toDisplayString(m.title), 1),
@@ -1986,7 +1995,7 @@ const rt = /* @__PURE__ */ t.defineComponent({
       ]);
     };
   }
-}), it = /* @__PURE__ */ j(lt, [["__scopeId", "data-v-ecaa2226"]]), st = /* @__PURE__ */ t.defineComponent({
+}), it = /* @__PURE__ */ j(lt, [["__scopeId", "data-v-72e6d689"]]), st = /* @__PURE__ */ t.defineComponent({
   __name: "PairingPage",
   setup(e) {
     const s = t.ref("generate"), o = t.ref(null), n = t.ref(!0), d = t.ref(""), v = t.ref(null), i = t.computed(() => o.value?.canManageDevices === !0), r = t.computed(() => {
@@ -2019,90 +2028,98 @@ const rt = /* @__PURE__ */ t.defineComponent({
       const u = t.resolveComponent("t-radio-button"), h = t.resolveComponent("t-radio-group"), m = t.resolveComponent("t-button");
       return t.openBlock(), t.createElementBlock("div", { class: "rolithax-page flex flex-col gap-5" }, [
         t.createElementVNode("div", { class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5" }, [
-          t.createElementVNode("div", { class: "flex flex-col gap-2" }, [
+          t.createElementVNode("div", { class: "rolithax-header flex flex-col sm:flex-row sm:items-center justify-between gap-4" }, [
             t.createElementVNode("div", { class: "flex items-center gap-3" }, [
               t.createElementVNode("img", {
                 src: "https://cdnjson.com/images/2026/10/10/ic_launcher_foreground.png",
                 alt: "Rolithax",
                 class: "w-10 h-10 object-contain"
               }),
-              t.createElementVNode("h2", { class: "rolithax-title text-lg font-bold m-0" }, "Rolithax 中心")
+              t.createElementVNode("div", null, [
+                t.createElementVNode("h2", { class: "rolithax-title text-lg font-bold m-0" }, "Rolithax 中心"),
+                t.createElementVNode("p", { class: "rolithax-muted text-sm mt-1 mb-0" }, "连接设备并管理远端扩展能力")
+              ])
             ]),
-            t.createElementVNode("p", { class: "rolithax-muted text-sm m-0" }, " 生成一次性配对二维码；设备权限由当前登录账号决定。 ")
-          ]),
-          i.value ? (t.openBlock(), t.createBlock(h, {
-            key: 0,
-            modelValue: s.value,
-            "onUpdate:modelValue": f[0] || (f[0] = (C) => s.value = C),
-            variant: "default-filled",
-            class: "self-start xl:self-auto"
-          }, {
-            default: t.withCtx(() => [
-              t.createVNode(u, { value: "generate" }, {
+            i.value ? (t.openBlock(), t.createBlock(h, {
+              key: 0,
+              modelValue: s.value,
+              "onUpdate:modelValue": f[0] || (f[0] = (C) => s.value = C),
+              variant: "default-filled",
+              class: "self-start xl:self-auto"
+            }, {
+              default: t.withCtx(() => [
+                t.createVNode(u, { value: "generate" }, {
+                  default: t.withCtx(() => [
+                    t.createElementVNode("span", { class: "flex items-center gap-1" }, [
+                      t.createVNode(t.unref(ue)),
+                      t.createTextVNode("生成配对码")
+                    ])
+                  ]),
+                  _: 1
+                }),
+                t.createVNode(u, { value: "devices" }, {
+                  default: t.withCtx(() => [
+                    t.createElementVNode("span", { class: "flex items-center gap-1" }, [
+                      t.createVNode(t.unref(Oe)),
+                      t.createTextVNode("已配对设备")
+                    ])
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            }, 8, ["modelValue"])) : t.createCommentVNode("", !0)
+          ])
+        ]),
+        t.createElementVNode("div", {
+          class: t.normalizeClass(["rolithax-content", { "rolithax-content-wide": s.value === "devices" }])
+        }, [
+          t.createElementVNode("main", { class: "rolithax-main" }, [
+            n.value ? (t.openBlock(), t.createElementBlock("div", {
+              key: 0,
+              class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-muted"
+            }, "正在加载配对配置…")) : d.value ? (t.openBlock(), t.createElementBlock("div", {
+              key: 1,
+              class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-error"
+            }, [
+              t.createTextVNode("加载失败：" + t.toDisplayString(d.value) + " ", 1),
+              t.createVNode(m, {
+                variant: "text",
+                onClick: l
+              }, {
                 default: t.withCtx(() => [
-                  t.createElementVNode("span", { class: "flex items-center gap-1" }, [
-                    t.createVNode(t.unref(ue)),
-                    t.createTextVNode("生成配对码")
-                  ])
-                ]),
-                _: 1
-              }),
-              t.createVNode(u, { value: "devices" }, {
-                default: t.withCtx(() => [
-                  t.createElementVNode("span", { class: "flex items-center gap-1" }, [
-                    t.createVNode(t.unref(Oe)),
-                    t.createTextVNode("已配对设备")
-                  ])
+                  t.createTextVNode("重试")
                 ]),
                 _: 1
               })
-            ]),
-            _: 1
-          }, 8, ["modelValue"])) : t.createCommentVNode("", !0)
-        ]),
-        r.value ? (t.openBlock(), t.createBlock(it, {
-          key: 0,
-          onChanged: l
-        })) : t.createCommentVNode("", !0),
-        n.value ? (t.openBlock(), t.createElementBlock("div", {
-          key: 1,
-          class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-muted"
-        }, "正在加载配对配置…")) : d.value ? (t.openBlock(), t.createElementBlock("div", {
-          key: 2,
-          class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-error"
-        }, [
-          t.createTextVNode("加载失败：" + t.toDisplayString(d.value) + " ", 1),
-          t.createVNode(m, {
-            variant: "text",
-            onClick: l
-          }, {
-            default: t.withCtx(() => [
-              t.createTextVNode("重试")
-            ]),
-            _: 1
-          })
-        ])) : v.value === !1 ? (t.openBlock(), t.createElementBlock("div", {
-          key: 3,
-          class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-muted"
-        }, "设备配对功能已关闭。")) : o.value ? (t.openBlock(), t.createBlock(t.Transition, {
-          key: 4,
-          name: "rolithax-fade",
-          mode: "out-in"
-        }, {
-          default: t.withCtx(() => [
-            (t.openBlock(), t.createBlock(t.KeepAlive, null, [
-              s.value === "generate" ? (t.openBlock(), t.createBlock(at, {
-                key: 0,
-                config: o.value
-              }, null, 8, ["config"])) : i.value ? (t.openBlock(), t.createBlock(nt, { key: 1 })) : t.createCommentVNode("", !0)
-            ], 1024))
+            ])) : v.value === !1 ? (t.openBlock(), t.createElementBlock("div", {
+              key: 2,
+              class: "design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-muted"
+            }, "设备配对功能已关闭。")) : o.value ? (t.openBlock(), t.createBlock(t.Transition, {
+              key: 3,
+              name: "rolithax-fade",
+              mode: "out-in"
+            }, {
+              default: t.withCtx(() => [
+                (t.openBlock(), t.createBlock(t.KeepAlive, null, [
+                  s.value === "generate" ? (t.openBlock(), t.createBlock(at, {
+                    key: 0,
+                    config: o.value
+                  }, null, 8, ["config"])) : i.value ? (t.openBlock(), t.createBlock(nt, { key: 1 })) : t.createCommentVNode("", !0)
+                ], 1024))
+              ]),
+              _: 1
+            })) : t.createCommentVNode("", !0)
           ]),
-          _: 1
-        })) : t.createCommentVNode("", !0)
+          r.value ? (t.openBlock(), t.createBlock(it, {
+            key: 0,
+            onChanged: l
+          })) : t.createCommentVNode("", !0)
+        ], 2)
       ]);
     };
   }
-}), ct = /* @__PURE__ */ j(st, [["__scopeId", "data-v-47aa6333"]]), ut = import.meta.url.match(/\/plugins\/[^/]+\/([^/]+)\//)?.[1], dt = {
+}), ct = /* @__PURE__ */ j(st, [["__scopeId", "data-v-5be26235"]]), ut = import.meta.url.match(/\/plugins\/[^/]+\/([^/]+)\//)?.[1], dt = {
   // 与后端 IPlugin.Id、package.json.name 完全一致，作为 Android 客户端扩展能力的统一标识。
   name: "mslx-plugin-rolithax",
   version: ut ?? "1.0.0",

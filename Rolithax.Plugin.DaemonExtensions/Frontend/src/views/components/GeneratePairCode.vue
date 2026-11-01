@@ -112,9 +112,12 @@ onUnmounted(stopCountdown);
 </script>
 
 <template>
-  <div class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5">
+  <div class="pairing-card design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 min-w-0">
     <div class="flex flex-col gap-2">
-      <h3 class="rolithax-title text-base font-bold m-0">生成配对二维码</h3>
+      <div class="flex items-center gap-3">
+        <span class="w-1.5 h-5 bg-[var(--color-primary)] rounded-full"></span>
+        <h3 class="rolithax-title text-base font-bold m-0">生成配对二维码</h3>
+      </div>
       <p class="rolithax-muted text-sm m-0">
         生成一次性二维码，在另一台设备的 Rolithax Launcher「连接」页扫描即可接入。
       </p>
@@ -138,7 +141,7 @@ onUnmounted(stopCountdown);
       <span v-if="instanceOptions.length">当前可访问实例：{{ instanceOptions.map((item) => item.label).join('、') }}</span>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-6">
+    <div class="pairing-layout">
       <div class="flex-1 min-w-0 flex flex-col gap-4">
         <div v-if="isAdmin" class="flex flex-col gap-2">
           <label class="rolithax-title text-xs font-bold">授权范围</label>
@@ -208,6 +211,16 @@ onUnmounted(stopCountdown);
 <style scoped>
 @unocss;
 
+.pairing-card {
+  container-type: inline-size;
+}
+
+.pairing-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .rolithax-qr-col {
   width: 100%;
 }
@@ -230,9 +243,13 @@ onUnmounted(stopCountdown);
   color: var(--td-error-color);
 }
 
-@media (min-width: 768px) {
+@container (min-width: 650px) {
+  .pairing-layout {
+    flex-direction: row;
+  }
+
   .rolithax-qr-col {
-    width: 280px;
+    width: 260px;
   }
 }
 </style>

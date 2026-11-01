@@ -49,7 +49,10 @@ onMounted(load);
 <template>
   <section class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5">
     <div>
-      <h3 class="rolithax-title text-base font-bold m-0">扩展 API</h3>
+      <div class="flex items-center gap-3">
+        <span class="w-1.5 h-5 bg-[var(--color-primary)] rounded-full"></span>
+        <h3 class="rolithax-title text-base font-bold m-0">扩展 API</h3>
+      </div>
       <p class="rolithax-muted text-sm mt-2 mb-0">管理此 Daemon 提供的 Rolithax 扩展能力。</p>
     </div>
     <p v-if="loading" class="rolithax-muted text-sm m-0">正在读取扩展状态…</p>
@@ -57,8 +60,8 @@ onMounted(load);
       <span class="text-[var(--td-error-color)] text-sm">{{ error }}</span>
       <t-button variant="text" @click="load">重试</t-button>
     </div>
-    <div v-else-if="features" class="flex flex-col gap-4">
-      <div v-for="entry in entries" :key="entry.key" class="flex items-center justify-between gap-4">
+    <div v-else-if="features" class="feature-list flex flex-col">
+      <div v-for="entry in entries" :key="entry.key" class="feature-row flex items-center justify-between gap-4">
         <div class="min-w-0">
           <div class="rolithax-title font-medium">{{ entry.title }}</div>
           <div class="rolithax-muted text-sm mt-1">{{ entry.description }}</div>
@@ -71,4 +74,13 @@ onMounted(load);
 
 <style scoped>
 @unocss;
+
+.feature-row {
+  padding: 16px 0;
+  border-top: 1px solid var(--td-component-border);
+}
+
+.feature-row:last-child {
+  padding-bottom: 0;
+}
 </style>
