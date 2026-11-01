@@ -76,7 +76,10 @@ onMounted(getList);
   <div class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 min-w-0">
     <div class="flex items-center justify-between gap-4 flex-wrap">
       <div class="flex flex-col gap-2">
-        <h3 class="rolithax-title text-base font-bold m-0">已配对设备</h3>
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-5 bg-[var(--color-primary)] rounded-full"></span>
+          <h3 class="rolithax-title text-base font-bold m-0">已配对设备</h3>
+        </div>
         <p class="rolithax-muted text-sm m-0">撤销将删除对应配对用户，其 API Key 立即失效且不可恢复。</p>
       </div>
       <t-button variant="dashed" :loading="loading" @click="getList">

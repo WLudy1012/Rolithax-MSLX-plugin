@@ -57,15 +57,14 @@ onMounted(loadCenter);
 <template>
   <div class="rolithax-page flex flex-col gap-5">
     <div class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5">
-      <div class="flex flex-col gap-2">
+      <div class="rolithax-header flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <img src="https://cdnjson.com/images/2026/10/10/ic_launcher_foreground.png" alt="Rolithax" class="w-10 h-10 object-contain" />
-          <h2 class="rolithax-title text-lg font-bold m-0">Rolithax 中心</h2>
+          <div>
+            <h2 class="rolithax-title text-lg font-bold m-0">Rolithax 中心</h2>
+            <p class="rolithax-muted text-sm mt-1 mb-0">连接设备并管理远端扩展能力</p>
+          </div>
         </div>
-        <p class="rolithax-muted text-sm m-0">
-          生成一次性配对二维码；设备权限由当前登录账号决定。
-        </p>
-      </div>
 
       <t-radio-group v-if="canManageDevices" v-model="activeTab" variant="default-filled" class="self-start xl:self-auto">
         <t-radio-button value="generate">
@@ -75,9 +74,11 @@ onMounted(loadCenter);
           <span class="flex items-center gap-1"><usergroup-icon />已配对设备</span>
         </t-radio-button>
       </t-radio-group>
+      </div>
     </div>
 
-    <feature-settings v-if="isAdmin" @changed="loadCenter" />
+    <div class="rolithax-content" :class="{ 'rolithax-content-wide': activeTab === 'devices' }">
+    <main class="rolithax-main">
     <div v-if="loading" class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-muted">正在加载配对配置…</div>
     <div v-else-if="loadError" class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-error">加载失败：{{ loadError }} <t-button variant="text" @click="loadCenter">重试</t-button></div>
     <div v-else-if="pairingEnabled === false" class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 rolithax-muted">设备配对功能已关闭。</div>
@@ -89,6 +90,9 @@ onMounted(loadCenter);
         </keep-alive>
       </transition>
     </template>
+    </main>
+    <feature-settings v-if="isAdmin" @changed="loadCenter" />
+    </div>
   </div>
 </template>
 
@@ -98,6 +102,24 @@ onMounted(loadCenter);
 .rolithax-page {
   color: var(--td-text-color-primary);
   padding-bottom: 8px;
+  min-width: 0;
+}
+
+.rolithax-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.rolithax-main {
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  .rolithax-content:not(.rolithax-content-wide) {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  }
 }
 
 .rolithax-error {
