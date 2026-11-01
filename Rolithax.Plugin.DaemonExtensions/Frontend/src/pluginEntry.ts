@@ -15,14 +15,18 @@ export const pluginConfig = {
   name: 'mslx-plugin-rolithax',
   version: loadedVersion ?? '1.0.0',
 
-  // 注入路由：挂到宿主「设置」分组（settingsBase）下，与「插件管理」同级
   routes: [
     {
-      parentName: 'settingsBase',
-      path: 'pairing',
-      name: 'mslx-plugin-rolithax-pairing',
-      component: PairingPage,
-      meta: { title: '扫码配对', icon: 'qrcode', roleCode: ['admin', 'user'] },
+      path: '/mslx-plugin-rolithax',
+      name: 'mslx-plugin-rolithax-center',
+      component: 'HOST_LAYOUT',
+      meta: { title: 'Rolithax 中心', icon: 'app', roleCode: ['admin', 'user'] },
+      children: [{
+        path: '',
+        name: 'mslx-plugin-rolithax-home',
+        component: PairingPage,
+        meta: { title: 'Rolithax 中心', hidden: true, roleCode: ['admin', 'user'] },
+      }],
     },
   ],
 };

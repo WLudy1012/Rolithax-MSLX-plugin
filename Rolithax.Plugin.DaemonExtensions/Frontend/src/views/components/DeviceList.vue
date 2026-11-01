@@ -73,7 +73,7 @@ onMounted(getList);
 </script>
 
 <template>
-  <div class="rolithax-card flex flex-col gap-4 p-5">
+  <div class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5 min-w-0">
     <div class="flex items-center justify-between gap-4 flex-wrap">
       <div class="flex flex-col gap-2">
         <h3 class="rolithax-title text-base font-bold m-0">已配对设备</h3>
@@ -85,6 +85,7 @@ onMounted(getList);
       </t-button>
     </div>
 
+    <div class="overflow-x-auto w-full">
     <t-table
       row-key="deviceId"
       :data="devices"
@@ -107,6 +108,7 @@ onMounted(getList);
         </t-popconfirm>
       </template>
     </t-table>
+    </div>
   </div>
 </template>
 

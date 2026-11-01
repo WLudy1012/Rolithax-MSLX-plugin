@@ -5,6 +5,9 @@ using Rolithax.Plugin.DaemonExtensions.Pairing;
 using Rolithax.Plugin.DaemonExtensions.ServerIcon;
 using Rolithax.Plugin.DaemonExtensions.Resources;
 using MSLX.SDK;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+
+[assembly: ApplicationPart("Rolithax.Plugin.DaemonExtensions")]
 
 namespace Rolithax.Plugin.DaemonExtensions;
 
@@ -12,11 +15,7 @@ namespace Rolithax.Plugin.DaemonExtensions;
 /// Rolithax Launcher 扩展插件：为 Rolithax Launcher 提供统一服务端扩展能力的第三方插件。
 ///
 /// Daemon 的 PluginManager 对每个程序集只识别第一个 IPlugin 实现，因此这里用单一入口，
-/// 在 OnRegisterEndpoints 中按插件 ID 挂载两组规范端点。
-/// 两组服务各自保持原有鉴权口径与生命周期。
-///
-/// 插件图标为硫磺史莱姆 PNG（Frontend/dist/icon.png，随前端产物内嵌）；Icon 返回相对文件名，
-/// Daemon 插件列表接口会拼成 <c>/plugins/{id}/{version}/icon.png</c> 由静态资源管线匿名下发。
+/// 在 OnRegisterEndpoints 中按插件 ID 挂载规范端点。
 /// </summary>
 public sealed class RolithaxPlugin : IPlugin
 {
@@ -38,7 +37,7 @@ public sealed class RolithaxPlugin : IPlugin
 
     public string Version => GetType().Assembly.GetName().Version?.ToString(3) ?? "1.0.0";
 
-    public string MinSDKVersion => "1.5.10.2";
+    public string MinSDKVersion => "1.7.3";
 
     public string Developer => "WLudy1012";
 
@@ -46,8 +45,7 @@ public sealed class RolithaxPlugin : IPlugin
 
     public string PluginUrl => "https://github.com/WLudy1012/Rolithax-MSLX-plugin";
 
-    /// <summary>插件图标：相对文件名（Daemon 会拼成 /plugins/{id}/{version}/icon.png 下发 Frontend/dist/icon.png）。</summary>
-    public string Icon => "icon.png";
+    public string Icon => "https://cdnjson.com/images/2026/10/10/ic_launcher_foreground.png";
 
     private PairingService? _pairing;
     private ServerIconService? _serverIcon;
@@ -88,9 +86,11 @@ public sealed class RolithaxPlugin : IPlugin
         api.AddEndpointFilter(async (context, next) =>
             (object?)DeviceLeaseGuard.Reject(context.HttpContext, pairing) ?? await next(context));
 
-        PairingEndpoints.Map(api, _pairing, "/pair");
-        ServerIconEndpoints.Map(api, _serverIcon, "/icon");
-        ResourceInstallEndpoints.Map(api, _resourceInstaller, "/resources");
+        var features = new FeatureSettings();
+        FeatureEndpoints.Map(api, features);
+        PairingEndpoints.Map(features.Guard(api.MapGroup("/pair"), "pairing"), _pairing, "");
+        ServerIconEndpoints.Map(features.Guard(api.MapGroup("/icon"), "serverIcon"), _serverIcon, "");
+        ResourceInstallEndpoints.Map(features.Guard(api.MapGroup("/resources"), "resourceInstall"), _resourceInstaller, "");
 
         global::MSLX.SDK.MSLX.Logger.Info($"[{PluginId}] Rolithax 扩展已挂载配对、图标和资源安装接口");
     }

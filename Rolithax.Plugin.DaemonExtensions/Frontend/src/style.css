@@ -1,12 +1,5 @@
 /* 插件全局样式：随 mslx-plugin-entry.js 注入宿主页面，类名统一 rolithax- 前缀避免污染 */
 
-.rolithax-card {
-  background: var(--td-bg-color-container);
-  border: 1px solid var(--td-component-border);
-  border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-
 .rolithax-title {
   color: var(--td-text-color-primary);
 }

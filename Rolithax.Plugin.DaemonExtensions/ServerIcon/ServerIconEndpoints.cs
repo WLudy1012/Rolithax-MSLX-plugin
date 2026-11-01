@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using MSLX.SDK;
+using MSLX.SDK.Attributes;
 
 namespace Rolithax.Plugin.DaemonExtensions.ServerIcon;
 
@@ -32,7 +34,7 @@ public static class ServerIconEndpoints
             return result.Bytes == null
                 ? Fail(result.Code, result.Message)
                 : Results.File(result.Bytes, result.ContentType);
-        });
+        }).AllowTokenScope(TokenScopes.Media);
 
         group.MapPost("/server/{id:long}/refresh", (long id, HttpContext ctx) =>
         {

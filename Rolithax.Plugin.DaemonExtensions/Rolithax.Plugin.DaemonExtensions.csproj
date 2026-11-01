@@ -63,7 +63,4 @@
     <EmbeddedResource Include="Frontend/dist/**/*" Condition="Exists('Frontend/dist')" />
   </ItemGroup>
 
-  <!-- 插件图标（硫磺史莱姆）源文件保留在 Assets/sulfur.png（隐式 None 项，无需配置）；
-       运行期由 Frontend/dist/icon.png 经插件静态资源管线下发（Frontend\dist\** 已整体内嵌）。 -->
-
 </Project>

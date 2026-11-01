@@ -3,8 +3,15 @@
 由 **WLudy1012** 开发的 MSLX Daemon 第三方插件，为 **Rolithax Launcher** 提供统一的服务端扩展能力，集中承载客户端所需的整合与增强功能。
 当前包含扫码配对、设备授权管理、服务端图标和资源中心远端直装，以**单个 DLL** 分发；后续增强功能可继续集成在此插件中。
 统一入口为 `RolithaxPlugin`，ID 为 `mslx-plugin-rolithax`，前端包名与此一致。
-插件版本从 **1.0.0** 起，发布 tag 构建时自动同步 tag 版本；声明的最低 **MSLX Daemon 版本为 1.5.10.2**。
-插件图标为内嵌的硫磺史莱姆 PNG，由 `/plugins/{id}/{version}/icon.png` 下发。
+插件版本从 **1.0.0** 起，发布 tag 构建时自动同步 tag 版本；声明的最低 **MSLX Daemon 版本为 1.7.3**。
+插件图标使用 `https://cdnjson.com/images/2026/10/10/ic_launcher_foreground.png`。
+
+「Rolithax 中心」可查看并管理配对、实例图标和资源安装三项扩展 API；新安装及旧配置缺少开关时默认启用。已认证用户可读取状态，只有管理员可以修改。关闭资源安装后不再接受新任务，已创建任务仍可查询和取消；设备租约校验不受配对开关影响。
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| GET | `/api/plugin/mslx-plugin-rolithax/features` | 获取各项扩展 API 的启用状态 |
+| PUT | `/api/plugin/mslx-plugin-rolithax/features/{feature}` | 管理员设置 `pairing`、`serverIcon` 或 `resourceInstall`，请求体为 `{ "enabled": true }` 或 `{ "enabled": false }` |
 
 > Daemon 的 PluginManager 对每个程序集只识别第一个 `IPlugin` 实现，因此合并采用单一入口，
 > 规范端点前缀为 `/api/plugin/mslx-plugin-rolithax/pair`、`/api/plugin/mslx-plugin-rolithax/icon` 和 `/api/plugin/mslx-plugin-rolithax/resources`。
@@ -18,7 +25,7 @@
    - Windows：`%APPDATA%\MSLX\MSLXData\DaemonData\Plugins\`
    - macOS：`~/Library/Application Support/MSLX/MSLXData/DaemonData/Plugins/`
 3. 重启 Daemon，或在面板插件管理中热加载；
-4. 日志出现 `[mslx-plugin-rolithax] Rolithax 扩展已挂载配对、图标和资源安装接口`，再确认面板出现「设置 → 扫码配对」。
+4. 日志确认 Rolithax 扩展接口已挂载，再确认面板出现「Rolithax 中心」。
 
 ### 从旧版本升级
 
@@ -99,6 +106,7 @@
 
 ## 数据位置
 
+- 扩展 API 开关：插件 `mslx-plugin-rolithax` 的配置项 `enabledApis`。
 - 配对配置：`<AppData>/PluginsData/mslx-pair/Config.json`（安装密钥 + Daemon 地址 + 设备记录，设备记录含签发者 `issuedBy`）
 - 图标缓存：`<AppData>/PluginsData/mslx-icon/IconCache/<实例 id>.png`（TTL 24 小时）
 - 配对设备对应的用户：Daemon `UserList.json` 中用户名形如 `pair_dxxxxxxxxxx`

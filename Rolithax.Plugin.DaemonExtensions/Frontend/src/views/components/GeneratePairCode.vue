@@ -112,7 +112,7 @@ onUnmounted(stopCountdown);
 </script>
 
 <template>
-  <div class="rolithax-card flex flex-col gap-5 p-5">
+  <div class="design-card relative flex flex-col rounded-2xl border border-[var(--td-component-border)] shadow-sm p-5 sm:p-6 gap-5">
     <div class="flex flex-col gap-2">
       <h3 class="rolithax-title text-base font-bold m-0">生成配对二维码</h3>
       <p class="rolithax-muted text-sm m-0">
@@ -173,7 +173,7 @@ onUnmounted(stopCountdown);
       </div>
 
       <div class="rolithax-qr-col shrink-0 flex flex-col items-center gap-3">
-        <div class="rolithax-qr-box rolithax-card items-center justify-center relative overflow-hidden">
+        <div class="rolithax-qr-box rounded-2xl border border-[var(--td-component-border)] items-center justify-center relative overflow-hidden">
           <template v-if="pairCode">
             <QrcodeVue :value="pairCode.payload" :size="220" :level="'M'" :margin="1" />
             <div v-if="expired" class="rolithax-qr-mask flex flex-col items-center justify-center gap-2 text-sm font-bold">
