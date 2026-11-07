@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { QrcodeIcon, UsergroupIcon } from 'tdesign-icons-vue-next';
-import request from 'mslx-request';
 
+import { getFeatures } from '../api/features';
 import { getPairingConfig } from '../api/pairing';
 import type { PairingConfigModel } from '../api/model/pairing';
 import GeneratePairCode from './components/GeneratePairCode.vue';
@@ -38,8 +38,7 @@ async function loadCenter() {
   loading.value = true;
   loadError.value = '';
   try {
-    const state = await request.get({ url: '/api/plugin/mslx-plugin-rolithax/features' });
-    if (typeof state?.pairing !== 'boolean') throw new Error('扩展状态无效');
+    const state = await getFeatures();
     pairingEnabled.value = state.pairing;
     if (state.pairing) await loadConfig();
     else config.value = null;

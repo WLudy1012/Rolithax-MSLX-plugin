@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import request from 'mslx-request';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { getFeatures, setFeature, type Feature, type FeatureState } from '../../api/features';
 
-type Feature = 'pairing' | 'serverIcon' | 'resourceInstall';
-type FeatureState = Record<Feature, boolean>;
 const features = ref<FeatureState | null>(null);
 const emit = defineEmits<{ changed: [] }>();
 const loading = ref(false);
@@ -15,13 +13,11 @@ const entries: { key: Feature; title: string; description: string }[] = [
   { key: 'serverIcon', title: '实例图标', description: '向客户端提供服务端图标。' },
   { key: 'resourceInstall', title: '资源安装', description: '允许客户端创建远端资源安装任务。' },
 ];
-const api = '/api/plugin/mslx-plugin-rolithax/features';
-
 async function load() {
   loading.value = true;
   error.value = '';
   try {
-    features.value = await request.get({ url: api });
+    features.value = await getFeatures();
   } catch (e: any) {
     error.value = e?.message || '获取扩展 API 状态失败';
   } finally {
@@ -33,7 +29,7 @@ async function change(key: Feature, enabled: boolean) {
   if (updating.value) return;
   updating.value = key;
   try {
-    features.value = await request.put({ url: `${api}/${key}`, data: { enabled } });
+    features.value = await setFeature(key, enabled);
     MessagePlugin.success('扩展 API 状态已更新');
     emit('changed');
   } catch (e: any) {

@@ -186,7 +186,9 @@ $:
             {
               echo "# Rolithax Launcher 扩展插件 $CUR_TAG"
               echo ""
-              if [ -n "$PREV_TAG" ]; then
+              if [ -f "release-notes/$CUR_TAG.md" ]; then
+                cat "release-notes/$CUR_TAG.md"
+              elif [ -n "$PREV_TAG" ]; then
                 echo "自 \`$PREV_TAG\` 以来的提交："
                 echo ""
                 git log --no-merges --pretty=format:"- %s" "${PREV_TAG}..${REV}"

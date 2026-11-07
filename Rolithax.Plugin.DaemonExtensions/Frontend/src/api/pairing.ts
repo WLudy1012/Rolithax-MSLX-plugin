@@ -1,4 +1,5 @@
 import request from 'mslx-request';
+import { putPluginData } from './request';
 
 import type {
   CreatePairCodeParams,
@@ -15,10 +16,7 @@ export async function getPairingConfig(): Promise<PairingConfigModel> {
 }
 
 export async function savePairingConfig(publicUrl: string): Promise<PairingConfigModel> {
-  return await request.put({
-    url: `${pairingApi}/config`,
-    data: { publicUrl },
-  });
+  return putPluginData(`${pairingApi}/config`, { publicUrl });
 }
 
 /** 生成一次性配对码（TTL 120s，仅服务端内存保存） */

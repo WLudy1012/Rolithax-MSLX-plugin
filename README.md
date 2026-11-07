@@ -6,7 +6,7 @@
 | --- | --- |
 | 插件 ID | `mslx-plugin-rolithax` |
 | 程序集与目录 | `Rolithax.Plugin.DaemonExtensions` |
-| 当前版本 | `1.0.0`（发布 tag 构建时使用 tag 版本） |
+| 当前发布 | [v1.2.6](release-notes/v1.2.6.md)（发布构建使用 tag 版本） |
 | 最低 MSLX Daemon 版本 | `1.7.3` |
 | Android 包名 | `com.wludy.rolithax.launcher` |
 

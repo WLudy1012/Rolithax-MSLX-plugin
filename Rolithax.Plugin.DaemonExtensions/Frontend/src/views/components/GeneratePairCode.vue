@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref } from 'vue';
 import { CopyIcon, QrcodeIcon, RefreshIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 import QrcodeVue from 'qrcode.vue';
@@ -56,6 +56,8 @@ async function handleSaveAddress() {
 
 const generating = ref(false);
 const pairCode = ref<PairCodeModel | null>(null);
+const showManualCopy = ref(false);
+const manualCopyField = ref<HTMLTextAreaElement | null>(null);
 const remaining = ref(0);
 let timer: ReturnType<typeof setInterval> | null = null;
 
@@ -73,6 +75,7 @@ async function handleGenerate() {
       deviceTtlDays: form.deviceTtlDays,
     });
     pairCode.value = data;
+    showManualCopy.value = false;
     startCountdown(data?.expiresInSeconds || 120);
   } catch (e: any) {
     MessagePlugin.error('生成配对码失败: ' + (e?.message || e));
@@ -97,14 +100,57 @@ function stopCountdown() {
 
 const expired = computed(() => pairCode.value !== null && remaining.value === 0);
 
-async function copyPayload() {
-  if (!pairCode.value) return;
+function copyWithSelection(payload: string): boolean {
+  const previousFocus = document.activeElement;
+  const field = document.createElement('textarea');
+  field.value = payload;
+  field.readOnly = true;
+  field.tabIndex = -1;
+  Object.assign(field.style, {
+    position: 'fixed',
+    left: '0',
+    top: '0',
+    opacity: '0',
+    pointerEvents: 'none',
+    fontSize: '16px',
+  });
+  document.body.append(field);
   try {
-    await navigator.clipboard.writeText(pairCode.value.payload);
-    MessagePlugin.success('二维码原文已复制');
+    field.focus({ preventScroll: true });
+    field.select();
+    field.setSelectionRange(0, payload.length);
+    return document.execCommand('copy');
   } catch {
-    MessagePlugin.error('复制失败，请手动选择');
+    return false;
+  } finally {
+    field.remove();
+    if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
   }
+}
+
+async function copyPayload() {
+  const current = pairCode.value;
+  if (!current || expired.value) return;
+  let copied = false;
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(current.payload);
+      copied = true;
+    } catch {
+      // HTTP or browser policy can require selection-based copying.
+    }
+  }
+  if (pairCode.value !== current || expired.value) return;
+  if (copied || copyWithSelection(current.payload)) {
+    showManualCopy.value = false;
+    MessagePlugin.success('二维码原文已复制');
+    return;
+  }
+  showManualCopy.value = true;
+  await nextTick();
+  manualCopyField.value?.focus();
+  manualCopyField.value?.select();
+  MessagePlugin.warning('浏览器未允许自动复制，请手动复制二维码原文');
 }
 
 onMounted(loadInstances);
@@ -187,13 +233,13 @@ onUnmounted(stopCountdown);
           <span v-else class="rolithax-placeholder text-sm px-6 text-center">生成后在此显示二维码</span>
         </div>
 
-        <div v-if="pairCode" class="flex flex-col items-center gap-2 text-center">
+        <div v-if="pairCode" class="flex flex-col items-center gap-2 text-center w-full min-w-0">
           <div class="rolithax-title text-sm font-mono tracking-widest">配对码 {{ pairCode.code }}</div>
           <div class="text-xs" :class="expired ? 'rolithax-expired' : 'rolithax-muted'">
             {{ expired ? '已过期，请重新生成' : `剩余 ${remaining} 秒 · 单次有效 · ${pairCode.scope === 'full' ? '完整权限' : '受限'}` }}
           </div>
           <div class="flex items-center gap-2">
-            <t-button size="small" variant="text" @click="copyPayload">
+            <t-button size="small" variant="text" :disabled="expired" @click="copyPayload">
               <template #icon><copy-icon /></template>
               复制原文
             </t-button>
@@ -202,6 +248,10 @@ onUnmounted(stopCountdown);
               刷新
             </t-button>
           </div>
+          <label v-if="showManualCopy && !expired" class="flex flex-col gap-1 w-full text-left">
+            <span class="rolithax-muted text-xs">二维码原文</span>
+            <textarea ref="manualCopyField" class="rolithax-copy-field" :value="pairCode.payload" readonly rows="3" />
+          </label>
         </div>
       </div>
     </div>
@@ -241,6 +291,17 @@ onUnmounted(stopCountdown);
 
 .rolithax-expired {
   color: var(--td-error-color);
+}
+
+.rolithax-copy-field {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--td-component-border);
+  border-radius: 6px;
+  background: var(--td-bg-color-secondarycontainer);
+  color: var(--td-text-color-primary);
+  font-family: monospace;
 }
 
 @container (min-width: 650px) {

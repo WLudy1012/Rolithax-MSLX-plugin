@@ -61,11 +61,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          $notesPath = "release-notes/$env:GITHUB_REF_NAME.md"
+          $notesArgs = @('--generate-notes')
+          if (Test-Path -LiteralPath $notesPath -PathType Leaf) {
+            $notesArgs = @('--notes-file', $notesPath)
+          }
           gh release create $env:GITHUB_REF_NAME `
             "Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Plugin.DaemonExtensions.dll" `
             "Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Plugin.DaemonExtensions.zip" `
             --title "Rolithax Launcher 扩展插件 $env:GITHUB_REF_NAME" `
-            --generate-notes
+            @notesArgs
 
 
       - name: 同步源码和发布标签到 CNB
