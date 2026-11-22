@@ -12,6 +12,7 @@ const entries: { key: Feature; title: string; description: string }[] = [
   { key: 'pairing', title: '设备配对', description: '通过一次性配对码连接 Rolithax Launcher。' },
   { key: 'serverIcon', title: '实例图标', description: '向客户端提供服务端图标。' },
   { key: 'resourceInstall', title: '资源安装', description: '允许客户端创建远端资源安装任务。' },
+  { key: 'hostTasks', title: '宿主机任务', description: '允许有明确授权的用户调用低权限 Worker 中配置的任务。' },
 ];
 async function load() {
   loading.value = true;

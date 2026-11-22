@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rolithax.Schema.Worker\Rolithax.Schema.Worker.csproj" Aliases="SchemaWorker" />
     <ProjectReference Include="..\Rolithax.Plugin.DaemonExtensions\Rolithax.Plugin.DaemonExtensions.csproj" />
   </ItemGroup>
 

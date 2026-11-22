@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Rolithax.Plugin.DaemonExtensions.Pairing;
+using Rolithax.Plugin.DaemonExtensions.Schema;
 
 namespace Rolithax.Plugin.DaemonExtensions.Tests;
 
@@ -31,6 +33,7 @@ public class FeatureHttpTests
         var api = app.MapGroup(RolithaxPlugin.ApiPrefix);
         var settings = new FeatureSettings();
         FeatureEndpoints.Map(api, settings);
+        SchemaEndpoints.Map(api.MapGroup("/schema"), settings, new PairingService());
         settings.Guard(api.MapGroup("/pair"), "pairing").MapGet("/config", () => Results.Ok());
         settings.Guard(api.MapGroup("/icon"), "serverIcon").MapGet("/server/{id:long}", (long id) => Results.Ok(id));
         var tasks = settings.Guard(api.MapGroup("/resources"), "resourceInstall");
@@ -43,8 +46,16 @@ public class FeatureHttpTests
         using var client = new HttpClient { BaseAddress = new Uri(app.Services.GetRequiredService<IServer>().Features.Get<IServerAddressesFeature>()!.Addresses.Single()) };
         const string prefix = "/api/plugin/mslx-plugin-rolithax";
         Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync(prefix + "/features", cancellation)).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync(prefix + "/schema/capabilities", cancellation)).StatusCode);
         client.DefaultRequestHeaders.Add("X-Test-Role", "user");
         Assert.Equal(HttpStatusCode.OK, (await client.GetAsync(prefix + "/features", cancellation)).StatusCode);
+        Assert.Equal(HttpStatusCode.Forbidden, (await client.GetAsync(prefix + "/schema/instances/22/layout", cancellation)).StatusCode);
+        var capabilities = await client.GetFromJsonAsync<System.Text.Json.JsonElement>(prefix + "/schema/capabilities", cancellation);
+        Assert.Equal(RolithaxPlugin.AssemblyVersion, capabilities.GetProperty("data").GetProperty("pluginVersion").GetString());
+        Assert.False(capabilities.GetProperty("data").GetProperty("capabilities").GetProperty("hostTasks").GetBoolean());
+        client.DefaultRequestHeaders.Add("X-Test-Media", "1");
+        Assert.Equal(HttpStatusCode.Forbidden, (await client.GetAsync(prefix + "/schema/capabilities", cancellation)).StatusCode);
+        client.DefaultRequestHeaders.Remove("X-Test-Media");
         Assert.Equal(HttpStatusCode.Forbidden, (await client.PutAsJsonAsync(prefix + "/features/pairing", new { enabled = false }, cancellation)).StatusCode);
         client.DefaultRequestHeaders.Remove("X-Test-Role");
         client.DefaultRequestHeaders.Add("X-Test-Role", "admin");
@@ -67,7 +78,9 @@ public class FeatureHttpTests
         {
             var role = Request.Headers["X-Test-Role"].ToString();
             if (role is not ("admin" or "user")) return Task.FromResult(AuthenticateResult.NoResult());
-            var identity = new ClaimsIdentity([new Claim(ClaimTypes.Name, "test"), new Claim(ClaimTypes.Role, role)], Scheme.Name);
+            var identity = new ClaimsIdentity([new Claim(ClaimTypes.Name, "test"), new Claim(ClaimTypes.Role, role),
+                new Claim("UserId", "fixture-user")], Scheme.Name);
+            if (Request.Headers.ContainsKey("X-Test-Media")) identity.AddClaim(new Claim("Scope", "media"));
             return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(identity), Scheme.Name)));
         }
     }

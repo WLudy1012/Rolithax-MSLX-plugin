@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Routing;
 using Rolithax.Plugin.DaemonExtensions.Pairing;
 using Rolithax.Plugin.DaemonExtensions.ServerIcon;
 using Rolithax.Plugin.DaemonExtensions.Resources;
+using Rolithax.Plugin.DaemonExtensions.Schema;
 using MSLX.SDK;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
@@ -27,6 +28,9 @@ public sealed class RolithaxPlugin : IPlugin
 
     // 按官方规范将公开 API 放在 /api/plugin/{plugin-id}/ 下，防止插件之间路由冲突。
     public const string ApiPrefix = "/api/plugin/" + PluginId;
+    public const int SchemaProtocolVersion = 1;
+    public static string AssemblyVersion =>
+        typeof(RolithaxPlugin).Assembly.GetName().Version?.ToString(3) ?? "1.0.0";
 
     public string Id => PluginId;
 
@@ -35,7 +39,7 @@ public sealed class RolithaxPlugin : IPlugin
     public string Description =>
         "Rolithax Launcher 配套扩展，提供扫码配对、设备图标与服务器本机资源安装。";
 
-    public string Version => GetType().Assembly.GetName().Version?.ToString(3) ?? "1.0.0";
+    public string Version => AssemblyVersion;
 
     public string MinSDKVersion => "1.7.3";
 
@@ -91,6 +95,7 @@ public sealed class RolithaxPlugin : IPlugin
         PairingEndpoints.Map(features.Guard(api.MapGroup("/pair"), "pairing"), _pairing, "");
         ServerIconEndpoints.Map(features.Guard(api.MapGroup("/icon"), "serverIcon"), _serverIcon, "");
         ResourceInstallEndpoints.Map(features.Guard(api.MapGroup("/resources"), "resourceInstall"), _resourceInstaller, "");
+        SchemaEndpoints.Map(api.MapGroup("/schema"), features, pairing);
 
         global::MSLX.SDK.MSLX.Logger.Info($"[{PluginId}] Rolithax 扩展已挂载配对、图标和资源安装接口");
     }

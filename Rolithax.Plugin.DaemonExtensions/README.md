@@ -1,17 +1,17 @@
 # Rolithax Launcher 扩展插件
 
 由 **WLudy1012** 开发的 MSLX Daemon 第三方插件，为 **Rolithax Launcher** 提供统一的服务端扩展能力，集中承载客户端所需的整合与增强功能。
-当前包含扫码配对、设备授权管理、服务端图标和资源中心远端直装，以**单个 DLL** 分发；后续增强功能可继续集成在此插件中。
+提供扫码配对、设备授权管理、服务端图标、资源中心远端直装，以及 Schema 能力发现和实例版本探测。插件以单个 DLL 分发；启用宿主机任务时单独部署低权限 Worker。
 统一入口为 `RolithaxPlugin`，ID 为 `mslx-plugin-rolithax`，前端包名与此一致。
 插件版本从 **1.0.0** 起，发布 tag 构建时自动同步 tag 版本；声明的最低 **MSLX Daemon 版本为 1.7.3**。
 插件图标使用 `https://cdnjson.com/images/2026/10/10/ic_launcher_foreground.png`。
 
-「Rolithax 中心」提供配对码生成、设备列表和扩展 API 设置。宽屏下配对操作与扩展设置并列显示，窄屏下顺序排列，设备列表可横向滚动。中心可查看并管理配对、实例图标和资源安装三项扩展 API；新安装及旧配置缺少开关时默认启用。已认证用户可读取状态，只有管理员可以修改。关闭资源安装后不再接受新任务，已创建任务仍可查询和取消；设备租约校验不受配对开关影响。
+「Rolithax 中心」提供配对码生成、设备列表和扩展 API 设置。宽屏下配对操作与扩展设置并列显示，窄屏下顺序排列，设备列表可横向滚动。配对、实例图标和资源安装默认启用，宿主机任务默认关闭。已认证用户可读取状态，只有管理员可以修改。关闭资源安装后不再接受新任务，已创建任务仍可查询和取消。设备租约校验不受配对开关影响。
 
 | 方法 | 路径 | 说明 |
 | --- | --- | --- |
 | GET | `/api/plugin/mslx-plugin-rolithax/features` | 获取各项扩展 API 的启用状态 |
-| PUT | `/api/plugin/mslx-plugin-rolithax/features/{feature}` | 管理员设置 `pairing`、`serverIcon` 或 `resourceInstall`，请求体为 `{ "enabled": true }` 或 `{ "enabled": false }` |
+| PUT | `/api/plugin/mslx-plugin-rolithax/features/{feature}` | 管理员设置 `pairing`、`serverIcon`、`resourceInstall` 或 `hostTasks`，请求体为 `{ "enabled": true }` 或 `{ "enabled": false }` |
 
 > Daemon 的 PluginManager 对每个程序集只识别第一个 `IPlugin` 实现，因此合并采用单一入口，
 > 规范端点前缀为 `/api/plugin/mslx-plugin-rolithax/pair`、`/api/plugin/mslx-plugin-rolithax/icon` 和 `/api/plugin/mslx-plugin-rolithax/resources`。
@@ -110,6 +110,22 @@
 - 配对配置：`<AppData>/PluginsData/mslx-pair/Config.json`（安装密钥 + Daemon 地址 + 设备记录，设备记录含签发者 `issuedBy`）
 - 图标缓存：`<AppData>/PluginsData/mslx-icon/IconCache/<实例 id>.png`（TTL 24 小时）
 - 配对设备对应的用户：Daemon `UserList.json` 中用户名形如 `pair_dxxxxxxxxxx`
+
+## Rolithax Schema 接口
+
+下表相对于 `/api/plugin/mslx-plugin-rolithax/schema`。接口使用普通 Daemon 凭据，实例相关请求逐次检查资源权限和设备租约。配对兑换返回的 `pluginVersion`、`protocolVersion` 是新增字段，原二维码格式保持兼容。
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| GET | `/capabilities` | 扩展版本、协议号、MCDR 布局、版本探测和宿主机任务可用状态 |
+| GET | `/instances/{id}/layout` | 获取当前实例下的 Minecraft 工作目录、MCDR 插件目录、游戏插件目录和模组目录 |
+| POST | `/instances/{id}/preflight` | 读取指定插件或模组的归档元数据。传入 `kind`（`mcdrPlugin`、`minecraftPlugin` 或 `mod`）和 `target`，得到 `found`、`missing` 或 `unknown` |
+| GET | `/instances/{id}/tasks` | 获取当前账户获准使用的宿主机任务 |
+| POST | `/instances/{id}/tasks/{taskId}/run` | 运行已授权的预设任务，请求体留空或传入空对象 |
+
+布局适配 MSLX 管理的 MCDR 实例，读取实例内的简单 `working_directory` 和 `plugin_directories` 配置。元数据探测支持 MCDR 打包或目录插件、Paper/Bukkit 描述文件、Fabric/Quilt JSON 以及 Forge/NeoForge TOML。Forge 的 `${file.jarVersion}` 从归档主清单的 `Implementation-Version` 读取。其他运行时表达式、单文件插件或无法可靠读取的内容返回未知。结果表示检测到的文件版本，无法判断对应模组是否已在进程中加载。
+
+宿主机预设和权限由独立进程管理，部署与授权见 [Worker 说明](../Rolithax.Schema.Worker/README.md)。
 
 ## 回归测试
 

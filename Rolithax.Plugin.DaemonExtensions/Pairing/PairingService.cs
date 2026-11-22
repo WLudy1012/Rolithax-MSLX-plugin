@@ -453,6 +453,8 @@ public sealed class PairingService
                 role,
                 resources,
                 expiresAt = Iso(record.ExpiresAt),
+                pluginVersion = RolithaxPlugin.AssemblyVersion,
+                protocolVersion = RolithaxPlugin.SchemaProtocolVersion,
             });
         }
         catch (Exception ex)

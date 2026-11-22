@@ -1,7 +1,7 @@
 import request from 'mslx-request';
 import { putPluginData } from './request';
 
-export type Feature = 'pairing' | 'serverIcon' | 'resourceInstall';
+export type Feature = 'pairing' | 'serverIcon' | 'resourceInstall' | 'hostTasks';
 export type FeatureState = Record<Feature, boolean>;
 
 const api = '/api/plugin/mslx-plugin-rolithax/features';
@@ -16,6 +16,7 @@ function featureState(data: Partial<FeatureState> | null | undefined): FeatureSt
     pairing: data.pairing,
     serverIcon: data.serverIcon,
     resourceInstall: data.resourceInstall,
+    hostTasks: data.hostTasks === true,
   };
 }
 

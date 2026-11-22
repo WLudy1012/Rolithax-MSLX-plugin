@@ -48,6 +48,8 @@ jobs:
         run: dotnet build ./Rolithax.Plugin.DaemonExtensions/Rolithax.Plugin.DaemonExtensions.csproj -c Release --nologo -p:MSLX_SDK_DIR="$GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK"
       - name: 运行插件回归测试
         run: dotnet test ./Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExtensions.Tests.csproj -c Release --nologo -p:MSLX_SDK_DIR="$GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK"
+      - name: 构建宿主任务 Worker
+        run: dotnet build ./Rolithax.Schema.Worker/Rolithax.Schema.Worker.csproj -c Release --nologo
       - name: 上传开发版插件 DLL
         uses: actions/upload-artifact@v7
         with:

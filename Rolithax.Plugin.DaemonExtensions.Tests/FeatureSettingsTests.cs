@@ -13,7 +13,8 @@ public sealed class FeatureSettingsTests
     {
         TestHost.Reset();
         var settings = new FeatureSettings();
-        Assert.All(settings.Get().Values, Assert.True);
+        Assert.All(settings.Get().Where(item => item.Key != "hostTasks").Select(item => item.Value), Assert.True);
+        Assert.False(settings.Get()["hostTasks"]);
         settings.Set("pairing", false);
         settings.Set("serverIcon", false);
         var reloaded = new FeatureSettings().Get();

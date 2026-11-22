@@ -1,6 +1,6 @@
 name: 构建并发布 Rolithax 插件
 
-# 推 v* 标签：构建并发布 Release（dll + zip）；
+# 推 v* 标签：构建并发布插件与 Worker；
 # 手动触发（workflow_dispatch）：仅构建并上传 Actions 工件（不发布 Release）。
 on:
   push:
@@ -20,12 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # SDK 不在本仓库：检出上游 MSLTeam/MSLX（公开仓库，dev 分支）提供 MSLX.SDK 源码
       - name: 检出 MSLX SDK 源码
         uses: actions/checkout@v7
         with:
           repository: MSLTeam/MSLX
-          ref: dev
+          ref: 8f0344e8bac5f5528ca6e206fa01c6ffc18401c7 # MSLX v1.7.3
           path: MSLX-dev
           fetch-depth: 1
 
@@ -34,18 +33,27 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: 配置 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
       - name: 运行回归测试
         shell: pwsh
         run: |
           dotnet test ./Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExtensions.Tests.csproj --nologo "-p:MSLX_SDK_DIR=$env:GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK"
           if ($LASTEXITCODE -ne 0) { throw 'regression tests failed' }
 
-      - name: 构建并打包插件
+      - name: 构建并打包插件与 Worker
         shell: pwsh
         run: |
           # tag 触发时注入 tag 版本；手动构建沿用 csproj 版本，保持程序集与插件元数据一致。
           $ver = if ($env:GITHUB_REF_TYPE -eq 'tag') { $env:GITHUB_REF_NAME.TrimStart('v') } else { '' }
           ./Rolithax.Plugin.DaemonExtensions/pack.ps1 -SdkDir "$env:GITHUB_WORKSPACE/MSLX-dev/MSLX.SDK" -Version $ver
+          $workerArgs = @()
+          if ($ver) { $workerArgs += @('--version', $ver) }
+          python ./Rolithax.Schema.Worker/pack.py @workerArgs
+          if ($LASTEXITCODE -ne 0) { throw 'Worker packaging failed' }
 
       - name: 上传插件构建产物
         uses: actions/upload-artifact@v7
@@ -54,6 +62,9 @@ jobs:
           path: |
             Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Plugin.DaemonExtensions.dll
             Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Plugin.DaemonExtensions.zip
+            Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Schema.Worker-win-x64.zip
+            Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Schema.Worker-linux-x64.zip
+          if-no-files-found: error
 
       - name: 发布 GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
@@ -69,6 +80,9 @@ jobs:
           gh release create $env:GITHUB_REF_NAME `
             "Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Plugin.DaemonExtensions.dll" `
             "Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Plugin.DaemonExtensions.zip" `
+            "Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Schema.Worker-win-x64.zip" `
+            "Rolithax.Plugin.DaemonExtensions/dist/Rolithax.Schema.Worker-linux-x64.zip" `
+            --verify-tag `
             --title "Rolithax Launcher 扩展插件 $env:GITHUB_REF_NAME" `
             @notesArgs
 

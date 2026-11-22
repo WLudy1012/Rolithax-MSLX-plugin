@@ -12,6 +12,7 @@
     <IsPackable>false</IsPackable>
     <!-- 生成内嵌文件清单：Daemon 面板用 ManifestEmbeddedFileProvider(assembly, "Frontend/dist") 下发插件前端 -->
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Frontend/**;dist/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -60,9 +60,11 @@ dotnet test ./Rolithax.Plugin.DaemonExtensions.Tests/Rolithax.Plugin.DaemonExten
 
 更换旧插件时先停掉 Daemon，再移除旧版程序集，避免重复注册路由。请保留 `PluginsData/mslx-pair/`、`PluginsData/mslx-icon/` 和 Daemon 用户数据；新版仍读取现有配对配置与图标缓存。
 
+宿主机任务和命令版本检查需要单独部署 Worker。GitHub Release 提供 Windows x64 和 Linux x64 的 ZIP 包，运行时需要 .NET 10。[Worker 部署说明](Rolithax.Schema.Worker/README.md)
+
 ## 自动构建
 
-- GitHub Actions：普通分支推送及 PR 执行前端类型检查、前端构建、.NET 构建和回归测试，不执行发布；`main` 推送还会运行现有打包和 CNB 同步工作流。推送 `v*` tag 时构建 DLL/ZIP、发布 GitHub Release，并同步 `main` 源码与 tag。
+- GitHub Actions 普通分支推送及 PR 执行前端类型检查、前端构建、.NET 构建和回归测试。`main` 推送还会运行打包与 CNB 同步。推送 `v*` tag 时将插件 DLL、插件 ZIP 和两个 Worker ZIP 发布到 GitHub Release。
 - 日常开发推送 `dev`，检查成功后可从 `rolithax-plugin-dev` 工件下载开发版 DLL；它不替代正式发布版本。
 - CNB：`main` 推送执行 Release 构建校验；`v*` tag 构建 DLL/ZIP 并发布 CNB Release。
 - 两边构建均从上游检出 MSLX SDK，并验证 DLL 内含 `mslx-plugin-entry.js` 与前端资源。

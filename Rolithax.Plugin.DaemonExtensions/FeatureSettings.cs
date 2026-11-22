@@ -9,7 +9,7 @@ namespace Rolithax.Plugin.DaemonExtensions;
 internal sealed class FeatureSettings
 {
     private const string ConfigKey = "enabledApis";
-    private static readonly string[] Names = ["pairing", "serverIcon", "resourceInstall"];
+    private static readonly string[] Names = ["pairing", "serverIcon", "resourceInstall", "hostTasks"];
     private readonly object _lock = new();
 
     private static MSLX.SDK.Interfaces.IPluginConfigBridge Config =>
@@ -26,7 +26,7 @@ internal sealed class FeatureSettings
             return Names.ToDictionary(name => name, name =>
             {
                 var value = values?[name];
-                if (value is null) return true;
+                if (value is null) return name != "hostTasks";
                 if (value.Type != JTokenType.Boolean) throw new InvalidOperationException("扩展 API 配置无效");
                 return value.Value<bool>();
             });
